@@ -1,0 +1,99 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 10px;
+}
+
+.header {
+    height: 10vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 0.2rem solid green;
+}
+
+.logo {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: sleft;
+    align-items: center;
+    border: 0.1rem solid blue;
+}
+
+.logo h1 {
+    font-family: 'Rampart One';
+    font-size: 4.5rem;
+    margin-left: 5vw;
+}
+
+.links {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    border: 0.1rem solid pink;
+}
+
+.links ul {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.links ul li {
+    font-family: Poppins;
+    font-size: 2rem;
+    list-style: none;
+}
+
+.container {
+    min-height: 90vh;
+    width: auto;
+    border: 0.2rem solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.box1 {
+    border: 0.1rem solid black;
+    border-radius: 1rem;
+    min-width: 30rem;
+    max-width: 50rem;
+    min-height: 30rem;
+    max-height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box2 {
+    border: 0.1rem solid black;
+    border-radius: 1rem;
+    min-width: 30rem;
+    max-width: 50rem;
+    min-height: 30rem;
+    max-height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box3 {
+    border: 0.1rem solid black;
+    border-radius: 1rem;
+    min-width: 30rem;
+    max-width: 50rem;
+    min-height: 30rem;
+    max-height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
