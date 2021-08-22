@@ -97,3 +97,14 @@
     justify-content: center;
     align-items: center;
 }
+
+.container2{
+    min-height: 100vh;
+    margin: auto;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;    
+}
