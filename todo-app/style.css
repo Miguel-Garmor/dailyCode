@@ -1,3 +1,8 @@
+:root {
+    --btnWidth: 20%;
+    --todoListHeight: 60vh;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -17,6 +22,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .inputArea {
@@ -56,7 +62,7 @@ html {
 
 #addTodoBtn {
     height: 100%;
-    width: 10%;
+    width: 20%;
     background: white;
     border-radius: 0.5rem;
     border: 0.1rem solid black;
@@ -67,4 +73,47 @@ html {
 #addTodoBtn:hover {
     background-color: lightblue;
     cursor: pointer;
+}
+
+.todoList {
+    width: auto;
+    min-height: var(--todoListHeight);
+    border: 0.2rem solid black;
+}
+
+.todoList ul {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    list-style: none;
+    font-family: Poppins;
+    height: var(--todoListHeight);
+    padding: 2rem;
+    border: 0.2rem solid pink;
+}
+
+.todoList li {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-width: 50%;
+    min-height: 10%;
+    border: 0.2rem solid black;
+    border-radius: 0.4rem;
+}
+
+.todoList p {
+    width: calc(100% - var(--btnWidth)*2);
+    padding: 0rem 2rem 0rem 2rem;
+    font-size: 2rem;
+}
+
+.todoList button {
+    width: calc(var(--btnWidth));
+    height: calc(var(--todoListHeight)/100*10);
+    background: lightblue;
+    font-family: Poppins;
+    border: 0.1rem solid rgb(22, 157, 247);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0.2rem;
 }
