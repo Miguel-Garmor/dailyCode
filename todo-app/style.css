@@ -83,11 +83,12 @@ html {
 
 .todoList ul {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: start;
+    align-items: center;
     list-style: none;
     font-family: Poppins;
-    height: var(--todoListHeight);
+    min-height: var(--todoListHeight);
     padding: 2rem;
     border: 0.2rem solid pink;
 }
@@ -100,6 +101,7 @@ html {
     min-height: 10%;
     border: 0.2rem solid black;
     border-radius: 0.4rem;
+    margin: 2rem;
 }
 
 .todoList p {
@@ -116,4 +118,10 @@ html {
     border: 0.1rem solid rgb(22, 157, 247);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
     border-radius: 0.2rem;
+}
+
+.todoList button:hover {
+    cursor: pointer;
+    background: darkblue;
+    color: white;
 }
