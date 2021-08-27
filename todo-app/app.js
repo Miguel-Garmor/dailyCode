@@ -17,6 +17,7 @@ const submitTodoHandler = (e) => {
     //Create delete button
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = "Del";
+    deleteBtn.classList.add("delBtn");
     //Create list element as container
     const listItem = document.createElement('li');
     //Add paragraph element to the list
@@ -33,7 +34,27 @@ const submitTodoHandler = (e) => {
 
 };
 
+const deleteButtonHandler = (e) => {
 
+    const listNodes = e.target.parentNode.childNodes;
+    const nodeLength = listNodes.length;
+    const liElement = e.target.parentElement;
+
+    const targetElementClass = e.target.className;
+
+    //Deletes all nodes inside the li tag
+    if (targetElementClass === 'delBtn') {
+        for (i = 0; i < nodeLength; i++) {
+            listNodes[0].remove();
+        };
+
+        liElement.remove();
+    }
+};
+
+// Calls
 addTodoBtn.addEventListener("click", submitTodoHandler);
+
+itemList.addEventListener("click", deleteButtonHandler);
 
 
