@@ -31,7 +31,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0.1rem solid pink;
+   
 }
 
 .inputArea form {
@@ -78,7 +78,7 @@ html {
 .todoList {
     width: auto;
     min-height: var(--todoListHeight);
-    border: 0.2rem solid black;
+   
 }
 
 .todoList ul {
@@ -90,7 +90,6 @@ html {
     font-family: Poppins;
     min-height: var(--todoListHeight);
     padding: 2rem;
-    border: 0.2rem solid pink;
 }
 
 .todoList li {
