@@ -104,6 +104,10 @@ html {
     margin: 2rem;
 }
 
+.completed p{
+    text-decoration: line-through;
+}
+
 .todoList p {
     width: calc(100% - var(--btnWidth)*2);
     padding: 0rem 2rem 0rem 2rem;

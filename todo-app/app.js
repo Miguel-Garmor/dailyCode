@@ -14,6 +14,7 @@ const submitTodoHandler = (e) => {
     //Create complete button
     const completeBtn = document.createElement('button');
     completeBtn.innerText = "Comp";
+    completeBtn.classList.add("completedBtn");
     //Create delete button
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = "Del";
@@ -34,27 +35,35 @@ const submitTodoHandler = (e) => {
 
 };
 
-const deleteButtonHandler = (e) => {
+const buttonActionHandler = (e) => {
 
-    const listNodes = e.target.parentNode.childNodes;
-    const nodeLength = listNodes.length;
+    const liElementNodes = e.target.parentNode.childNodes;
+    const nodeLength = liElementNodes.length;
     const liElement = e.target.parentElement;
 
     const targetElementClass = e.target.className;
 
-    //Deletes all nodes inside the li tag
+    //Delete Button
     if (targetElementClass === 'delBtn') {
+        //Delete nodes in li element
         for (i = 0; i < nodeLength; i++) {
-            listNodes[0].remove();
+            liElementNodes[0].remove();
         };
 
+        //Delete li element
         liElement.remove();
     }
+    //Completed button
+    else if (targetElementClass === 'completedBtn') {
+        liElement.classList.toggle("completed");
+        console.log(liElement.classList);
+    }
+
 };
 
 // Calls
 addTodoBtn.addEventListener("click", submitTodoHandler);
 
-itemList.addEventListener("click", deleteButtonHandler);
+itemList.addEventListener("click", buttonActionHandler);
 
 
