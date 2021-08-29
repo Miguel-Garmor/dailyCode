@@ -5,40 +5,57 @@ const table = document.querySelector("#game-area");
 
 //Functions
 
-const checkWin = (id) => {
+const checkWin = (e, id) => {
+
+    /* console.log(e.target.parentNode.parentNode.children[0].children[0].id);
+    console.log(e.target.parentNode.parentNode.children[0].children[1].id);
+    console.log(e.target.parentNode.parentNode.children[0].children[2].id);
+    console.log(e.target.parentNode.parentNode.children[1].children[0].id);
+    console.log(e.target.parentNode.parentNode.children[1].children[1].id);
+    console.log(e.target.parentNode.parentNode.children[1].children[2].id);
+    console.log(e.target.parentNode.parentNode.children[2].children[0].id); */
+
+    const tableRef = e.target.parentNode.parentNode;
 
     const column = id.slice(1, 2);
     const row = id.slice(0, 1);
     let counter = 0;
+    let colCheckSuccess = false;
+    let rowCheckSuccess = false;
 
     //Column check
     for (i = 0; i < 3; i++) {
 
-        let iToString = i.toString();
-        let colToString = column.toString();
-        let endNum = iToString + colToString;
-        console.log("id"+id);
+        if (tableRef.children[i].children[column].classList.contains("marked")) {
+            counter++;
+        };
     };
 
     if (counter === 3) {
-        return true;
-    }
+        colCheckSuccess = true;
+        console.log("Success");        
+    }else colCheckSucess = false;
     //-Finish column check
 
     counter = 0; //Reset counter
 
     //Row check
     for (j = 0; j < 3; j++) {
-        let rowToString = row.toString();
-        let jToString = j.toString();
-        let endNum = rowToString + jToString;
-        console.log("id" + id);
+
+        if (tableRef.children[row].children[j].classList.contains("marked")) {
+            counter++;
+        };
     };
 
     if (counter === 3) {
-        return true;
-    } else false;
+        rowCheckSuccess = true;
+        console.log("Success");        
+    } else rowCheckSuccess = false;
     //-Finish row check
+
+    if((colCheckSuccess || rowCheckSuccess) === true){
+        return true;
+    }else return false;
 
 };
 
@@ -61,7 +78,7 @@ const markHandler = (e) => {
         targetEl.innerText = 'X';
 
         //Checks if there is a winner
-        winCheck = checkWin(e.target.id);
+        winCheck = checkWin(e, e.target.id);
         if (winCheck === false) {
             return 1;
         } else return 2;
@@ -83,7 +100,7 @@ const addMark = (e) => {
 
     if (markChecked === 1) {
         actionCounter++;
-        console.log(actionCounter);
+        console.log("Action counter:" + actionCounter);
     } else if (markChecked === 2) {
         console.log("You win!");
     }
