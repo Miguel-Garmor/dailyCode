@@ -10,14 +10,20 @@ const checkMark = (e) => {
     const table = e.target.parentNode.parentNode;
 
     if (targetEl.className === "marked") {
-        console.log("Marked try again");
-        return false;
+        if (actionCounter === 9) {
+            if (actionCounter === 9) {
+                console.log("Game ended");
+            }
+        } else if (actionCounter < 9) {
+            console.log("Marked try again");
+            return false;
+        }
     } else {
         targetEl.classList.add("marked");
         targetEl.innerText = 'X';
         return true;
     }
-    
+
 
 };
 
@@ -27,10 +33,12 @@ const addMark = (e) => {
 
     markChecked = checkMark(e);
 
-    if(markChecked === true){
+    if (markChecked === true) {
         actionCounter++;
         console.log(actionCounter);
     }
+
+
 };
 
 
