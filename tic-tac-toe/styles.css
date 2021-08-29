@@ -12,8 +12,15 @@ html {
     font-size: 10px;
 }
 
+header{
+    font-size: 3rem;
+    text-align: center;
+    margin: 2rem;
+}
+
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -24,4 +31,11 @@ html {
     height: var(--game-box-dim);
     width: var(--game-box-dim);
     border: 0.2rem solid black;
+    text-align: center;
+}
+
+td {
+    height: 10vh;
+    width: 10vh;
+    border: 0.1rem solid black;
 }
