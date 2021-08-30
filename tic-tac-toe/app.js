@@ -7,13 +7,6 @@ const table = document.querySelector("#game-area");
 
 const checkWin = (e, id) => {
 
-    /* console.log(e.target.parentNode.parentNode.children[0].children[0].id);
-    console.log(e.target.parentNode.parentNode.children[0].children[1].id);
-    console.log(e.target.parentNode.parentNode.children[0].children[2].id);
-    console.log(e.target.parentNode.parentNode.children[1].children[0].id);
-    console.log(e.target.parentNode.parentNode.children[1].children[1].id);
-    console.log(e.target.parentNode.parentNode.children[1].children[2].id);
-    console.log(e.target.parentNode.parentNode.children[2].children[0].id); */
 
     const tableRef = e.target.parentNode.parentNode;
 
@@ -59,42 +52,55 @@ const checkWin = (e, id) => {
 
 };
 
-const markHandler = (e) => {
-    const targetEl = e.target;
-    const table = e.target.parentNode.parentNode;
-    let winCheck = false;
-
-    if (targetEl.className === "marked") {
+const gameEndOrMarkedCheck = (actionCounter) =>{
+    //Game end or marked check
+    if (actionCounter === 9) {
         if (actionCounter === 9) {
-            if (actionCounter === 9) {
-                console.log("Game ended");
-            }
-        } else if (actionCounter < 9) {
-            console.log("Marked try again");
+            console.log("Game ended");
+        }
+    } else if (actionCounter < 9) {
+        console.log("Marked try again");
+        return 0;
+    }
+};
+
+const markHandler = (e, targetEl, className1, className2) => {
+    
+    let winCheck = false;
+    let returnHandler = false;
+
+    if (targetEl.classList.contains(className1 || className2)) {
+        returnHandler = gameEndOrMarkedCheck(actionCounter);
+        if(returnHandler === 0){
             return 0;
         }
     } else {
-        targetEl.classList.add("marked");
+        //Add X mark
+        targetEl.classList.add(className1);
         targetEl.innerText = 'X';
 
         //Checks if there is a winner
-        winCheck = checkWin(e, e.target.id);
+        winCheck = checkWin(e, targetEl.id);
         if (winCheck === false) {
             return 1;
         } else return 2;
         //-End checkWin
-
     }
-
-
 };
+
 
 const addMark = (e) => {
 
     let markChecked = 0;
+    const targetEl = e.target;
 
-    //Handles X mark
-    markChecked = markHandler(e);
+    //Handles "X" mark
+    markChecked = markHandler(e, targetEl, "marked", "robot");
+    //-End markHandler
+    //---checkWin inside
+
+    //Handles "O" mark
+   // markChecked = markHandler(random, "robot", "marked");
     //-End markHandler
     //---checkWin inside
 
