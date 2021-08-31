@@ -26,8 +26,8 @@ const checkWin = (e, id) => {
 
     if (counter === 3) {
         colCheckSuccess = true;
-        console.log("Success");        
-    }else colCheckSucess = false;
+        console.log("Success");
+    } else colCheckSucess = false;
     //-Finish column check
 
     counter = 0; //Reset counter
@@ -42,17 +42,17 @@ const checkWin = (e, id) => {
 
     if (counter === 3) {
         rowCheckSuccess = true;
-        console.log("Success");        
+        console.log("Success");
     } else rowCheckSuccess = false;
     //-Finish row check
 
-    if((colCheckSuccess || rowCheckSuccess) === true){
+    if ((colCheckSuccess || rowCheckSuccess) === true) {
         return true;
-    }else return false;
+    } else return false;
 
 };
 
-const gameEndOrMarkedCheck = (actionCounter) =>{
+const gameEndOrMarkedCheck = (actionCounter) => {
     //Game end or marked check
     if (actionCounter === 9) {
         if (actionCounter === 9) {
@@ -65,19 +65,53 @@ const gameEndOrMarkedCheck = (actionCounter) =>{
 };
 
 const markHandler = (e, targetEl, className1, className2) => {
-    
+
     let winCheck = false;
     let returnHandler = false;
 
     if (targetEl.classList.contains(className1 || className2)) {
         returnHandler = gameEndOrMarkedCheck(actionCounter);
-        if(returnHandler === 0){
+        if (returnHandler === 0) {
             return 0;
         }
     } else {
         //Add X mark
         targetEl.classList.add(className1);
         targetEl.innerText = 'X';
+
+        //Add "O" mark
+
+        let notMarked = [];
+        let i = 0;
+        let j = 0;
+        const tableRef = e.target.parentNode.parentNode;
+        console.log(tableRef.children.length);
+
+        //Get non-marked table elements (array of IDs nonMarked)
+        for (i = 0; i < tableRef.children.length; i++) {
+            for (j = 0; j < tableRef.children[i].children.length; j++) {
+                if (tableRef.children[i].children[j].classList.contains(className1 || className2)) {
+                    console.log(tableRef.children[i].children[j].id + " " + "is marked");
+                } else if (!tableRef.children[i].children[j].classList.contains(className1 || className2)) {
+                    notMarked = [...notMarked, tableRef.children[i].children[j].id];
+                    console.log(tableRef.children[i].children[j].id);
+                }
+            }
+        }
+
+        //Get random nonMarked array position
+        let randomizer = Math.floor(Math.random() * notMarked.length);
+        let randomElementId = notMarked[randomizer];
+
+
+        const row = randomElementId.slice(0, 1);
+        const column = randomElementId.slice(1, 2);
+
+        tableRef.children[row].children[column].classList.add("robot");
+        console.log(tableRef);
+        tableRef.children[row].children[column].innerText = "O";
+        console.log();
+
 
         //Checks if there is a winner
         winCheck = checkWin(e, targetEl.id);
@@ -100,7 +134,7 @@ const addMark = (e) => {
     //---checkWin inside
 
     //Handles "O" mark
-   // markChecked = markHandler(random, "robot", "marked");
+    // markChecked = markHandler(random, "robot", "marked");
     //-End markHandler
     //---checkWin inside
 
