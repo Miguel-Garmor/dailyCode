@@ -55,9 +55,7 @@ const checkWin = (e, id) => {
 const gameEndOrMarkedCheck = (actionCounter) => {
     //Game end or marked check
     if (actionCounter === 9) {
-        if (actionCounter === 9) {
             console.log("Game ended");
-        }
     } else if (actionCounter < 9) {
         console.log("Marked try again");
         return 0;
@@ -69,7 +67,7 @@ const markHandler = (e, targetEl, className1, className2) => {
     let winCheck = false;
     let returnHandler = false;
 
-    if (targetEl.classList.contains(className1 || className2)) {
+    if (targetEl.classList.contains(className1) || targetEl.classList.contains(className2)) {
         returnHandler = gameEndOrMarkedCheck(actionCounter);
         if (returnHandler === 0) {
             return 0;
@@ -90,27 +88,29 @@ const markHandler = (e, targetEl, className1, className2) => {
         //Get non-marked table elements (array of IDs nonMarked)
         for (i = 0; i < tableRef.children.length; i++) {
             for (j = 0; j < tableRef.children[i].children.length; j++) {
-                if (tableRef.children[i].children[j].classList.contains(className1 || className2)) {
-                    console.log(tableRef.children[i].children[j].id + " " + "is marked");
-                } else if (!tableRef.children[i].children[j].classList.contains(className1 || className2)) {
-                    notMarked = [...notMarked, tableRef.children[i].children[j].id];
-                    console.log(tableRef.children[i].children[j].id);
+                let item = tableRef.children[i].children[j];
+                if (item.classList.contains(className1) || item.classList.contains(className2)) {
+                    console.log(item.id + " " + "is marked");
+                } else if (!item.classList.contains(className1) || !item.classList.contains(className2)) {
+                    notMarked = [...notMarked, item.id];
+                    console.log(item.id);
                 }
             }
         }
 
         //Get random nonMarked array position
-        let randomizer = Math.floor(Math.random() * notMarked.length);
-        let randomElementId = notMarked[randomizer];
+        if (notMarked.length > 0) {
+            let randomizer = Math.floor(Math.random() * notMarked.length);
+            let randomElementId = notMarked[randomizer];
 
 
-        const row = randomElementId.slice(0, 1);
-        const column = randomElementId.slice(1, 2);
+            const row = randomElementId.slice(0, 1);
+            const column = randomElementId.slice(1, 2);
 
-        tableRef.children[row].children[column].classList.add("robot");
-        console.log(tableRef);
-        tableRef.children[row].children[column].innerText = "O";
-        console.log();
+            tableRef.children[row].children[column].classList.add("robot");
+            console.log(tableRef);
+            tableRef.children[row].children[column].innerText = "O";
+        }
 
 
         //Checks if there is a winner
