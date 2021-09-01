@@ -5,10 +5,11 @@ const table = document.querySelector("#game-area");
 
 //Functions
 
-const checkWin = (e, id) => {
+const checkWin = (target, id, nameClass) => {
 
 
-    const tableRef = e.target.parentNode.parentNode;
+    const targetEl = target.parentNode.parentNode;
+
 
     const column = id.slice(1, 2);
     const row = id.slice(0, 1);
@@ -19,7 +20,7 @@ const checkWin = (e, id) => {
     //Column check
     for (i = 0; i < 3; i++) {
 
-        if (tableRef.children[i].children[column].classList.contains("marked")) {
+        if (targetEl.children[i].children[column].classList.contains(nameClass)) {
             counter++;
         };
     };
@@ -35,7 +36,7 @@ const checkWin = (e, id) => {
     //Row check
     for (j = 0; j < 3; j++) {
 
-        if (tableRef.children[row].children[j].classList.contains("marked")) {
+        if (targetEl.children[row].children[j].classList.contains(nameClass)) {
             counter++;
         };
     };
@@ -55,7 +56,7 @@ const checkWin = (e, id) => {
 const gameEndOrMarkedCheck = (actionCounter) => {
     //Game end or marked check
     if (actionCounter === 9) {
-            console.log("Game ended");
+        console.log("Game ended");
     } else if (actionCounter < 9) {
         console.log("Marked try again");
         return 0;
@@ -77,18 +78,29 @@ const markHandler = (e, targetEl, className1, className2) => {
         targetEl.classList.add(className1);
         targetEl.innerText = 'X';
 
+        //Check win
+        //-- If win, return a certain value
+        //-- If no win, let continue
+
+        //Checks if there is a winner "x" Mark
+        winCheck = checkWin(e.target, targetEl.id, "marked");
+        if (winCheck === true) {
+            return 2;
+        }
+        //-End checkWin
+
         //Add "O" mark
 
         let notMarked = [];
         let i = 0;
         let j = 0;
-        const tableRef = e.target.parentNode.parentNode;
-        console.log(tableRef.children.length);
+        const oMark = e.target.parentNode.parentNode;
+        console.log(oMark.children.length);
 
         //Get non-marked table elements (array of IDs nonMarked)
-        for (i = 0; i < tableRef.children.length; i++) {
-            for (j = 0; j < tableRef.children[i].children.length; j++) {
-                let item = tableRef.children[i].children[j];
+        for (i = 0; i < oMark.children.length; i++) {
+            for (j = 0; j < oMark.children[i].children.length; j++) {
+                let item = oMark.children[i].children[j];
                 if (item.classList.contains(className1) || item.classList.contains(className2)) {
                     console.log(item.id + " " + "is marked");
                 } else if (!item.classList.contains(className1) || !item.classList.contains(className2)) {
@@ -107,18 +119,21 @@ const markHandler = (e, targetEl, className1, className2) => {
             const row = randomElementId.slice(0, 1);
             const column = randomElementId.slice(1, 2);
 
-            tableRef.children[row].children[column].classList.add("robot");
-            console.log(tableRef);
-            tableRef.children[row].children[column].innerText = "O";
+            oMark.children[row].children[column].classList.add("robot");
+            console.log(oMark);
+            oMark.children[row].children[column].innerText = "O";
+
+
+
+            //Checks if there is a winner
+            winCheck = checkWin(oMark.children[row].children[column], randomElementId, "robot");
+            if (winCheck === false) {
+                return 1;
+            } else if (winCheck === true) {
+                return 3;
+            }
+            //-End checkWin
         }
-
-
-        //Checks if there is a winner
-        winCheck = checkWin(e, targetEl.id);
-        if (winCheck === false) {
-            return 1;
-        } else return 2;
-        //-End checkWin
     }
 };
 
@@ -143,6 +158,8 @@ const addMark = (e) => {
         console.log("Action counter:" + actionCounter);
     } else if (markChecked === 2) {
         console.log("You win!");
+    } else if (markChecked === 3) {
+        console.log("You lose!");
     }
 
 
