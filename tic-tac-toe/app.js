@@ -141,10 +141,14 @@ const markHandler = (e, targetEl, className1, className2) => {
 const addMark = (e) => {
 
     let markChecked = 0;
+
     const targetEl = e.target;
 
     //Handles "X" mark
-    markChecked = markHandler(e, targetEl, "marked", "robot");
+    if (gameEnded === false) {
+        markChecked = markHandler(e, targetEl, "marked", "robot");
+    }
+
     //-End markHandler
     //---checkWin inside
 
@@ -158,17 +162,21 @@ const addMark = (e) => {
         console.log("Action counter:" + actionCounter);
     } else if (markChecked === 2) {
         console.log("You win!");
+        gameEnded = true;
+       
     } else if (markChecked === 3) {
         console.log("You lose!");
+        gameEnded = true;
     }
-
 
 };
 
 
 let actionCounter = 0;
+let gameEnded = false;
 
 table.addEventListener("click", addMark);
+
 
 
 
