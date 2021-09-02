@@ -1,6 +1,8 @@
 //Selectors
 const table = document.querySelector("#game-area");
 
+const resetBtn = document.querySelector(".reset");
+
 
 
 //Functions
@@ -163,7 +165,7 @@ const addMark = (e) => {
     } else if (markChecked === 2) {
         console.log("You win!");
         gameEnded = true;
-       
+
     } else if (markChecked === 3) {
         console.log("You lose!");
         gameEnded = true;
@@ -171,11 +173,27 @@ const addMark = (e) => {
 
 };
 
+const resetBoard = (e) => {
+    const table = e.target.parentNode.children[1].children[0];
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            table.children[i].children[j].classList = "";
+            table.children[i].children[j].innerText = "";
+            actionCounter = 0;
+            gameEnded = false;
+            console.log(table.children[i].children[j]);
+        }
+    }
+};
+
 
 let actionCounter = 0;
 let gameEnded = false;
 
 table.addEventListener("click", addMark);
+
+resetBtn.addEventListener("click", resetBoard);
 
 
 

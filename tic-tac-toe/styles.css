@@ -10,6 +10,7 @@
 
 html {
     font-size: 10px;
+    font-family: Poppins;
 }
 
 header {
@@ -39,3 +40,18 @@ td {
     width: 10vh;
     border: 0.1rem solid black;
 }
+
+.reset {
+    background: white;
+    border: 0.2rem solid black;
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.reset:hover {
+    background: lightblue;
+    border: 0.2rem solid black;
+    font-weight: 600;
+    cursor: pointer;
+   }
