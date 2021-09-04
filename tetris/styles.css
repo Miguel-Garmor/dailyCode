@@ -16,17 +16,29 @@ html {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 0.2rem solid black;
 }
 
 #title {
     font-size: 4rem;
     text-align: center;
+    height: 10vh;
+    width: auto;
+}
+
+#game-area {
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 0.2rem solid black;
 }
 
 #board {
     min-height: 90%;
     min-width: 70%;
-    border: 0.2rem solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;

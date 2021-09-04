@@ -1,6 +1,13 @@
 //Selectors
 const boardElement = document.querySelector("#board");
+const buttonSectionElement = document.querySelector("#button-section");
+
 
 //Main
 
-window.addEventListener("load", createBoard);
+createBoard();
+
+buttonSectionElement.addEventListener("click", movement);
+
+setMarker();
+
