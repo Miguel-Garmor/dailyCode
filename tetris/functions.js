@@ -1,5 +1,7 @@
 //Functions
 
+//Functions
+
 const createBoard = (rows, columns) => {
 
     //*Table section
@@ -63,15 +65,14 @@ const createBoard = (rows, columns) => {
 
 }
 
-const setMarker = () => {
+const resetMarker = () => {
 
-    const rowStart = 0;
     let markerLocation;
 
+    const rowStart = 0;
+
     const tableEl = boardElement.children[0];
-
-
-    const targetEl = tableEl.children[rowStart]
+    const targetEl = tableEl.children[rowStart];
 
     const numColumns = targetEl.children.length;
 
@@ -82,13 +83,13 @@ const setMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    //Return initial marker position:
-
+    markerLocation = boardElement.children[0].children[rowStart].children[columnStart].id;
+    console.log("Running resetMarker()");
     return markerLocation;
+
 }
 
 const getMarkerLocation = (target) => {
-    console.log();
 
     const rows = target.children.length;
     const columns = target.children[0].children.length;
@@ -110,12 +111,11 @@ const getMarkerLocation = (target) => {
     }
 }
 
-const adjustMarker = (direction, tableElement, markerLocation, colMax, bottomLimit) => {
+const adjustMarker = (direction, tableElement, rowMax, colMax) => {
 
 
     let colLeftLimit = "0";
     let colRightLimit = (colMax - 1).toString();
-    console.log(colRightLimit);
     //bottom Limit -> will be a changing array
     //let bottomLimit; //array 
 
@@ -124,11 +124,6 @@ const adjustMarker = (direction, tableElement, markerLocation, colMax, bottomLim
     let nextRow = preRow;
     let nextColumn = preColumn;
 
-    console.log("0: " + preRow);
-    console.log("0: " + preColumn);
-
-
-
     switch (direction) {
 
         case "left-button":
@@ -136,15 +131,23 @@ const adjustMarker = (direction, tableElement, markerLocation, colMax, bottomLim
                 console.log("abort-left");
             } else {
                 nextColumn--;
+                console.log("Continue left movement");
             }
             break;
 
         case "down-button":
             // + Implement dynamic bottom limit
-            if (markerLocation === bottomLimit[preColumn]) {
+            if (preRow == (rowMax - 1) || tableElement.children[preRow].children[preColumn].classList.contains("bottom-limit")) {
+                console.log("Run bottom limit");
+                nextRow;
+                tableElement.children[nextRow].children[nextColumn].classList = "bottom-limit";
+                tableElement.children[nextRow].children[nextColumn].innerText = "O";
+                console.log(tableElement.children[nextRow].children[nextColumn].classList);
                 console.log("abort-down");
+                return true;
             } else {
                 nextRow++;
+                console.log("Continue down movement");
             }
             break;
 
@@ -153,6 +156,7 @@ const adjustMarker = (direction, tableElement, markerLocation, colMax, bottomLim
                 console.log("abort-right");
             } else {
                 nextColumn++;
+                console.log("Continue right movement");
             }
             break;
 
@@ -162,24 +166,26 @@ const adjustMarker = (direction, tableElement, markerLocation, colMax, bottomLim
 
     /* console.log("1: " + nextRow);
     console.log("1: " + nextColumn);
-
     console.log(tableElement.children[preRow].children[preColumn].class);
     console.log(tableElement.children[preRow].children[preColumn].innerText); */
 
     //Delete previous "marked" position
     tableElement.children[preRow].children[preColumn].classList = "";
     tableElement.children[preRow].children[preColumn].innerText = markerLocation;
-    
+
     /* console.log(tableElement.children[preRow].children[preColumn]); */
 
     //Add new "marked" position
     tableElement.children[nextRow].children[nextColumn].classList = "marked";
     tableElement.children[nextRow].children[nextColumn].innerText = "X";
-    
+
+
     /* console.log(tableElement.children[nextRow].children[nextColumn]); */
 
-    //markerLocation = row.concat(column);
+    /* markerLocation = nextRow.concat(nextColumn);*/
+    
 
+    return false;
 
 }
 
@@ -191,14 +197,22 @@ const movement = (e) => {
     const tableElement = e.target.parentNode.parentNode.children[0].children[0];
 
     const colMax = e.target.parentNode.parentNode.children[0].children[0].children[0].children.length;
-    let bottomLimit = ["90", "91", "92", "93", "94", "95", "96"]
+    const rowMax = e.target.parentNode.parentNode.children[0].children[0].children.length;
 
-    markerLocation;
 
-    markerLocation = getMarkerLocation(tableElement);
-    console.log("Marker location: " + markerLocation);
+    console.log("Inside Movement - Marker location: " + markerLocation);
 
-    adjustMarker(e.target.id, tableElement, markerLocation, colMax, bottomLimit);
+    if (touchBottomLimit === false) {
+        touchBottomLimit = adjustMarker(e.target.id, tableElement, rowMax, colMax);
+        markerLocation = getMarkerLocation(tableElement);
+    } else if (touchBottomLimit === true) {
+        markerLocation = resetMarker();
+        console.log("Touch bottom true (new Marker loc): " + markerLocation);
+        touchBottomLimit = false;
+    }
+
+
+
 
 
 }

@@ -5,6 +5,7 @@ const buttonSectionElement = document.querySelector("#button-section");
 
 //Global variables
 let markerLocation;
+let touchBottomLimit = false;
 //Event listeners
 
 markerLocation = buttonSectionElement.addEventListener("click", movement);
@@ -17,9 +18,4 @@ createBoard(10, 7);
 const rows = boardElement.children[0].children.length;
 const columns = boardElement.children[0].children[0].children.length;
  */
-markerLocation = setMarker();
-
-
-
-
-
+markerLocation = resetMarker();
