@@ -1,7 +1,5 @@
 //Functions
 
-//Functions
-
 const createBoard = (rows, columns) => {
 
     //*Table section
@@ -67,26 +65,24 @@ const createBoard = (rows, columns) => {
 
 const resetMarker = () => {
 
-    let markerLocation;
-
-    const rowStart = 0;
+    const rowStart = markerLocation.start.row;
 
     const tableEl = boardElement.children[0];
     const targetEl = tableEl.children[rowStart];
 
-    const numColumns = targetEl.children.length;
+    const columnStart = markerLocation.start.column;
 
-    const columnStart = parseInt(numColumns / 2);
+    markerLocation.current.row = 0;
+    markerLocation.current.column = columnStart;
 
     //Sets marker to mid of board
 
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    markerLocation = boardElement.children[0].children[rowStart].children[columnStart].id;
-    console.log("Running resetMarker()");
-    return markerLocation;
 
+
+    console.log("Running resetMarker()");
 }
 
 const getMarkerLocation = (target) => {
@@ -94,35 +90,35 @@ const getMarkerLocation = (target) => {
     const rows = target.children.length;
     const columns = target.children[0].children.length;
 
-    let markerLocation;
-
     //Search for ID: "marked"
 
     for (let i = 0; i < rows; i++) {
         for (let j = 0; j < columns; j++) {
             if (target.children[i].children[j].className === "marked") {
-                let rowPos = i.toString();
-                let colPos = j.toString();
 
-                markerLocation = rowPos.concat(colPos);
-                return markerLocation;
+                markerLocation.current.row = i;
+                markerLocation.current.column = j;
+
+
             }
         }
     }
 }
 
-const adjustMarker = (direction, tableElement, rowMax, colMax) => {
+const adjustMarker = (direction, tableElement) => {
 
+    //Limits
+    const rowMax = limits.hardBottom;
+    let colLeftLimit = limits.left;
+    let colRightLimit = limits.right;
+    //--Limits
 
-    let colLeftLimit = "0";
-    let colRightLimit = (colMax - 1).toString();
-    //bottom Limit -> will be a changing array
-    //let bottomLimit; //array 
-
-    let preRow = markerLocation.slice(0, 1);
-    let preColumn = markerLocation.slice(1, 2);
+    //Marker location
+    let preRow = markerLocation.current.row;
+    let preColumn = markerLocation.current.column;
     let nextRow = preRow;
     let nextColumn = preColumn;
+    //--Marker location
 
     switch (direction) {
 
@@ -137,17 +133,22 @@ const adjustMarker = (direction, tableElement, rowMax, colMax) => {
 
         case "down-button":
             // + Implement dynamic bottom limit
-            if (preRow == (rowMax - 1) || tableElement.children[preRow].children[preColumn].classList.contains("bottom-limit")) {
-                console.log("Run bottom limit");
-                nextRow;
-                tableElement.children[nextRow].children[nextColumn].classList = "bottom-limit";
+            if (preRow === rowMax) {
+                /* console.log("Run bottom limit");
+                nextRow--;
+                tableElement.children[preRow].children[nextColumn].classList = "bottom-limit";
                 tableElement.children[nextRow].children[nextColumn].innerText = "O";
-                console.log(tableElement.children[nextRow].children[nextColumn].classList);
+                console.log(tableElement.children[nextRow].children[nextColumn].classList); */
                 console.log("abort-down");
                 return true;
+            } else if (tableElement.children[preRow].children[preColumn].classList.contains("bottom-limit")) {
+                console.log("IT RUNS");
             } else {
                 nextRow++;
+                console.log("Inside down: " + preRow);
+                console.log("Inside down: " + limits.hardBottom); 
                 console.log("Continue down movement");
+                console.log(tableElement.children[nextRow].children[preColumn].id);
             }
             break;
 
@@ -171,7 +172,7 @@ const adjustMarker = (direction, tableElement, rowMax, colMax) => {
 
     //Delete previous "marked" position
     tableElement.children[preRow].children[preColumn].classList = "";
-    tableElement.children[preRow].children[preColumn].innerText = markerLocation;
+    tableElement.children[preRow].children[preColumn].innerText = markerLocation.markerString();
 
     /* console.log(tableElement.children[preRow].children[preColumn]); */
 
@@ -183,7 +184,7 @@ const adjustMarker = (direction, tableElement, rowMax, colMax) => {
     /* console.log(tableElement.children[nextRow].children[nextColumn]); */
 
     /* markerLocation = nextRow.concat(nextColumn);*/
-    
+
 
     return false;
 
@@ -196,18 +197,18 @@ const movement = (e) => {
 
     const tableElement = e.target.parentNode.parentNode.children[0].children[0];
 
-    const colMax = e.target.parentNode.parentNode.children[0].children[0].children[0].children.length;
-    const rowMax = e.target.parentNode.parentNode.children[0].children[0].children.length;
 
 
-    console.log("Inside Movement - Marker location: " + markerLocation);
+
+
+    console.log("Inside Movement - Marker location: " + markerLocation.markerString());
 
     if (touchBottomLimit === false) {
-        touchBottomLimit = adjustMarker(e.target.id, tableElement, rowMax, colMax);
-        markerLocation = getMarkerLocation(tableElement);
+        touchBottomLimit = adjustMarker(e.target.id, tableElement);
+        getMarkerLocation(tableElement);
     } else if (touchBottomLimit === true) {
-        markerLocation = resetMarker();
-        console.log("Touch bottom true (new Marker loc): " + markerLocation);
+        resetMarker();
+        console.log("Touch bottom true (new Marker loc): " + markerLocation.markerString());
         touchBottomLimit = false;
     }
 
