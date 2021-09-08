@@ -134,23 +134,28 @@ const adjustMarker = (direction, tableElement) => {
         case "down-button":
             // + Implement dynamic bottom limit
             if (preRow === rowMax) {
-                console.log("Run bottom limit");
+                //TEST console.log("Run bottom limit");
                 tableElement.children[preRow].children[preColumn].className = "bottom-limit";
                 tableElement.children[preRow].children[nextColumn].innerText = "O";
-                console.log("abort-down");
+                console.log("abort-down 1");
                 return true;
-            } else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
-                console.log("IT RUNS");
+                
+            } else if ((preRow === 0) && (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit")) {
                 tableElement.children[preRow].children[preColumn].className = "bottom-limit";
                 tableElement.children[preRow].children[nextColumn].innerText = "O";
+                console.log("TOP LIMIT, END GAME");
+                return
+
+            }else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
+                //TEST console.log("IT RUNS");
+                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
+                tableElement.children[preRow].children[nextColumn].innerText = "O";
+                console.log("abort-down 2");
                 return true;
             } else {
                 nextRow++;
-                console.log("Inside down: " + preRow);
-                console.log("Inside down: " + limits.hardBottom);
                 console.log("Continue down movement");
-                console.log(tableElement.children[nextRow].children[preColumn].id);
-
+                //TEST console.log(tableElement.children[nextRow].children[preColumn].id);
             }
             break;
 
