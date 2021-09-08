@@ -135,21 +135,22 @@ const adjustMarker = (direction, tableElement) => {
             // + Implement dynamic bottom limit
             if (preRow === rowMax) {
                 console.log("Run bottom limit");
-                
-                tableElement.children[preRow].children[nextColumn].classList = "bottom-limit";
-                tableElement.children[nextRow].children[nextColumn].innerText = "O";
-                console.log(tableElement.children[nextRow].children[nextColumn].classList);
+                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
+                tableElement.children[preRow].children[nextColumn].innerText = "O";
                 console.log("abort-down");
                 return true;
-            } else if (tableElement.children[preRow].children[preColumn].classList.contains("bottom-limit")) {
+            } else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
                 console.log("IT RUNS");
+                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
+                tableElement.children[preRow].children[nextColumn].innerText = "O";
+                return true;
             } else {
                 nextRow++;
                 console.log("Inside down: " + preRow);
-                console.log("Inside down: " + limits.hardBottom); 
+                console.log("Inside down: " + limits.hardBottom);
                 console.log("Continue down movement");
                 console.log(tableElement.children[nextRow].children[preColumn].id);
-                
+
             }
             break;
 
@@ -164,25 +165,31 @@ const adjustMarker = (direction, tableElement) => {
 
         default:
             console.log("Nothing pressed");
+            return false;
     }
 
     /* console.log("1: " + nextRow);
     console.log("1: " + nextColumn);
     console.log(tableElement.children[preRow].children[preColumn].class);
     console.log(tableElement.children[preRow].children[preColumn].innerText); */
+    if (tableElement.children[preRow].children[preColumn].className !== "bottom-limit") {
+        //Delete previous "marked" position
+        console.log(tableElement.children[preRow].children[preColumn].className);
+        tableElement.children[preRow].children[preColumn].classList = "";
+        tableElement.children[preRow].children[preColumn].innerText = markerLocation.markerString();
 
-    //Delete previous "marked" position
-    tableElement.children[preRow].children[preColumn].classList = "";
-    tableElement.children[preRow].children[preColumn].innerText = markerLocation.markerString();
+        /* console.log(tableElement.children[preRow].children[preColumn]); */
 
-    /* console.log(tableElement.children[preRow].children[preColumn]); */
+        //Add new "marked" position
 
-    //Add new "marked" position
-    tableElement.children[nextRow].children[nextColumn].classList = "marked";
-    tableElement.children[nextRow].children[nextColumn].innerText = "X";
 
-    markerLocation.current.row = nextRow;
-    markerLocation.current.column = nextColumn;
+        tableElement.children[nextRow].children[nextColumn].classList = "marked";
+        tableElement.children[nextRow].children[nextColumn].innerText = "X";
+
+        markerLocation.current.row = nextRow;
+        markerLocation.current.column = nextColumn;
+    }
+
 
     console.log("Marker ID LOC:" + markerLocation.markerString());
 
