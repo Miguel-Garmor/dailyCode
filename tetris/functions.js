@@ -105,6 +105,29 @@ const getMarkerLocation = (target) => {
     }
 }
 
+const isRowCompleted = (tableElement) => {
+
+    const colMax = limits.right;
+    const row = markerLocation.current.row;
+
+    let counter = 0;
+
+    for (let j = 0; j <= colMax; j++) {
+        if (counter === 6) {
+            console.log("ROW COMPLETED");
+            for (let j = 0; j <= colMax; j++) {
+                tableElement.children[row].children[j].className = "";
+                tableElement.children[row].children[j].innerText = "";
+            }
+        }
+        else if (tableElement.children[row].children[j].className === "bottom-limit") {
+            console.log("Check: " + (j + 1));
+            counter++;
+        }
+    }
+
+}
+
 const adjustMarker = (direction, tableElement) => {
 
     //Limits
@@ -138,20 +161,23 @@ const adjustMarker = (direction, tableElement) => {
                 tableElement.children[preRow].children[preColumn].className = "bottom-limit";
                 tableElement.children[preRow].children[nextColumn].innerText = "O";
                 console.log("abort-down 1");
+                isRowCompleted(tableElement);
                 return true;
-                
+
             } else if ((preRow === 0) && (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit")) {
                 tableElement.children[preRow].children[preColumn].className = "bottom-limit";
                 tableElement.children[preRow].children[nextColumn].innerText = "O";
                 console.log("TOP LIMIT, END GAME");
-                return
+                //return?
 
-            }else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
+            } else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
                 //TEST console.log("IT RUNS");
                 tableElement.children[preRow].children[preColumn].className = "bottom-limit";
                 tableElement.children[preRow].children[nextColumn].innerText = "O";
                 console.log("abort-down 2");
+                isRowCompleted(tableElement);
                 return true;
+
             } else {
                 nextRow++;
                 console.log("Continue down movement");
@@ -215,16 +241,15 @@ const movement = (e) => {
 
     const tableElement = e.target.parentNode.parentNode.children[0].children[0];
 
-
-
-
-
     console.log("Inside Movement - Marker location: " + markerLocation.markerString());
 
     if (touchBottomLimit === false) {
+
         touchBottomLimit = adjustMarker(e.target.id, tableElement);
         getMarkerLocation(tableElement);
+
     } else if (touchBottomLimit === true) {
+
         resetMarker();
         console.log("Touch bottom true (new Marker loc): " + markerLocation.markerString());
         touchBottomLimit = false;

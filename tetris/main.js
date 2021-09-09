@@ -30,7 +30,7 @@ buttonSectionElement.addEventListener("click", movement);
 
 //Main
 
-createBoard(10, 7);
+createBoard(10, 7); //Why doesn't it work if I change the row size?
 
 /* //--Row + column length reference
 const rows = boardElement.children[0].children.length;
