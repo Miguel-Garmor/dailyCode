@@ -11,26 +11,38 @@ let markerLocation = {
     },
     start: {
         row: 0,
-        column: 3
+        column: 0
     },
-    markerString: function(){
+    markerString: function () {
         return `${markerLocation.current.row}${markerLocation.current.column}`;
     }
 }
 
 let limits = {
     left: 0,
-    right: 6,
-    hardBottom: 9
+    right: 0,
+    hardBottom: 0
 }
+
+let boardValues = {
+    rows: 3,
+    columns: 5
+}
+
 let touchBottomLimit = false;
+
+//Value initializations
+limits.hardBottom = boardValues.rows - 1;
+limits.right = boardValues.columns - 1;
+
+markerLocation.start.column = (boardValues.columns - 1) / 2;
 //Event listeners
 
 buttonSectionElement.addEventListener("click", movement);
 
 //Main
 
-createBoard(10, 7); //Why doesn't it work if I change the row size?
+createBoard(boardValues.rows, boardValues.columns); //Why doesn't it work if I change the row size?
 
 /* //--Row + column length reference
 const rows = boardElement.children[0].children.length;

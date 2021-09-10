@@ -105,6 +105,11 @@ const getMarkerLocation = (target) => {
     }
 }
 
+const lowerRows = () => {
+    console.log("Run lower rows");
+
+}
+
 const isRowCompleted = (tableElement) => {
 
     const colMax = limits.right;
@@ -113,16 +118,29 @@ const isRowCompleted = (tableElement) => {
     let counter = 0;
 
     for (let j = 0; j <= colMax; j++) {
-        if (counter === 6) {
-            console.log("ROW COMPLETED");
-            for (let j = 0; j <= colMax; j++) {
-                tableElement.children[row].children[j].className = "";
-                tableElement.children[row].children[j].innerText = "";
-            }
-        }
-        else if (tableElement.children[row].children[j].className === "bottom-limit") {
+        console.log(colMax);
+        console.log(counter);
+
+        if (tableElement.children[row].children[j].className === "bottom-limit") {
             console.log("Check: " + (j + 1));
             counter++;
+            if ((counter - 1) === colMax) {
+                console.log("ROW COMPLETED");
+                for (j = 0; j <= colMax; j++) {
+                    tableElement.children[row].children[j].className = "";
+                    tableElement.children[row].children[j].innerText = "";
+                }
+                lowerRows();
+                /* for (let i = row; i > 0; i--) {
+                    for (let j = 0; i < colMax; i++) {
+                        if (tableElement.children[row].children[j].className === "bottom-limit") {
+                            tableElement.children[row].children[j].className = "";
+                            tableElement.children[row].children[j].innerText = "";
+                            tableElement.children[row + 1].children[j].className = "bottom-limit";
+                        } tableElement.children[row + 1].children[j].innerText = "O";
+                    }
+                } */
+            }
         }
     }
 
