@@ -105,8 +105,25 @@ const getMarkerLocation = (target) => {
     }
 }
 
-const lowerRows = () => {
+const lowerRows = (row, colMax, tableElement) => {
     console.log("Run lower rows");
+    row--;
+    for (let i = row; i >= 0; i--) {
+        for (let j = 0; j <= colMax; j++) {
+            console.log("row" + i);
+            console.log("column" + j);
+
+            if (tableElement.children[i].children[j].className === "bottom-limit") {
+                tableElement.children[i].children[j].className = "";
+                tableElement.children[i].children[j].innerText = "";
+                tableElement.children[i + 1].children[j].className = "bottom-limit";
+                tableElement.children[i + 1].children[j].innerText = "O";
+                console.log("FOUND IT");
+            }
+            
+
+        }
+    }
 
 }
 
@@ -130,16 +147,8 @@ const isRowCompleted = (tableElement) => {
                     tableElement.children[row].children[j].className = "";
                     tableElement.children[row].children[j].innerText = "";
                 }
-                lowerRows();
-                /* for (let i = row; i > 0; i--) {
-                    for (let j = 0; i < colMax; i++) {
-                        if (tableElement.children[row].children[j].className === "bottom-limit") {
-                            tableElement.children[row].children[j].className = "";
-                            tableElement.children[row].children[j].innerText = "";
-                            tableElement.children[row + 1].children[j].className = "bottom-limit";
-                        } tableElement.children[row + 1].children[j].innerText = "O";
-                    }
-                } */
+                lowerRows(row, colMax, tableElement);
+
             }
         }
     }

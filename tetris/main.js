@@ -25,7 +25,7 @@ let limits = {
 }
 
 let boardValues = {
-    rows: 3,
+    rows: 5,
     columns: 5
 }
 
