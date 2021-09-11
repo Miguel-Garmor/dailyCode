@@ -24,7 +24,7 @@ let limits = {
     hardBottom: 0
 }
 
-let boardValues = {
+const boardValues = {
     rows: 5,
     columns: 5
 }

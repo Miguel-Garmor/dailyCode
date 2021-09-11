@@ -81,7 +81,7 @@ const generateObject = (chosenObject, tableEl) => {
                     tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
                     tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
 
-                    currentObject.points = [...currentObject.points, startColumn + j];
+                    currentObject.points = [...currentObject.points, tableEl.children[startRow + i].children[startColumn + j].id];
 
                     console.log("Current points: " + currentObject.points);
                 }
@@ -191,6 +191,29 @@ const isRowCompleted = (tableElement) => {
 
 }
 
+const checkLimits = (rowCheck, columnCheck, tableElement) => {
+
+    const maxRow = boardValues.rows - 1;
+    const maxColumns = boardValues.columns - 1;
+
+
+    for (let i = maxRow; i >= 0; i--) {
+        for (let j = 0; j < maxColumns; j++) {
+            console.log("Marker ID: " + i + "" + j);
+            if (tableElement.children[i].children[j].className === "marked") {
+                console.log("Hit a MARKER: " + i + "" + j);
+            }
+        }
+    }
+}
+
+const addBottomLimit = (preRow, preColumn, nextColumn, tableElement) => {
+
+    tableElement.children[preRow].children[preColumn].className = "bottom-limit";
+    tableElement.children[preRow].children[nextColumn].innerText = "O";
+
+}
+
 const adjustMarker = (direction, tableElement) => {
 
     //Limits
@@ -213,6 +236,7 @@ const adjustMarker = (direction, tableElement) => {
                 console.log("abort-left");
             } else {
                 nextColumn--;
+                checkLimits(0, -1, tableElement);
                 console.log("Continue left movement");
             }
             break;
@@ -221,28 +245,26 @@ const adjustMarker = (direction, tableElement) => {
             // + Implement dynamic bottom limit
             if (preRow === rowMax) {
                 //TEST console.log("Run bottom limit");
-                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
-                tableElement.children[preRow].children[nextColumn].innerText = "O";
+                addBottomLimit(preRow, preColumn, nextColumn, tableElement);
                 console.log("abort-down 1");
                 isRowCompleted(tableElement);
                 return true;
 
             } else if ((preRow === 0) && (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit")) {
-                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
-                tableElement.children[preRow].children[nextColumn].innerText = "O";
+                addBottomLimit(preRow, preColumn, nextColumn, tableElement);
                 console.log("TOP LIMIT, END GAME");
                 //return?
 
             } else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
                 //TEST console.log("IT RUNS");
-                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
-                tableElement.children[preRow].children[nextColumn].innerText = "O";
+                addBottomLimit(preRow, preColumn, nextColumn, tableElement);
                 console.log("abort-down 2");
                 isRowCompleted(tableElement);
                 return true;
 
             } else {
                 nextRow++;
+                checkLimits(0, -1, tableElement);
                 console.log("Continue down movement");
                 //TEST console.log(tableElement.children[nextRow].children[preColumn].id);
             }
@@ -253,6 +275,7 @@ const adjustMarker = (direction, tableElement) => {
                 console.log("abort-right");
             } else {
                 nextColumn++;
+                checkLimits(0, -1, tableElement);
                 console.log("Continue right movement");
             }
             break;
