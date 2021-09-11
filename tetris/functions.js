@@ -63,6 +63,39 @@ const createBoard = (rows, columns) => {
 
 }
 
+
+const generateObject = (chosenObject, tableEl) => {
+    console.log(chosenObject);
+
+    let startRow = markerLocation.start.row;
+    let startColumn = markerLocation.start.column;
+
+    switch (chosenObject) {
+
+        case "square":
+            console.log("This is the square");
+            console.log("Start Column: " + startColumn);
+
+            for (let i = 0; i < 2; i++) {
+                for (let j = 0; j < 2; j++) {
+                    tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
+                    tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
+
+                    currentObject.points = [...currentObject.points, startColumn + j];
+
+                    console.log("Current points: " + currentObject.points);
+                }
+            }
+            console.log("Finished square: " + currentObject.points)
+            break;
+
+        default:
+            console.log("No object");
+
+    }
+
+}
+
 const resetMarker = () => {
 
     const rowStart = markerLocation.start.row;
@@ -80,10 +113,13 @@ const resetMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-
-
     console.log("Running resetMarker()");
+
+    generateObject("square", tableEl);
+
+
 }
+
 
 const getMarkerLocation = (target) => {
 
@@ -120,7 +156,7 @@ const lowerRows = (row, colMax, tableElement) => {
                 tableElement.children[i + 1].children[j].innerText = "O";
                 console.log("FOUND IT");
             }
-            
+
 
         }
     }
@@ -173,7 +209,7 @@ const adjustMarker = (direction, tableElement) => {
     switch (direction) {
 
         case "left-button":
-            if (preColumn === colLeftLimit) {
+            if (preColumn === colLeftLimit || tableElement.children[preRow].children[preColumn - 1].className === "bottom-limit") {
                 console.log("abort-left");
             } else {
                 nextColumn--;
@@ -213,7 +249,7 @@ const adjustMarker = (direction, tableElement) => {
             break;
 
         case "right-button":
-            if (preColumn === colRightLimit) {
+            if (preColumn === colRightLimit || tableElement.children[preRow].children[preColumn + 1].className === "bottom-limit") {
                 console.log("abort-right");
             } else {
                 nextColumn++;
@@ -281,9 +317,5 @@ const movement = (e) => {
         console.log("Touch bottom true (new Marker loc): " + markerLocation.markerString());
         touchBottomLimit = false;
     }
-
-
-
-
 
 }

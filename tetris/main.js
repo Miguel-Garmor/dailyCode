@@ -29,6 +29,11 @@ let boardValues = {
     columns: 5
 }
 
+let currentObject = {
+    points: [],
+    colour: "white"
+}
+
 let touchBottomLimit = false;
 
 //Value initializations
