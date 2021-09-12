@@ -21,7 +21,7 @@ let markerLocation = {
 let limits = {
     left: 0,
     right: 0,
-    hardBottom: 0
+    hardBottom: []
 }
 
 let boardValues = {
@@ -29,28 +29,22 @@ let boardValues = {
     columns: 5
 }
 
-let currentObject = {
-    points: [],
-    colour: "white"
-}
+
 
 let touchBottomLimit = false;
 
-//Value initializations
+//Limit value initializations
 limits.hardBottom = boardValues.rows - 1;
 limits.right = boardValues.columns - 1;
 
+//Mid point on table
 markerLocation.start.column = (boardValues.columns - 1) / 2;
-//Event listeners
 
+//Event listeners
 buttonSectionElement.addEventListener("click", movement);
 
 //Main
 
-createBoard(boardValues.rows, boardValues.columns); //Why doesn't it work if I change the row size?
+createBoard(boardValues.rows, boardValues.columns); 
 
-/* //--Row + column length reference
-const rows = boardElement.children[0].children.length;
-const columns = boardElement.children[0].children[0].children.length;
- */
 resetMarker();
