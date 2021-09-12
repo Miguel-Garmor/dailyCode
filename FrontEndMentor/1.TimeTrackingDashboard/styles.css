@@ -15,8 +15,8 @@ html {
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border: 0.2rem solid green;
-    height: 100vh;
+    background: #0D1323;
+       height: 100vh;
     width: 100vw;
 }
 
@@ -41,7 +41,8 @@ html {
     flex-direction: column;
     justify-content: left;
     align-items: left;
-    background-color: #0D1323;
+    background-color: #1D204D;
+    font-family: Poppins;
 }
 
 .report-container {
@@ -81,7 +82,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #0D1323;
+    background-color: #1D204D;
     height: 30%;
     padding: 3rem;
 }
@@ -98,4 +99,70 @@ html {
     list-style: none;
     font-size: 1.5rem;
     color: white;
+}
+
+.box {
+    position: relative;
+    font-family: Poppins;
+    color: white;
+    overflow: hidden;
+}
+
+.work {
+    background: #FE8A64;
+}
+
+.play {
+    background: #56C2E6;
+}
+
+.study {
+    background: #FF5E7D;
+}
+
+.exercise {
+    background: #4CCF82;
+}
+
+.social {
+    background: #7235D1;
+}
+
+.self-care {
+    background: #F1C65B;
+}
+
+.box img {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    height: 5rem;
+    width: auto;
+}
+
+.box-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    position: absolute;
+    bottom: 0;
+    height: 85%;
+    width: 100%;
+    background: #1D204D;
+    padding: 2rem;
+}
+
+.box-container h1 {
+    font-size: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.box-container h2 {
+    font-size: 4rem;
+    padding-bottom: 2rem;
+}
+
+.box-header {
+    display: flex;
+    justify-content: space-between;
 }
