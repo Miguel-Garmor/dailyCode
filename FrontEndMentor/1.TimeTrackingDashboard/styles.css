@@ -98,6 +98,15 @@ html {
 .filter-container li {
     list-style: none;
     font-size: 1.5rem;
+    color: #4B4E85;
+}
+
+.filter-container li:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.clicked {
     color: white;
 }
 
