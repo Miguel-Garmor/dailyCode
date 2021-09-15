@@ -13,7 +13,17 @@ const setValues = () => {
 }
 
 const filterValues = (e) => {
-    console.log(e.target.innerText);
+    
+
+    for (let i = 0; i < e.target.parentNode.children.length; i++) {
+        console.log("Before: " + e.target.parentNode.children[0].classList);
+        e.target.parentNode.children[i].classList = "";
+        console.log("After: " + e.target.parentNode.children[0].classList);
+    }
+
+    e.target.className = "clicked";
+    console.log(e.target.classList);
+
 
     switch (e.target.innerText) {
 

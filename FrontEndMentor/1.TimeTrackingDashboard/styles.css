@@ -107,7 +107,7 @@ html {
 }
 
 .clicked {
-    color: white;
+    color: white !important;
 }
 
 .box {
