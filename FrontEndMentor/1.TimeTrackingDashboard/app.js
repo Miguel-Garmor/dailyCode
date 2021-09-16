@@ -2,18 +2,27 @@ const container = document.querySelector(".container");
 const filterContainer = document.querySelector(".filter-container");
 
 
-const setValues = () => {
+const valueOnLoad = () => {
+
+    console.log(filterContainer.children[0].children[0]);
+
+    for (let i = 0; i < container.children.length; i++) {
+                container.children[i].children[1].children[0].children[0].classList = "";
+            }
+
+    filterContainer.children[0].children[0].className = "clicked";
 
     for (let i = 1; i < container.children.length; i++) {
 
         container.children[i].children[1].children[0].children[0].innerText = data[i - 1].title;
-        console.log(container.children[i].children[1].children[1]);
+        container.children[i].children[1].children[1].innerText = data[i - 1].timeframes.daily.current + "hrs";
+        container.children[i].children[1].children[2].innerText = "Last week - " + data[i - 1].timeframes.daily.previous + "hrs";
     }
 
 }
 
 const filterValues = (e) => {
-    
+
 
     for (let i = 0; i < e.target.parentNode.children.length; i++) {
         console.log("Before: " + e.target.parentNode.children[0].classList);
@@ -60,6 +69,7 @@ const filterValues = (e) => {
 
 }
 
-window.addEventListener("load", setValues);
+window.addEventListener("load", valueOnLoad("daily"));
+
 
 filterContainer.addEventListener("click", filterValues);
