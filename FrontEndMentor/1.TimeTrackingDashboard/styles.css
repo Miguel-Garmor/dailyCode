@@ -11,8 +11,6 @@ html {
 
 .main {
     display: flex;
-    flex: wrap;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
     background: #0D1323;
@@ -29,6 +27,7 @@ html {
     align-items: stretch;
     height: 50rem;
     width: 90rem;
+    border: 0.2rem solid white;
 }
 
 .container div {
@@ -174,4 +173,27 @@ html {
 .box-header {
     display: flex;
     justify-content: space-between;
+}
+
+@media only screen and (max-width: 700px) {
+    .main {
+        height: auto;
+    }
+    .container {
+        display: -ms-inline-grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+        justify-content: center;
+        
+        height: auto;
+        width: 90vw;
+    }
+    .report-box {
+        height: 35vh;
+        max-width: 50rem;
+    }
+    .box {
+        height: 25vh;
+        max-width: 50rem;
+    }
 }
