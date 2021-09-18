@@ -27,7 +27,6 @@ html {
     align-items: stretch;
     height: 50rem;
     width: 90rem;
-    border: 0.2rem solid white;
 }
 
 .container div {
@@ -42,6 +41,9 @@ html {
     align-items: left;
     background-color: #1D204D;
     font-family: Poppins;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .report-container {
@@ -111,6 +113,8 @@ html {
 
 .box {
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: Poppins;
     color: white;
     overflow: hidden;
@@ -180,11 +184,8 @@ html {
         height: auto;
     }
     .container {
-        display: -ms-inline-grid;
+        display: grid;
         grid-template-columns: 1fr;
-        align-items: center;
-        justify-content: center;
-        
         height: auto;
         width: 90vw;
     }
