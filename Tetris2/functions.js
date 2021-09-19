@@ -63,30 +63,44 @@ const createBoard = (rows, columns) => {
 
 }
 
+const setPositionArray = (tableEl, startRow, startColumn, i, j, counter) => {
+    
+    markerLocation.positionArray[counter] = tableEl.children[startRow + i].children[startColumn + j].id;
 
-const generateObject = (chosenObject, tableEl) => {
-    console.log(chosenObject);
+    console.log("POSITION ARRAY: " + markerLocation.positionArray);
+
+}
+
+const squareGenerator = (tableEl) => {
+    //Set marker length
+    markerLocation.markerLength = 4;
 
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
 
+    let counter = 0;
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 2; j++) {
+            tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
+            tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
+
+            setPositionArray(tableEl, startRow, startColumn, i, j, counter);
+            counter++;
+        }
+    }
+}
+const generateObject = (chosenObject, tableEl) => {
+    console.log(chosenObject);
+
+    
+
     switch (chosenObject) {
 
         case "square":
-            console.log("This is the square");
-            console.log("Start Column: " + startColumn);
+            squareGenerator(tableEl);
 
-            for (let i = 0; i < 2; i++) {
-                for (let j = 0; j < 2; j++) {
-                    tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
-                    tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
 
-                    currentObject.points = [...currentObject.points, startColumn + j];
-
-                    console.log("Current points: " + currentObject.points);
-                }
-            }
-            console.log("Finished square: " + currentObject.points)
             break;
 
         default:
@@ -99,14 +113,10 @@ const generateObject = (chosenObject, tableEl) => {
 const resetMarker = () => {
 
     const rowStart = markerLocation.start.row;
+    const columnStart = markerLocation.start.column;
 
     const tableEl = boardElement.children[0];
     const targetEl = tableEl.children[rowStart];
-
-    const columnStart = markerLocation.start.column;
-
-    markerLocation.current.row = 0;
-    markerLocation.current.column = columnStart;
 
     //Sets marker to mid of board
 
@@ -306,7 +316,7 @@ const adjustMarker = (direction, tableElement) => {
 //Inside:
 //--getMarkerLocation
 //--adjustMarker
-const movement = (e) => {
+const movementManager = (e) => {
 
     const tableElement = e.target.parentNode.parentNode.children[0].children[0];
 

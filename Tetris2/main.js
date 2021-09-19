@@ -3,25 +3,32 @@ const boardElement = document.querySelector("#board");
 const buttonSectionElement = document.querySelector("#button-section");
 
 
-//Global variables
+//Experimental variables
+
+
+
+//OBJECTS
+
 let markerLocation = {
-    current: {
-        row: 0,
-        column: 0
-    },
+    markerLength: 0,
+
+    positionArray: [],
+
+    rows: [],
+    columns: [],
+
     start: {
         row: 0,
         column: 0
     },
     markerString: function () {
-        return `${markerLocation.current.row}${markerLocation.current.column}`;
+        return `${markerLocation.row}${markerLocation.column}`;
     }
 }
 
 let limits = {
     left: 0,
-    right: 0,
-    hardBottom: []
+    right: 0
 }
 
 let boardValues = {
@@ -29,22 +36,20 @@ let boardValues = {
     columns: 5
 }
 
-
+//GLOBAL VARIABLES
 
 let touchBottomLimit = false;
 
-//Limit value initializations
-limits.hardBottom = boardValues.rows - 1;
+//INITIALIZATIONS
+
 limits.right = boardValues.columns - 1;
+markerLocation.start.column = parseInt(boardValues.columns / 2);
 
-//Mid point on table
-markerLocation.start.column = (boardValues.columns - 1) / 2;
+//EVENT LISTENERS
+buttonSectionElement.addEventListener("click", movementManager);
 
-//Event listeners
-buttonSectionElement.addEventListener("click", movement);
+//MAIN
 
-//Main
-
-createBoard(boardValues.rows, boardValues.columns); 
+createBoard(boardValues.rows, boardValues.columns);
 
 resetMarker();
