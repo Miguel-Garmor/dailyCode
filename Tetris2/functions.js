@@ -63,14 +63,6 @@ const createBoard = (rows, columns) => {
 
 }
 
-const setPositionArray = (tableEl, startRow, startColumn, i, j, counter) => {
-    
-    markerLocation.positionArray[counter] = tableEl.children[startRow + i].children[startColumn + j].id;
-
-    console.log("POSITION ARRAY: " + markerLocation.positionArray);
-
-}
-
 const squareGenerator = (tableEl) => {
     //Set marker length
     markerLocation.markerLength = 4;
@@ -78,22 +70,21 @@ const squareGenerator = (tableEl) => {
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
 
-    let counter = 0;
+
 
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 2; j++) {
             tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
             tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
 
-            setPositionArray(tableEl, startRow, startColumn, i, j, counter);
-            counter++;
+
         }
     }
 }
 const generateObject = (chosenObject, tableEl) => {
     console.log(chosenObject);
 
-    
+
 
     switch (chosenObject) {
 
@@ -313,6 +304,27 @@ const adjustMarker = (direction, tableElement) => {
 
 }
 
+const markerScanner = (tableElement) => {
+
+    let rowLength = tableElement.children.length;
+    let columnLength = tableElement.children[1].children.length
+
+    markerLocation.rows = [];
+    markerLocation.columns = [];
+
+    for (let i = 0; i < rowLength; i++) {
+        for (let j = 0; j < columnLength; j++) {
+            if (tableElement.children[i].children[j].className === "marked") {
+                console.log("WE MARKED");
+                markerLocation.rows = [...markerLocation.rows, i];
+                markerLocation.columns = [...markerLocation.columns, j];
+            }
+        }
+    }
+    console.log(markerLocation.rows);
+    console.log(markerLocation.columns);
+}
+
 //Inside:
 //--getMarkerLocation
 //--adjustMarker
@@ -320,10 +332,10 @@ const movementManager = (e) => {
 
     const tableElement = e.target.parentNode.parentNode.children[0].children[0];
 
-    console.log("Inside Movement - Marker location: " + markerLocation.markerString());
+    //console.log("Inside Movement - Marker location: " + markerLocation.markerString());
 
     if (touchBottomLimit === false) {
-
+        markerScanner(tableElement);
         touchBottomLimit = adjustMarker(e.target.id, tableElement);
         getMarkerLocation(tableElement);
 
