@@ -37,8 +37,8 @@ html {
 }
 
 #board {
-    min-height: 90%;
-    min-width: 70%;
+    min-height: 80vh;
+    min-width: 70vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -46,8 +46,8 @@ html {
 }
 
 #board table {
-    height: 90%;
-    width: 40%;
+    height: 60vh;
+    width: 40vw;
 }
 
 #board table, td {
@@ -56,10 +56,10 @@ html {
 
 #board td {
     text-align: center;
-    height: 10%;
-    width: 10%;
+    height: 6rem;
+    width: 6rem;
 }
 
 #button-section {
-    margin: 1rem;
+    margin: 0rem;
 }

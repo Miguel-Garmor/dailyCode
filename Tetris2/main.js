@@ -28,7 +28,8 @@ let markerLocation = {
 
 let limits = {
     left: 0,
-    right: 0
+    bottom: 4,
+    right: 4
 }
 
 let boardValues = {

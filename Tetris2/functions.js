@@ -123,26 +123,6 @@ const resetMarker = () => {
 }
 
 
-const getMarkerLocation = (target) => {
-
-    const rows = target.children.length;
-    const columns = target.children[0].children.length;
-
-    //Search for ID: "marked"
-
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < columns; j++) {
-            if (target.children[i].children[j].className === "marked") {
-
-                markerLocation.current.row = i;
-                markerLocation.current.column = j;
-
-
-            }
-        }
-    }
-}
-
 const lowerRows = (row, colMax, tableElement) => {
     console.log("Run lower rows");
     row--;
@@ -194,74 +174,33 @@ const isRowCompleted = (tableElement) => {
 
 }
 
-const adjustMarker = (direction, tableElement) => {
+const moveMarkers = () => {
 
-    //Limits
-    const rowMax = limits.hardBottom;
-    let colLeftLimit = limits.left;
-    let colRightLimit = limits.right;
-    //--Limits
+}
 
-    //Marker location
-    let preRow = markerLocation.current.row;
-    let preColumn = markerLocation.current.column;
-    let nextRow = preRow;
-    let nextColumn = preColumn;
-    //--Marker location
+const isMovePossible = (tableElement, direction, positions, i) => {
+
+    let elementClass = tableElement.children[positions.nextRow].children[positions.nextColumn].className;
 
     switch (direction) {
 
         case "left-button":
-            if (preColumn === colLeftLimit) {
-                if (preColumn === colLeftLimit || tableElement.children[preRow].children[preColumn - 1].className === "bottom-limit") {
-                    console.log("abort-left");
-                } else {
-                    nextColumn--;
-                    console.log("Continue left movement");
-                }
-            }
+
             break;
 
         case "down-button":
-            // + Implement dynamic bottom limit
-            if (preRow === rowMax) {
-                //TEST console.log("Run bottom limit");
-                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
-                tableElement.children[preRow].children[nextColumn].innerText = "O";
-                console.log("abort-down 1");
-                isRowCompleted(tableElement);
-                return true;
 
-            } else if ((preRow === 0) && (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit")) {
-                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
-                tableElement.children[preRow].children[nextColumn].innerText = "O";
-                console.log("TOP LIMIT, END GAME");
-                //return?
-
-            } else if (tableElement.children[preRow + 1].children[preColumn].className === "bottom-limit") {
-                //TEST console.log("IT RUNS");
-                tableElement.children[preRow].children[preColumn].className = "bottom-limit";
-                tableElement.children[preRow].children[nextColumn].innerText = "O";
-                console.log("abort-down 2");
-                isRowCompleted(tableElement);
-                return true;
+            if (positions.row === 0 || elementClass === "bottom-limit") {
+                console.log("Abort down");
 
             } else {
-                nextRow++;
-                console.log("Continue down movement");
-                //TEST console.log(tableElement.children[nextRow].children[preColumn].id);
+                console.log("Marker is OK - Continue check");
             }
+
             break;
 
         case "right-button":
-            if (preColumn === colRightLimit) {
-                if (preColumn === colRightLimit || tableElement.children[preRow].children[preColumn + 1].className === "bottom-limit") {
-                    console.log("abort-right");
-                } else {
-                    nextColumn++;
-                    console.log("Continue right movement");
-                }
-            }
+
             break;
 
         default:
@@ -269,35 +208,71 @@ const adjustMarker = (direction, tableElement) => {
             return false;
     }
 
-    /* console.log("1: " + nextRow);
-    console.log("1: " + nextColumn);
-    console.log(tableElement.children[preRow].children[preColumn].class);
-    console.log(tableElement.children[preRow].children[preColumn].innerText); */
-    if (tableElement.children[preRow].children[preColumn].className !== "bottom-limit") {
-        //Delete previous "marked" position
-        console.log(tableElement.children[preRow].children[preColumn].className);
-        tableElement.children[preRow].children[preColumn].classList = "";
-        tableElement.children[preRow].children[preColumn].innerText = markerLocation.markerString();
+}
 
-        /* console.log(tableElement.children[preRow].children[preColumn]); */
-
-        //Add new "marked" position
-
-
-        tableElement.children[nextRow].children[nextColumn].classList = "marked";
-        tableElement.children[nextRow].children[nextColumn].innerText = "X";
-
-        markerLocation.current.row = nextRow;
-        markerLocation.current.column = nextColumn;
+const moveOnDirection = (direction, markerMovement) => {
+  
+    if (direction === "left-button") {
+        markerMovement.row = 0;
+        markerMovement.column = -1;
+    } if (direction === "down-button") {
+        markerMovement.row = 1;
+        markerMovement.column = 0;
+    } else if (direction === "right-button") {
+        markerMovement.row = 0;
+        markerMovement.column = 1;
+      
     }
 
+}
 
-    console.log("Marker ID LOC:" + markerLocation.markerString());
+const adjustMarker = (direction, tableElement) => {
 
 
-    /* console.log(tableElement.children[nextRow].children[nextColumn]); */
+    console.log("So... is Move possible?");
+    console.log(tableElement.children[1].children[1].id);
 
-    /* markerLocation = nextRow.concat(nextColumn);*/
+    let markerLength = markerLocation.rows.length;
+
+    let positions = {
+        row: 0,
+        column: 0,
+        nextRow: 0,
+        nextColumn: 0
+    };
+
+    let markerMovement = {
+        row: 0,
+        column: 0
+    }
+
+    moveOnDirection(direction, markerMovement);
+
+    console.log("ROW MOVEMENT: " + markerMovement.row);
+    console.log("COLUMN MOVEMENT: " + markerMovement.column);
+
+    for (let i = 0; i < markerLength; i++) {
+
+        positions.row = markerLocation.rows[i];
+        positions.column = markerLocation.columns[i];
+
+        positions.nextRow = positions.row + markerMovement.row;
+        positions.nextColumn = positions.column + columnMovement.column;
+
+        console.log("NextRow: " + positions.nextRow);
+        console.log("NextColumn: " + positions.nextColumn);
+
+        let currentMarkerLoc = tableElement.children[positions.row].children[positions.column].id;
+        let nextMarkerLoc = tableElement.children[positions.nextRow].children[positions.nextColumn].id;
+
+        console.log("Current Marker Loc: " + currentMarkerLoc);
+        console.log("Next Marker Loc: " + nextMarkerLoc);
+
+        //conditional
+        isMovePossible(tableElement, direction, positions, i);
+
+    }
+
 
 
     return false;
@@ -335,9 +310,10 @@ const movementManager = (e) => {
     //console.log("Inside Movement - Marker location: " + markerLocation.markerString());
 
     if (touchBottomLimit === false) {
+
         markerScanner(tableElement);
         touchBottomLimit = adjustMarker(e.target.id, tableElement);
-        getMarkerLocation(tableElement);
+
 
     } else if (touchBottomLimit === true) {
 
