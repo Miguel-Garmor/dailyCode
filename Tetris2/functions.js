@@ -190,11 +190,12 @@ const isMovePossible = (tableElement, direction, positions, i) => {
 
         case "down-button":
 
-            if (positions.row === 0 || elementClass === "bottom-limit") {
+            if (positions.row === 4 || elementClass === "bottom-limit") {
                 console.log("Abort down");
 
             } else {
                 console.log("Marker is OK - Continue check");
+                return 1;
             }
 
             break;
@@ -211,7 +212,7 @@ const isMovePossible = (tableElement, direction, positions, i) => {
 }
 
 const moveOnDirection = (direction, markerMovement) => {
-  
+
     if (direction === "left-button") {
         markerMovement.row = 0;
         markerMovement.column = -1;
@@ -221,9 +222,40 @@ const moveOnDirection = (direction, markerMovement) => {
     } else if (direction === "right-button") {
         markerMovement.row = 0;
         markerMovement.column = 1;
-      
+
     }
 
+}
+
+const performMovement = (tableElement, markerMovement) => {
+    console.log("Perform movement");
+
+    let row = markerLocation.rows;
+    let column = markerLocation.columns;
+
+    let length = markerLocation.markerLength;
+
+
+    //delete old markers
+    for (let i = 0; i < length; i++) {
+        tableElement.children[row[i]].children[column[i]].className = "";
+        tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;
+    }
+
+    //change marker position
+    for (let i = 0; i < length; i++) {
+        row[i] += markerMovement.row;
+        column[i] += markerMovement.column;
+        /* //Checks
+        console.log("ROW Marker location " + i + ": " + markerLocation.rows[i]);
+        console.log("COLUMN Marker location " + i + ": " + markerLocation.columns[i]); */
+    }
+
+    //add new markers
+    for (let i = 0; i < length; i++) {
+        tableElement.children[row[i]].children[column[i]].className = "marked";
+        tableElement.children[row[i]].children[column[i]].innerText = "X";
+    }
 }
 
 const adjustMarker = (direction, tableElement) => {
@@ -231,6 +263,10 @@ const adjustMarker = (direction, tableElement) => {
 
     console.log("So... is Move possible?");
     console.log(tableElement.children[1].children[1].id);
+
+    let counter = 0;
+
+    let check = 0;
 
     let markerLength = markerLocation.rows.length;
 
@@ -251,29 +287,41 @@ const adjustMarker = (direction, tableElement) => {
     console.log("ROW MOVEMENT: " + markerMovement.row);
     console.log("COLUMN MOVEMENT: " + markerMovement.column);
 
+
     for (let i = 0; i < markerLength; i++) {
+        console.log("BEGIN CHECK: ");
 
         positions.row = markerLocation.rows[i];
         positions.column = markerLocation.columns[i];
 
         positions.nextRow = positions.row + markerMovement.row;
-        positions.nextColumn = positions.column + columnMovement.column;
+        positions.nextColumn = positions.column + markerMovement.column;
 
-        console.log("NextRow: " + positions.nextRow);
+        //Checks
+        /* console.log("NextRow: " + positions.nextRow);
         console.log("NextColumn: " + positions.nextColumn);
 
         let currentMarkerLoc = tableElement.children[positions.row].children[positions.column].id;
         let nextMarkerLoc = tableElement.children[positions.nextRow].children[positions.nextColumn].id;
 
         console.log("Current Marker Loc: " + currentMarkerLoc);
-        console.log("Next Marker Loc: " + nextMarkerLoc);
+        console.log("Next Marker Loc: " + nextMarkerLoc); */
 
-        //conditional
-        isMovePossible(tableElement, direction, positions, i);
+        check = isMovePossible(tableElement, direction, positions, i);
 
+        if (check === 1) {
+            counter++;
+
+        } else console.log("Abort counter");
+        //Checks
+        /* console.log("COUNTER: " + counter);
+        console.log("Marker length: " + markerLength);
+        console.log("i value: " + i); */
     }
 
-
+    if (counter === markerLength) {
+        performMovement(tableElement, markerMovement);
+    } else console.log("CANNOT MOVE");
 
     return false;
 
