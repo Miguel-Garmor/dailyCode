@@ -64,6 +64,7 @@ const createBoard = (rows, columns) => {
 }
 
 const squareGenerator = (tableEl) => {
+
     //Set marker length
     markerLocation.markerLength = 4;
 
@@ -74,24 +75,32 @@ const squareGenerator = (tableEl) => {
 
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 2; j++) {
-            tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
-            tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
+            if (tableEl.children[startRow + i].children[startColumn + j].className === "bottom-limit") {
+                console.log("Abort SQUARE GEN - in squareGenerator");
+                return true;
+            } else {
+                tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
+                tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
 
+            }
 
         }
     }
+    return false;
 }
 const generateObject = (chosenObject, tableEl) => {
-    console.log(chosenObject);
 
-
-
+    let check = false;
     switch (chosenObject) {
 
         case "square":
-            squareGenerator(tableEl);
+            console.log("Inside square");
+            check = squareGenerator(tableEl);
 
-
+            if (check === true) {
+                console.log("Abort SQUARE GEN - in generateObject");
+                return true;
+            }
             break;
 
         default:
@@ -101,7 +110,28 @@ const generateObject = (chosenObject, tableEl) => {
 
 }
 
+const restartGame = (tableEl) => {
+
+    let boardRows = boardValues.rows;
+    let boardColumns = boardValues.columns;
+
+    for (let i = 0; i < boardRows; i++) {
+        for (let j = 0; j < boardColumns; j++) {
+            let string1 = i.toString();
+            let string2 = j.toString();
+
+            let idString = string1.concat(string2);
+
+            tableEl.children[i].children[j].innerText = idString;
+            tableEl.children[i].children[j].className = "";
+        }
+    }
+
+}
+
 const resetMarker = () => {
+
+    let check = false;
 
     const rowStart = markerLocation.start.row;
     const columnStart = markerLocation.start.column;
@@ -114,12 +144,16 @@ const resetMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    console.log("Running resetMarker()");
+    check = generateObject("square", tableEl);
 
-    generateObject("square", tableEl);
-
-
-    console.log("Running resetMarker()");
+    if (check === true) {
+        console.log("Abort SQUARE GEN in resetMarker");
+        //Clear all information in cells
+        restartGame(tableEl);
+        //Run resetMarker();
+        resetMarker();
+    }
+    console.log("Finish resetMarker");
 }
 
 
@@ -416,9 +450,8 @@ const movementManager = (e) => {
 
 
     } else if (touchBottomLimit === true) {
-        console.log("HIIIIII, Hello!");
+
         resetMarker();
-        console.log("Touch bottom true (new Marker loc): " + markerLocation.markerString());
         touchBottomLimit = false;
     }
 
