@@ -235,8 +235,7 @@ const isMovePossible = (tableElement, direction, positions, i) => {
 
         case "left-button":
 
-            if (positions.column === 0 || elementClass === "bottom-limit" || elementClass === "edge-limit") {
-                console.log(elementClass);
+            if (positions.column === limits.left || elementClass === "bottom-limit" || elementClass === "edge-limit") {
                 console.log("ABORT LEFT");
                 return 2;
             } else {
@@ -249,9 +248,9 @@ const isMovePossible = (tableElement, direction, positions, i) => {
         case "down-button":
             console.log("Positions ROW: " + positions.row);
 
-            if (positions.row === 4 || elementClass === "bottom-limit") {
+            if (positions.row === limits.bottom || elementClass === "bottom-limit") {
                 console.log("Set bottom-limit");
-                if (positions.row === 4) {
+                if (positions.row === limits.bottom) {
                     //Set current cell as bottom limit
                     //Send signal to resetMarker()
                     console.log("Touched bottom");
@@ -272,7 +271,13 @@ const isMovePossible = (tableElement, direction, positions, i) => {
 
         case "right-button":
 
-
+            if (positions.column === limits.right || elementClass === "bottom-limit" || elementClass === "edge-limit") {
+                console.log("ABORT RIGHT");
+                return 2;
+            } else {
+                console.log("Marker is OK - Continue check");
+                return 1;
+            }
 
             break;
 
