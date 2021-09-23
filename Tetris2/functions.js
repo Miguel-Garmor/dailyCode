@@ -88,6 +88,30 @@ const squareGenerator = (tableEl) => {
     }
     return false;
 }
+const line3Generator = (tableEl) =>{
+    //Set marker length
+    markerLocation.markerLength = 3;
+
+    let startRow = markerLocation.start.row;
+    let startColumn = markerLocation.start.column;
+
+
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 1; j++) {
+            if (tableEl.children[startRow + i].children[startColumn + j].className === "bottom-limit") {
+                console.log("Abort line3 GEN - in squareGenerator");
+                return true;
+            } else {
+                tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
+                tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
+
+            }
+
+        }
+    }
+    return false;
+}
 const generateObject = (chosenObject, tableEl) => {
 
     let check = false;
@@ -102,6 +126,14 @@ const generateObject = (chosenObject, tableEl) => {
                 return true;
             }
             break;
+
+            case "line3":
+                console.log("Inside line3");
+                check = line3Generator(tableEl);
+            if (check === true) {
+                console.log("Abort LINE3 GEN - in generateObject");
+                return true;
+            }
 
         default:
             console.log("No object");
@@ -144,7 +176,7 @@ const resetMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    check = generateObject("square", tableEl);
+    check = generateObject("line3", tableEl);
 
     if (check === true) {
         console.log("Abort SQUARE GEN in resetMarker");
