@@ -24,7 +24,7 @@ html {
     top: 10%;
     left: 50%;
     transform: translate(-50%, -50%);
-   /*  border: 1px solid black; */
+    /*  border: 1px solid black; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -45,13 +45,36 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Baloo Bhai 2', cursive;
 }
 
 .select-area {
     height: 90%;
     width: 48%;
-    border: 1px solid black;
+    border: 1px solid blue;
     border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.select-area div:nth-child(1) {
+    height: 20%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.select-area div:nth-child(2) {
+    height: 60%;
+    width: 100%;
+    border: 1px solid black;
+}
+
+.select-area div:nth-child(3) {
+    height: 20%;
+    width: 100%;
+    border: 1px solid black;
 }
 
 .result-area {
@@ -59,4 +82,53 @@ html {
     width: 48%;
     border: 1px solid black;
     border-radius: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.info {
+    height: 50%;
+    width: 100%;
+    border: 1px solid green;
+    display: flex;
+    flex-direction: column;
+}
+
+.tip-amt {
+    display: flex;
+    flex-direction: row;
+}
+
+.tip-amt section:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+}
+
+.total {
+    display: flex;
+    flex-direction: row;
+}
+
+.total section:nth-child(1) {
+    display: flex;
+    flex-direction: column;
+}
+
+.reset {
+    height: 50%;
+    width: 100%;
+    border: 1px solid green;
+    position: relative;
+}
+
+.reset button {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
 }
