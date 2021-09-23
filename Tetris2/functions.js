@@ -209,6 +209,13 @@ const performMovement = (tableElement, markerMovement) => {
     }
 }
 
+const clearMarkers = (tableElement, rows, columns) => {
+    for (let i = 0; i < markerLocation.markerLength; i++) {
+        tableElement.children[rows[i]].children[columns[i]].className = "bottom-limit";
+        tableElement.children[rows[i]].children[columns[i]].innerText = "O";
+    }
+}
+
 const isMovePossible = (tableElement, direction, positions, i) => {
 
     let elementClass;
@@ -217,6 +224,8 @@ const isMovePossible = (tableElement, direction, positions, i) => {
 
     if (tableElement.children[positions.nextRow] === undefined) {
         elementClass = tableElement.children[positions.row].children[positions.column].className;
+    } else if (tableElement.children[positions.nextRow].children[positions.nextColumn] === undefined) {
+        elementClass = "edge-limit";
     } else {
         elementClass = tableElement.children[positions.nextRow].children[positions.nextColumn].className;
     }
@@ -225,6 +234,15 @@ const isMovePossible = (tableElement, direction, positions, i) => {
     switch (direction) {
 
         case "left-button":
+
+            if (positions.column === 0 || elementClass === "bottom-limit" || elementClass === "edge-limit") {
+                console.log(elementClass);
+                console.log("ABORT LEFT");
+                return 2;
+            } else {
+                console.log("Marker is OK - Continue check");
+                return 1;
+            }
 
             break;
 
@@ -243,11 +261,7 @@ const isMovePossible = (tableElement, direction, positions, i) => {
                     console.log("Touched limit");
                 }
 
-                //Clear previous markers
-                for (let i = 0; i < markerLocation.markerLength; i++) {
-                    tableElement.children[rows[i]].children[columns[i]].className = "bottom-limit";
-                    tableElement.children[rows[i]].children[columns[i]].innerText = "O";
-                }
+                clearMarkers(tableElement, rows, columns);
 
             } else {
                 console.log("Marker is OK - Continue check");
@@ -257,6 +271,8 @@ const isMovePossible = (tableElement, direction, positions, i) => {
             break;
 
         case "right-button":
+
+
 
             break;
 
@@ -331,7 +347,10 @@ const adjustMarker = (direction, tableElement) => {
         if (check === 1) {
             counter++;
 
-        } else console.log("Can't move - Abort mark counter");
+        } else if (check === 2) {
+            console.log("Can't move - Abort mark counter");
+            break;
+        }
         //Checks
         /* console.log("COUNTER: " + counter);
         console.log("Marker length: " + markerLength);
@@ -340,6 +359,9 @@ const adjustMarker = (direction, tableElement) => {
 
     if (counter === markerLength) {
         performMovement(tableElement, markerMovement);
+        return false;
+    } else if (check === 2) {
+        //Don't perform movement, but don't reset either
         return false;
     } else {
         console.log("CANNOT MOVE")
