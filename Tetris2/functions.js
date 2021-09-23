@@ -88,7 +88,7 @@ const squareGenerator = (tableEl) => {
     }
     return false;
 }
-const line3Generator = (tableEl) =>{
+const line3Generator = (tableEl) => {
     //Set marker length
     markerLocation.markerLength = 3;
 
@@ -112,6 +112,32 @@ const line3Generator = (tableEl) =>{
     }
     return false;
 }
+
+const snakeGenerator = (tableEl) => {
+    //Set marker length
+    markerLocation.markerLength = 4;
+
+    let startRow = markerLocation.start.row;
+    let startColumn = markerLocation.start.column;
+
+
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (tableEl.children[startRow + i].children[startColumn + j - 1].className === "bottom-limit") {
+                console.log("Abort snake3 GEN - in squareGenerator");
+                return true;
+            } else if (tableEl.children[startRow + i].children[startColumn + j - 1].id === "03" || tableEl.children[startRow + i].children[startColumn + j - 1].id === "11"){
+                console.log("BLANK");
+            }else {
+                tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
+                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
+            }
+
+        }
+    }
+    return false;
+}
 const generateObject = (chosenObject, tableEl) => {
 
     let check = false;
@@ -127,13 +153,23 @@ const generateObject = (chosenObject, tableEl) => {
             }
             break;
 
-            case "line3":
-                console.log("Inside line3");
-                check = line3Generator(tableEl);
+        case "line3":
+            console.log("Inside line3");
+            check = line3Generator(tableEl);
             if (check === true) {
                 console.log("Abort LINE3 GEN - in generateObject");
                 return true;
             }
+            break;
+
+        case "snake":
+            console.log("Inside snake");
+            check = snakeGenerator(tableEl);
+            if (check === true) {
+                console.log("Abort SNAKE GEN - in generateObject");
+                return true;
+            }
+            break;
 
         default:
             console.log("No object");
@@ -176,7 +212,7 @@ const resetMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    check = generateObject("line3", tableEl);
+    check = generateObject("snake", tableEl);
 
     if (check === true) {
         console.log("Abort SQUARE GEN in resetMarker");
