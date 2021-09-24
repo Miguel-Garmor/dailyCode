@@ -127,9 +127,9 @@ const snakeGenerator = (tableEl) => {
             if (tableEl.children[startRow + i].children[startColumn + j - 1].className === "bottom-limit") {
                 console.log("Abort snake3 GEN - in squareGenerator");
                 return true;
-            } else if (tableEl.children[startRow + i].children[startColumn + j - 1].id === "03" || tableEl.children[startRow + i].children[startColumn + j - 1].id === "11"){
+            } else if (i === 0 && j === 2 || i === 1 && j === 0) {
                 console.log("BLANK");
-            }else {
+            } else {
                 tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
             }

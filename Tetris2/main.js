@@ -28,13 +28,13 @@ let markerLocation = {
 
 let limits = {
     left: 0,
-    bottom: 4,
-    right: 4
+    bottom: 0,
+    right: 0
 }
 
 let boardValues = {
-    rows: 5,
-    columns: 5
+    rows: 10,
+    columns: 10
 }
 
 //GLOBAL VARIABLES
@@ -44,6 +44,7 @@ let touchBottomLimit = false;
 //INITIALIZATIONS
 
 limits.right = boardValues.columns - 1;
+limits.bottom = boardValues.rows - 1;
 markerLocation.start.column = parseInt(boardValues.columns / 2);
 
 //EVENT LISTENERS
