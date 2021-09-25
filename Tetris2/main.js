@@ -34,7 +34,7 @@ let limits = {
 
 let boardValues = {
     rows: 10,
-    columns: 10
+    columns: 4
 }
 
 //GLOBAL VARIABLES
