@@ -121,9 +121,21 @@ html {
     border-radius: 0.5rem;
 }
 
+.button-grid div:hover {
+    background-color: #25C2AD;
+    color: rgb(39, 39, 39);
+    cursor: pointer;
+}
+
 .button-grid div:nth-child(6) {
     background-color: #F3F8FC;
     color: #5d6a6b;
+}
+
+.button-grid div:nth-child(6):hover {
+    background-color: #25C2AD;
+    color: rgb(39, 39, 39);
+    cursor: pointer;
 }
 
 .result-area {
@@ -208,7 +220,7 @@ html {
     position: relative;
 }
 
-.reset button {
+#reset-button {
     padding: 0;
     margin: 0;
     position: absolute;
@@ -218,7 +230,15 @@ html {
     height: 3.5rem;
     width: 80%;
     background-color: #25C2AD;
+    color: rgb(39, 39, 39);
     border: none;
     border-radius: 0.5rem;
     font-family: 'Baloo Bhai 2', cursive;
+    font-size: 1.7rem;
+}
+
+#reset-button:hover {
+    background-color: #34f0d7;
+    color: rgb(92, 92, 92);
+    cursor: pointer;
 }

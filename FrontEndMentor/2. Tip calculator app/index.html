@@ -19,30 +19,28 @@
         <div class="container">
 
             <div class="select-area">
+
                 <section>
                     <h1>Bill</h1>
-                    <form action="">
-                        <input type="text">
-                    </form>
+                    <input type="text" id="bill-input">
                 </section>
+
                 <section>
                     <h1>Select Tip %</h1>
                     <div class="button-grid">
                         <!-- GRID -->
-                        <div>5%</div>
-                        <div>10%</div>
-                        <div>15%</div>
-                        <div>25%</div>
-                        <div>50%</div>
+                        <div id="5">5%</div>
+                        <div id="10">10%</div>
+                        <div id="15">15%</div>
+                        <div id="25">25%</div>
+                        <div id="50">50%</div>
                         <div>CUSTOM</div>
-
                     </div>
                 </section>
+
                 <section>
                     <h1>Number of people</h1>
-                    <form action="">
-                        <input type="text">
-                    </form>
+                    <input type="text" id="num-people">
                 </section>
             </div>
             <div class="result-area">
@@ -54,30 +52,31 @@
                         </section>
 
                         <section>
-                            <h1>$ 1</h1>
+                            <h1 id = "tip-amount">$ 0.00</h1>
                         </section>
                     </div>
                     <div class="total">
                         <section>
-                            <h1>Tip Amount</h1>
+                            <h1>Total Amount</h1>
                             <h2>/ person</h2>
                         </section>
 
                         <section>
-                            <h1>$ Amount</h1>
+                            <h1 id = "total-amount">$ 0.00</h1>
                         </section>
                     </div>
                 </div>
                 <div class="reset">
 
-                    <button>RESET</button>
+                    <button id="reset-button">RESET</button>
 
                 </div>
             </div>
 
         </div>
     </div>
-
+    <script src="functions.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
