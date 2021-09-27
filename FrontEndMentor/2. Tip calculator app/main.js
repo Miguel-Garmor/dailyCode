@@ -1,7 +1,9 @@
+
 const billEl = document.querySelector("#bill-input");
 const buttonGridEl = document.querySelector(".button-grid");
 const numPeopleEl = document.querySelector("#num-people");
 const resetButton = document.querySelector("#reset-button");
+const custom = document.querySelector("#custom");
 
 const tipAmount = document.querySelector("#tip-amount");
 const totalAmount = document.querySelector("#total-amount");
@@ -15,6 +17,7 @@ let tipElements = {
 
 billEl.addEventListener("input", getBill);
 buttonGridEl.addEventListener("click", selectTip);
+custom.addEventListener("input", selectCustomTip);
 numPeopleEl.addEventListener("input", getNumPeople);
 resetButton.addEventListener("click", resetValues);
 

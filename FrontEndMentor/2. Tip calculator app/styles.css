@@ -39,8 +39,8 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 50vh;
-    width: 60vw;
+    height: 40rem;
+    width: 80rem;
     border-radius: 1rem;
     display: flex;
     justify-content: center;
@@ -128,14 +128,29 @@ html {
 }
 
 .button-grid div:nth-child(6) {
+    height: 100%;
+    width: 100%;
     background-color: #F3F8FC;
     color: #5d6a6b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button-grid div:nth-child(6):hover {
-    background-color: #25C2AD;
     color: rgb(39, 39, 39);
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+.button-grid div:nth-child(6) input {
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+
+.button-grid div:nth-child(6) input:hover {
+    color: rgb(39, 39, 39);
+    cursor: pointer !important;
 }
 
 .result-area {
@@ -182,6 +197,7 @@ html {
     font-size: 2rem;
     color: #36BAA9;
     width: 50%;
+    text-align: right;
 }
 
 .tip-amt section:nth-child(1) h1 {
@@ -208,6 +224,7 @@ html {
     font-size: 2rem;
     color: #36BAA9;
     width: 50%;
+    text-align: right;
 }
 
 .total section:nth-child(1) h1 {
@@ -238,7 +255,7 @@ html {
 }
 
 #reset-button:hover {
-    background-color: #34f0d7;
-    color: rgb(92, 92, 92);
+    background-color: #a2fff3;
+    color: rgb(31, 31, 31);
     cursor: pointer;
 }

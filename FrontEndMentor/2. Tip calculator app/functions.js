@@ -8,11 +8,17 @@ const selectTip = (e) => {
 
     tipElements.tip = parseInt(e.target.id);
 
-    console.log(tipElements.tip);
-
     tipAmtPerson(tipAmount);
     totalAmtPerson(totalAmount);
 
+}
+
+const selectCustomTip = () => {
+
+    tipElements.tip = parseInt(custom.value);
+
+    tipAmtPerson(tipAmount);
+    totalAmtPerson(totalAmount);
 }
 
 const getNumPeople = (e) => {
@@ -33,9 +39,10 @@ const tipAmtPerson = (tipAmount) => {
 
 const totalAmtPerson = () => {
     let bill = tipElements.bill;
+    let tip = tipElements.tip;
     let numPeople = tipElements.numPeople;
 
-    totalAmount.innerText = "$ " + (bill * numPeople).toFixed(2);
+    totalAmount.innerText = "$ " + (bill / numPeople + (bill * (tip / 100) / numPeople)).toFixed(2);
 }
 
 const resetValues = () => {
@@ -45,4 +52,5 @@ const resetValues = () => {
     numPeopleEl.value = "";
     tipAmount.innerText = "$ 0.00";
     totalAmount.innerText = "$ 0.00";
+    custom.value = "";
 }
