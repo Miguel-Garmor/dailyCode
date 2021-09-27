@@ -26,6 +26,8 @@ let markerLocation = {
     }
 }
 
+let clearedRows = [];
+
 let limits = {
     left: 0,
     bottom: 0,

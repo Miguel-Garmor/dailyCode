@@ -224,28 +224,29 @@ const resetMarker = () => {
     console.log("Finish resetMarker");
 }
 
-
-const lowerRows = (row, colMax, tableElement) => {
+const lowerRows = (tableElement) => {
     console.log("Run lower rows");
-    row--;
-    for (let i = row; i >= 0; i--) {
-        for (let j = 0; j <= colMax; j++) {
-            console.log("row" + i);
-            console.log("column" + j);
 
-            if (tableElement.children[i].children[j].className === "bottom-limit") {
-                tableElement.children[i].children[j].className = "";
-                tableElement.children[i].children[j].innerText = "";
-                tableElement.children[i + 1].children[j].className = "bottom-limit";
-                tableElement.children[i + 1].children[j].innerText = "O";
-                console.log("FOUND IT");
+    let rowsLength = clearedRows.length;
+    let colMax = boardValues.columns;
+    let row = clearedRows;
+
+    for (let rowCounter = 0; rowCounter < rowsLength; rowCounter++) {
+        for (let i = row[rowCounter]; i >= 0; i--) {
+            for (let j = 0; j < colMax; j++) {
+                console.log("row" + i);
+                console.log("column" + j);
+
+                if (tableElement.children[i].children[j].className === "bottom-limit") {
+                    tableElement.children[i].children[j].className = "";
+                    tableElement.children[i].children[j].innerText = "";
+                    tableElement.children[i + 1].children[j].className = "bottom-limit";
+                    tableElement.children[i + 1].children[j].innerText = "O";
+
+                }
             }
-
-
-
         }
     }
-
 }
 
 const isRowCompleted = (tableElement) => {
@@ -254,6 +255,7 @@ const isRowCompleted = (tableElement) => {
 
     const colMax = limits.right + 1;
     let counter;
+    let clearedRowsCounter = 0;
 
     let rows = markerLocation.rows;
     let rowsLength = markerLocation.markerLength;
@@ -279,7 +281,8 @@ const isRowCompleted = (tableElement) => {
                         tableElement.children[rows[i]].children[j].innerText = tableElement.children[rows[i]].children[j].id;
                     }
                     //lowerRows(row, colMax, tableElement);
-
+                    clearedRows[clearedRowsCounter] = rows[i];
+                    clearedRowsCounter++;
                 }
             }
         }
@@ -497,11 +500,12 @@ const movementManager = (e) => {
 
         markerScanner(tableElement);
         touchBottomLimit = adjustMarker(e.target.id, tableElement);
-        
+
         if (touchBottomLimit === true) {
-            console.log("PLAY");
+
             isRowCompleted(tableElement);
-            console.log("PLAY2");
+            console.log("Showing cleared rows" + clearedRows);
+            lowerRows(tableElement);
         }
 
 
