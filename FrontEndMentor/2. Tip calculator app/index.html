@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/eb42eed187.js" crossorigin="anonymous"></script>
     <title>Tip calculator</title>
 </head>
 
@@ -22,7 +23,10 @@
 
                 <section>
                     <h1>Bill</h1>
-                    <input type="number" max="9999" id="bill-input">
+                    <div class="input-icons">
+                        <i class="fas fa-dollar-sign icon"></i>
+                        <input type="number" max="9999" id="bill-input">
+                    </div>
                 </section>
 
                 <section>
@@ -40,7 +44,10 @@
 
                 <section>
                     <h1>Number of people</h1>
-                    <input type="number" max="50" id="num-people">
+                    <div class="input-icons">
+                        <i class="fa fa-user icon"></i>
+                        <input type="number" max="50" id="num-people">
+                    </div>
                 </section>
             </div>
             <div class="result-area">
@@ -52,7 +59,7 @@
                         </section>
 
                         <section>
-                            <h1 id = "tip-amount">$ 0.00</h1>
+                            <h1 id="tip-amount">$ 0.00</h1>
                         </section>
                     </div>
                     <div class="total">
@@ -62,7 +69,7 @@
                         </section>
 
                         <section>
-                            <h1 id = "total-amount">$ 0.00</h1>
+                            <h1 id="total-amount">$ 0.00</h1>
                         </section>
                     </div>
                 </div>
