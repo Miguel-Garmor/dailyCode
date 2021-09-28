@@ -1,6 +1,15 @@
 //Functions
 
-const objectContainerGenerator = (height, width, startLoc) => {
+const objectContainerGenerator = (tableEl, height, width, startLoc, correction) => {
+
+    let startCorrection = startLoc - correction;
+
+    for (let i = 0; i < height; i++) {
+        for (let j = 0; j < width; j++) {
+                        tableEl.children[i].children[startCorrection - j].classList.add("objectContainer");
+        }
+    }
+
 
 }
 
@@ -109,11 +118,10 @@ const line3Generator = (tableEl) => {
             } else {
                 tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
                 tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
-
             }
-
         }
     }
+    objectContainerGenerator(tableEl, 3, 3, startColumn, -1);
     return false;
 }
 
@@ -216,7 +224,7 @@ const resetMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    check = generateObject("square", tableEl);
+    check = generateObject("line3", tableEl);
 
     if (check === true) {
         console.log("Abort SQUARE GEN in resetMarker");
