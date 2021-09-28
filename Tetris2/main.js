@@ -20,9 +20,6 @@ let markerLocation = {
     start: {
         row: 0,
         column: 0
-    },
-    markerString: function () {
-        return `${markerLocation.row}${markerLocation.column}`;
     }
 }
 
@@ -36,7 +33,7 @@ let limits = {
 
 let boardValues = {
     rows: 10,
-    columns: 4
+    columns: 8
 }
 
 //GLOBAL VARIABLES

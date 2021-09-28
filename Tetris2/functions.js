@@ -1,5 +1,9 @@
 //Functions
 
+const objectContainerGenerator = (height, width, startLoc) => {
+
+}
+
 const createBoard = (rows, columns) => {
 
     //*Table section
@@ -247,6 +251,7 @@ const lowerRows = (tableElement) => {
             }
         }
     }
+    clearedRows = [];
 }
 
 const isRowCompleted = (tableElement) => {
@@ -494,8 +499,6 @@ const movementManager = (e) => {
 
     const tableElement = e.target.parentNode.parentNode.children[0].children[0];
 
-    //console.log("Inside Movement - Marker location: " + markerLocation.markerString());
-
     if (touchBottomLimit === false) {
 
         markerScanner(tableElement);
@@ -504,8 +507,11 @@ const movementManager = (e) => {
         if (touchBottomLimit === true) {
 
             isRowCompleted(tableElement);
-            console.log("Showing cleared rows" + clearedRows);
-            lowerRows(tableElement);
+
+            if (clearedRows.length > 0) {
+                lowerRows(tableElement);
+            }
+
         }
 
 
