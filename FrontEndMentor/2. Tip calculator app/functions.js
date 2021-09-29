@@ -3,15 +3,15 @@ const inputCheck = (number, element, limit, inputType) => {
 
     if (number > limit || number === NaN) {
         element.classList.add("errorOutline");
+        return false;
     } else if (number < limit) {
         element.classList.remove("errorOutline");
+        return true;
     }
 
 }
 
-const checkValues = () => {
 
-}
 
 const getBill = (e) => {
     let billHolder = 0;
@@ -19,7 +19,7 @@ const getBill = (e) => {
     billHolder = parseFloat(e.target.value);
     tipElements.bill = billHolder;
 
-    inputCheck(billHolder, billContainer, 9999, "inputBill");
+    tipElements.check = inputCheck(billHolder, billContainer, 9999, "inputBill");
 }
 
 const clearClickedClass = () => {
@@ -46,19 +46,17 @@ const selectTip = (e) => {
 
     toggleBtnClass(e);
 
-    tipAmtPerson(tipAmount);
-    totalAmtPerson(totalAmount);
-
 }
 
-const selectCustomTip = () => {
+const selectCustomTip = (e) => {
 
     let customTipHolder = 0;
 
     customTipHolder = parseInt(custom.value);
     tipElements.tip = customTipHolder;
+    e.target.id = customTipHolder;
 
-    inputCheck(customTipHolder, customContainer, 100, "customTip");
+    tipElements.check = inputCheck(customTipHolder, customContainer, 100, "customTip");
 }
 
 const getNumPeople = (e) => {
@@ -67,26 +65,46 @@ const getNumPeople = (e) => {
     numPeopleHolder = parseInt(e.target.value);
     tipElements.numPeople = numPeopleHolder;
 
-    inputCheck(numPeopleHolder, numPeopleContainer, 50, "inputPeople");
+    tipElements.check = inputCheck(numPeopleHolder, numPeopleContainer, 50, "inputPeople");
 }
 
-const tipAmtPerson = (tipAmount) => {
+const calculate = () => {
+    tipAmtPerson();
+    totalAmtPerson();
+    if (tipElements.check === false){
+        resetResult();
+    }
+}
+
+const checkValues = (calculation) => {
+    console.log(calculation);
+    if (calculation !== "NaN" && calculation !== "Infinity") {
+        tipAmount.innerText = "$ " + calculation;
+    } else resetResult();
+}
+
+const tipAmtPerson = () => {
 
     let bill = tipElements.bill;
     let tip = tipElements.tip;
     let numPeople = tipElements.numPeople;
+    let amtPerPerson = ((bill * (tip / 100)) / numPeople).toFixed(2)
 
-    tipAmount.innerText = "$ " + ((bill * (tip / 100)) / numPeople).toFixed(2);
-
-
+    checkValues(amtPerPerson);
 }
 
 const totalAmtPerson = () => {
     let bill = tipElements.bill;
     let tip = tipElements.tip;
     let numPeople = tipElements.numPeople;
+    let amtPerPerson = (bill / numPeople + (bill * (tip / 100) / numPeople)).toFixed(2);
 
-    totalAmount.innerText = "$ " + (bill / numPeople + (bill * (tip / 100) / numPeople)).toFixed(2);
+    checkValues(amtPerPerson);
+}
+
+const resetResult = () => {
+    tipAmount.innerText = "$ 0.00";
+    totalAmount.innerText = "$ 0.00";
 }
 
 const resetValues = () => {

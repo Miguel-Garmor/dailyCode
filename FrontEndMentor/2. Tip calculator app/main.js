@@ -15,14 +15,23 @@ const numPeopleContainer = document.querySelector("#num-people-container");
 let tipElements = {
     bill: 0,
     tip: 0,
-    numPeople: 0
+    numPeople: 0,
+    check: false
 };
 
 billEl.addEventListener("input", getBill);
+billEl.addEventListener("input", calculate);
+
 buttonGridEl.addEventListener("click", selectTip);
-numPeopleEl.addEventListener("input", getNumPeople);
-resetButton.addEventListener("click", resetValues);
+buttonGridEl.addEventListener("click", calculate);
 custom.addEventListener("input", selectCustomTip);
+custom.addEventListener("input", calculate);
+
+numPeopleEl.addEventListener("input", getNumPeople);
+numPeopleEl.addEventListener("input", calculate);
+
+resetButton.addEventListener("click", resetValues);
+
 
 
 
