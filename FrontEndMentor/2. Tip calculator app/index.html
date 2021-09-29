@@ -23,8 +23,9 @@
 
                 <section>
                     <h1>Bill</h1>
-                    <div class="input-icons">
-                        <i class="fas fa-dollar-sign icon"></i>
+                    <p>This number is valid</p>
+                    <div class="input-icons" id="bill-container">
+                        <i class="fas fa-dollar-sign fa-lg icon"></i>
                         <input type="number" max="9999" id="bill-input">
                     </div>
                 </section>
@@ -33,20 +34,22 @@
                     <h1>Select Tip %</h1>
                     <div class="button-grid">
                         <!-- GRID -->
-                        <div id="5">5%</div>
-                        <div id="10">10%</div>
-                        <div id="15">15%</div>
-                        <div id="25">25%</div>
-                        <div id="50">50%</div>
-                        <div><input type="number" max="100" placeholder="CUSTOM" id="custom"></div>
+                        <div class = "clickBtn" id="5">5%</div>
+                        <div class = "clickBtn"id="10">10%</div>
+                        <div class = "clickBtn"id="15">15%</div>
+                        <div class = "clickBtn"id="25">25%</div>
+                        <div class = "clickBtn"id="50">50%</div>
+                        <div class="customContainer">
+                            <input type="number" max="100" placeholder="CUSTOM" id="custom">
+                        </div>
                     </div>
                 </section>
 
                 <section>
                     <h1>Number of people</h1>
-                    <div class="input-icons">
-                        <i class="fa fa-user icon"></i>
-                        <input type="number" max="50" id="num-people">
+                    <div class="input-icons" id="num-people-container">
+                        <i class="fa fa-user fa-lg icon"></i>
+                        <input type="number" max="50" id="num-people" value="0">
                     </div>
                 </section>
             </div>

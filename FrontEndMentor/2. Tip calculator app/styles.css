@@ -121,21 +121,29 @@ input[type=number] {
 .input-icons {
     position: relative;
     width: 90%;
+    height: 32%;
     margin-left: auto;
     margin-right: auto;
     border-radius: 0.7rem;
     background-color: #F3F8FC;
 }
 
-.input-icons i {
+.icon {
     position: absolute;
     background-color: #F3F8FC;
     border-radius: 0.7rem;
+    padding: 10px;
+    height: 90%;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 
-.icon {
-    padding: 10px;
-    min-width: 5rem;
+.errorOutline {
+    border: 1px solid red;
+}
+
+.noZeroOutline {
+    border: 2px solid orangered;
 }
 
 #bill-input, #num-people {
@@ -173,6 +181,11 @@ input[type=number] {
     cursor: pointer;
 }
 
+.clickedTip {
+    background-color: #25C2AD !important;
+    color: rgb(39, 39, 39) !important;
+}
+
 .button-grid div:nth-child(6) {
     height: 100%;
     width: 100%;
@@ -183,18 +196,13 @@ input[type=number] {
     align-items: center;
 }
 
-.button-grid div:nth-child(6):hover {
-    color: rgb(39, 39, 39);
-    cursor: pointer !important;
-}
-
 .button-grid div:nth-child(6) input {
     height: 100%;
     width: 100%;
     text-align: center;
 }
 
-.button-grid div:nth-child(6) input:hover {
+#custom {
     color: rgb(39, 39, 39);
     cursor: pointer !important;
 }
