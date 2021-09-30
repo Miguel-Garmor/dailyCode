@@ -2,7 +2,6 @@
 const boardElement = document.querySelector("#board");
 const buttonSectionElement = document.querySelector("#button-section");
 
-
 //Global variables
 let markerLocation = {
     current: {

@@ -23,6 +23,11 @@ let markerLocation = {
     }
 }
 
+let objectContainer = {
+    rows: [],
+    columns: []
+}
+
 let clearedRows = [];
 
 let limits = {
@@ -33,7 +38,7 @@ let limits = {
 
 let boardValues = {
     rows: 10,
-    columns: 8
+    columns: 4
 }
 
 //GLOBAL VARIABLES
