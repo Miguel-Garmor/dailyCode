@@ -11,6 +11,8 @@ const inputCheck = (number, element, limit, inputType) => {
 
 }
 
+
+
 const getBill = (e) => {
     let billHolder = 0;
 

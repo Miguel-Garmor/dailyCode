@@ -22,6 +22,7 @@ let tipElements = {
 billEl.addEventListener("input", getBill);
 billEl.addEventListener("input", calculate);
 
+
 buttonGridEl.addEventListener("click", selectTip);
 buttonGridEl.addEventListener("click", calculate);
 custom.addEventListener("input", selectCustomTip);
