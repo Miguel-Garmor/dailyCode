@@ -88,7 +88,7 @@ const squareGenerator = (tableEl) => {
 
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 2; j++) {
-            if (tableEl.children[startRow + i].children[startColumn + j - 1].className === "bottom-limit") {
+            if (tableEl.children[startRow + i].children[startColumn + j - 1].classList.contains("bottom-limit")) {
                 console.log("Abort SQUARE GEN - in squareGenerator");
                 return true;
             } else {
@@ -112,7 +112,7 @@ const line3Generator = (tableEl) => {
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 1; j++) {
-            if (tableEl.children[startRow + i].children[startColumn + j].className === "bottom-limit") {
+            if (tableEl.children[startRow + i].children[startColumn + j].classList.contains("bottom-limit")) {
                 console.log("Abort line3 GEN - in squareGenerator");
                 return true;
             } else {
@@ -136,7 +136,7 @@ const snakeGenerator = (tableEl) => {
 
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 3; j++) {
-            if (tableEl.children[startRow + i].children[startColumn + j - 1].className === "bottom-limit") {
+            if (tableEl.children[startRow + i].children[startColumn + j - 1].classList.contains("bottom-limit")) {
                 console.log("Abort snake3 GEN - in squareGenerator");
                 return true;
             } else if (i === 0 && j === 2 || i === 1 && j === 0) {
@@ -249,10 +249,10 @@ const lowerRows = (tableElement) => {
                 console.log("row" + i);
                 console.log("column" + j);
 
-                if (tableElement.children[i].children[j].className === "bottom-limit") {
-                    tableElement.children[i].children[j].className = "";
+                if (tableElement.children[i].children[j].classList.contains("bottom-limit")) {
+                    tableElement.children[i].children[j].classList.remove("bottom-limit");
                     tableElement.children[i].children[j].innerText = "";
-                    tableElement.children[i + 1].children[j].className = "bottom-limit";
+                    tableElement.children[i + 1].children[j].classList.add("bottom-limit");
                     tableElement.children[i + 1].children[j].innerText = "O";
 
                 }
@@ -280,7 +280,7 @@ const isRowCompleted = (tableElement) => {
         for (let j = 0; j < colMax; j++) {
             console.log("Column being checked: " + j);
 
-            if (tableElement.children[rows[i]].children[j].className === "bottom-limit") {
+            if (tableElement.children[rows[i]].children[j].classList.contains("bottom-limit")) {
 
                 counter++;
 
@@ -290,7 +290,7 @@ const isRowCompleted = (tableElement) => {
                 if (counter === colMax) {
 
                     for (j = 0; j < colMax; j++) {
-                        tableElement.children[rows[i]].children[j].className = "";
+                        tableElement.children[rows[i]].children[j].classList.remove("bottom-limit");
                         tableElement.children[rows[i]].children[j].innerText = tableElement.children[rows[i]].children[j].id;
                     }
                     //lowerRows(row, colMax, tableElement);
@@ -315,7 +315,7 @@ const performMovement = (tableElement, markerMovement) => {
 
     //delete old markers
     for (let i = 0; i < length; i++) {
-        tableElement.children[row[i]].children[column[i]].className = "";
+        tableElement.children[row[i]].children[column[i]].classList.remove("marked");
         tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;
     }
 
@@ -330,7 +330,7 @@ const performMovement = (tableElement, markerMovement) => {
 
     //add new markers
     for (let i = 0; i < length; i++) {
-        tableElement.children[row[i]].children[column[i]].className = "marked";
+        tableElement.children[row[i]].children[column[i]].classList.add("marked");
         tableElement.children[row[i]].children[column[i]].innerText = "X";
     }
 }
@@ -338,7 +338,8 @@ const performMovement = (tableElement, markerMovement) => {
 const setBottomLimit = (tableElement, rows, columns) => {
 
     for (let i = 0; i < markerLocation.markerLength; i++) {
-        tableElement.children[rows[i]].children[columns[i]].className = "bottom-limit";
+        tableElement.children[rows[i]].children[columns[i]].classList.remove("marked");
+        tableElement.children[rows[i]].children[columns[i]].classList.add("bottom-limit");
         tableElement.children[rows[i]].children[columns[i]].innerText = "O";
     }
     console.log("All set");
@@ -350,19 +351,26 @@ const isMovePossible = (tableElement, direction, positions) => {
     let rows = markerLocation.rows;
     let columns = markerLocation.columns;
 
+
+    //Redundancy:
     if (tableElement.children[positions.nextRow] === undefined) {
-        elementClass = tableElement.children[positions.row].children[positions.column].className;
+        elementClass = "bottom-limit";
     } else if (tableElement.children[positions.nextRow].children[positions.nextColumn] === undefined) {
-        elementClass = "edge-limit";
-    } else {
-        elementClass = tableElement.children[positions.nextRow].children[positions.nextColumn].className;
+        if (direction === "left-button" || direction === "right-button") {
+            elementClass = "edge-limit";
+        }
     }
+    else if (tableElement.children[positions.nextRow].children[positions.nextColumn].classList.contains("bottom-limit")) {
+        elementClass = "bottom-limit";
+    }
+
+
 
 
     switch (direction) {
 
         case "left-button":
-
+            //-Redundancy: there are two indicators for left and right limits in the same conditional
             if (positions.column === limits.left || elementClass === "bottom-limit" || elementClass === "edge-limit") {
                 console.log("ABORT LEFT");
                 return 2;
@@ -489,7 +497,7 @@ const markerScanner = (tableElement) => {
 
     for (let i = 0; i < rowLength; i++) {
         for (let j = 0; j < columnLength; j++) {
-            if (tableElement.children[i].children[j].className === "marked") {
+            if (tableElement.children[i].children[j].classList.contains("marked")) {
                 //console.log("WE MARKED");
                 markerLocation.rows = [...markerLocation.rows, i];
                 markerLocation.columns = [...markerLocation.columns, j];
