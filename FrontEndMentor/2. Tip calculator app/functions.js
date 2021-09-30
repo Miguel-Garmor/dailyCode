@@ -4,14 +4,12 @@ const inputCheck = (number, element, limit, inputType) => {
     if (number > limit || number === NaN) {
         element.classList.add("errorOutline");
         return false;
-    } else if (number < limit) {
+    } else if (number <= limit) {
         element.classList.remove("errorOutline");
         return true;
     }
 
 }
-
-
 
 const getBill = (e) => {
     let billHolder = 0;
@@ -71,15 +69,15 @@ const getNumPeople = (e) => {
 const calculate = () => {
     tipAmtPerson();
     totalAmtPerson();
-    if (tipElements.check === false){
+    if (tipElements.check === false) {
         resetResult();
     }
 }
 
-const checkValues = (calculation) => {
+const checkValues = (calculation, element) => {
     console.log(calculation);
     if (calculation !== "NaN" && calculation !== "Infinity") {
-        tipAmount.innerText = "$ " + calculation;
+        element.innerText = "$ " + calculation;
     } else resetResult();
 }
 
@@ -90,7 +88,9 @@ const tipAmtPerson = () => {
     let numPeople = tipElements.numPeople;
     let amtPerPerson = ((bill * (tip / 100)) / numPeople).toFixed(2)
 
-    checkValues(amtPerPerson);
+    console.log("Amt per person tip: " + amtPerPerson);
+
+    checkValues(amtPerPerson, tipAmount);
 }
 
 const totalAmtPerson = () => {
@@ -99,7 +99,9 @@ const totalAmtPerson = () => {
     let numPeople = tipElements.numPeople;
     let amtPerPerson = (bill / numPeople + (bill * (tip / 100) / numPeople)).toFixed(2);
 
-    checkValues(amtPerPerson);
+    console.log("Amt per person total: " + amtPerPerson);
+
+    checkValues(amtPerPerson, totalAmount);
 }
 
 const resetResult = () => {
