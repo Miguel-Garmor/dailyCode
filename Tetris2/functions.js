@@ -494,6 +494,10 @@ const adjustMarker = (direction, tableElement, object) => {
             performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
         } else if (direction === "left-button" || direction === "right-button") {
             checkContainer = isMovePossible(tableElement, direction, positions, objectContainer);
+            if(checkContainer === 1){
+                performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
+            }
+            console.log("Check Container: " + checkContainer);
         }
         return false;
     }
