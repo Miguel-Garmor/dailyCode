@@ -7,6 +7,8 @@ const objectContainerGenerator = (tableEl, height, width, startLoc, correction) 
     for (let i = 0; i < height; i++) {
         for (let j = 0; j < width; j++) {
             tableEl.children[i].children[startCorrection + j].classList.add("objectContainer");
+            objectContainer.rows = [...objectContainer.rows, i];
+            objectContainer.columns = [...objectContainer.columns, startCorrection + j];
         }
     }
 
@@ -84,6 +86,7 @@ const squareGenerator = (tableEl) => {
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
 
+    objectContainer.markerLength = 4;
 
 
     for (let i = 0; i < 2; i++) {
@@ -99,6 +102,7 @@ const squareGenerator = (tableEl) => {
 
         }
     }
+    objectContainerGenerator(tableEl, 2, 2, startRow, -1);
     return false;
 }
 const line3Generator = (tableEl) => {
@@ -108,7 +112,7 @@ const line3Generator = (tableEl) => {
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
 
-
+    objectContainer.markerLength = 9;
 
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 1; j++) {
@@ -132,7 +136,7 @@ const snakeGenerator = (tableEl) => {
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
 
-
+    objectContainer.markerLength = 9;
 
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 3; j++) {
@@ -304,34 +308,37 @@ const isRowCompleted = (tableElement) => {
 
 }
 
-const performMovement = (tableElement, markerMovement) => {
-    console.log("Perform movement");
+const performMovement = (tableElement, markerMovement, targetObject, targetClass) => {
+    console.log("Perform movement: " + targetClass);
 
-    let row = markerLocation.rows;
-    let column = markerLocation.columns;
+    let row = targetObject.rows;
+    let column = targetObject.columns;
 
-    let length = markerLocation.markerLength;
+    let length = targetObject.markerLength;
 
 
     //delete old markers
     for (let i = 0; i < length; i++) {
-        tableElement.children[row[i]].children[column[i]].classList.remove("marked");
-        tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;
+        tableElement.children[row[i]].children[column[i]].classList.remove(targetClass);
+        if (targetClass === "marked") {
+            tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;
+        }
     }
 
     //change marker position
     for (let i = 0; i < length; i++) {
         row[i] += markerMovement.row;
         column[i] += markerMovement.column;
-        /* //Checks
-        console.log("ROW Marker location " + i + ": " + markerLocation.rows[i]);
-        console.log("COLUMN Marker location " + i + ": " + markerLocation.columns[i]); */
+
     }
 
     //add new markers
     for (let i = 0; i < length; i++) {
-        tableElement.children[row[i]].children[column[i]].classList.add("marked");
-        tableElement.children[row[i]].children[column[i]].innerText = "X";
+        tableElement.children[row[i]].children[column[i]].classList.add(targetClass);
+        if (targetClass === "marked") {
+            tableElement.children[row[i]].children[column[i]].innerText = "X";
+        }
+
     }
 }
 
@@ -345,11 +352,11 @@ const setBottomLimit = (tableElement, rows, columns) => {
     console.log("All set");
 }
 
-const isMovePossible = (tableElement, direction, positions) => {
+const isMovePossible = (tableElement, direction, positions, object) => {
 
     let elementClass;
-    let rows = markerLocation.rows;
-    let columns = markerLocation.columns;
+    let rows = object.rows;
+    let columns = object.columns;
 
 
     //Redundancy:
@@ -363,9 +370,6 @@ const isMovePossible = (tableElement, direction, positions) => {
     else if (tableElement.children[positions.nextRow].children[positions.nextColumn].classList.contains("bottom-limit")) {
         elementClass = "bottom-limit";
     }
-
-
-
 
     switch (direction) {
 
@@ -432,14 +436,16 @@ const moveOnDirection = (direction, markerMovement) => {
 
 }
 
-const adjustMarker = (direction, tableElement) => {
+const adjustMarker = (direction, tableElement, object) => {
 
 
     let counter = 0;
+    let containerCounter = 0;
 
     let check = 0;
+    let checkContainer = 0;
 
-    let markerLength = markerLocation.rows.length;
+    let markerLength = object.rows.length;
 
     let positions = {
         row: 0,
@@ -452,7 +458,7 @@ const adjustMarker = (direction, tableElement) => {
         row: 0,
         column: 0
     }
-
+    //Attempts move
     moveOnDirection(direction, markerMovement);
 
     for (let i = 0; i < markerLength; i++) {
@@ -463,24 +469,40 @@ const adjustMarker = (direction, tableElement) => {
         positions.nextRow = positions.row + markerMovement.row;
         positions.nextColumn = positions.column + markerMovement.column;
 
-        check = isMovePossible(tableElement, direction, positions);
+        //Is move possible for this marker?
+        check = isMovePossible(tableElement, direction, positions, markerLocation);
 
+        //Move possible for marker being checked
         if (check === 1) {
             counter++;
-
-        } else if (check === 2) {
+        }
+        //Move not possible for marker being checked
+        else if (check === 2) {
             console.log("Can't move - Abort mark counter");
             break;
         }
     }
 
+    //All markers can move
     if (counter === markerLength) {
-        performMovement(tableElement, markerMovement);
+        //MOVEMENT: object markers
+        performMovement(tableElement, markerMovement, markerLocation, "marked");
+        //MOVEMENT: object container
+        //CHECK objectContainer movement
+        if (direction === "down-button") {
+            //moveObjectContainer
+            performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
+        } else if (direction === "left-button" || direction === "right-button"){
+            checkContainer = isMovePossible(tableElement, direction, positions, objectContainer);
+        }            
         return false;
-    } else if (check === 2) {
+    }
+    //One or more markers can't move
+    else if (check === 2) {
         //Don't perform movement, but don't reset either
         return false;
     } else {
+        //Don't perform movement, and reset markers
         console.log("CANNOT MOVE")
         return true;
     }
@@ -501,6 +523,8 @@ const markerScanner = (tableElement) => {
                 //console.log("WE MARKED");
                 markerLocation.rows = [...markerLocation.rows, i];
                 markerLocation.columns = [...markerLocation.columns, j];
+                //if cell contains objecContainer class 
+                // -save objectContainer positions
             }
         }
     }
@@ -518,7 +542,10 @@ const movementManager = (e) => {
     if (touchBottomLimit === false) {
 
         markerScanner(tableElement);
-        touchBottomLimit = adjustMarker(e.target.id, tableElement);
+
+        //Set custom values ADJUST MARKER-------------------------------
+        touchBottomLimit = adjustMarker(e.target.id, tableElement, markerLocation);
+        //--------------------------------------------------------------
 
         if (touchBottomLimit === true) {
 

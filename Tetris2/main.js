@@ -24,8 +24,11 @@ let markerLocation = {
 }
 
 let objectContainer = {
+    
     rows: [],
-    columns: []
+    columns: [],
+    //set at object generator
+    markerLength: 0
 }
 
 let clearedRows = [];
