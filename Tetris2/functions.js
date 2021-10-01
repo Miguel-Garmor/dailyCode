@@ -492,9 +492,9 @@ const adjustMarker = (direction, tableElement, object) => {
         if (direction === "down-button") {
             //moveObjectContainer
             performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
-        } else if (direction === "left-button" || direction === "right-button"){
+        } else if (direction === "left-button" || direction === "right-button") {
             checkContainer = isMovePossible(tableElement, direction, positions, objectContainer);
-        }            
+        }
         return false;
     }
     //One or more markers can't move
