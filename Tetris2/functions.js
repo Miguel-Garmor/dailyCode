@@ -384,28 +384,6 @@ const isMovePossible = (tableElement, direction, positions, object) => {
     let rows = object.rows;
     let columns = object.columns;
 
-    let nextCellClass;
-
-    /* if (positions.row === limits.bottom) {
-        nextCellClass = tableElement.children[positions.row].children[positions.column].classList;
-    } else if (positions.column === limits.left || positions.column === limits.right) {
-        nextCellClass = tableElement.children[positions.row].children[positions.column].classList;
-    } else {
-        nextCellClass = tableElement.children[positions.nextRow].children[positions.nextColumn].classList;
-    } */
-
-    //Redundancy:
-    /*  if (tableElement.children[positions.nextRow] === undefined) {
-         elementClass = "bottom-limit";
-     } else if (tableElement.children[positions.nextRow].children[positions.nextColumn] === undefined) {
-         if (direction === "left-button" || direction === "right-button") {
-             elementClass = "edge-limit";
-         }
-     }
-     else if (tableElement.children[positions.nextRow].children[positions.nextColumn].classList.contains("bottom-limit")) {
-         elementClass = "bottom-limit";
-     } */
-
     switch (direction) {
 
         case "left-button":
@@ -524,7 +502,7 @@ const adjustMarkers = (direction, tableElement, object) => {
     moveOnDirection(direction, markerMovement);
 
     //+-------
-    evaluate = loopCheck(markerLength, object, positions, markerMovement, tableElement, direction)
+    evaluate = loopCheck(markerLength, object, positions, markerMovement, tableElement, direction);
     //--------
 
     //All markers can move
@@ -533,18 +511,17 @@ const adjustMarkers = (direction, tableElement, object) => {
         performMovement(tableElement, markerMovement, markerLocation, "marked");
         //MOVEMENT: object container
         //CHECK objectContainer movement
-        /* if (direction === "down-button") {
+        if (direction === "down-button") {
             //moveObjectContainer
             performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
         } else if (direction === "left-button" || direction === "right-button") {
-            checkContainer = isMovePossible(tableElement, direction, positions, objectContainer);
-            if (checkContainer === 4) {
+            evaluate = loopCheck(objectContainer.markerLength, objectContainer, positions, markerMovement, tableElement, direction);
+            if (evaluate.check === 2) {
                 console.log("Can't move object container");
-            } else if (checkContainer === 1) {
+            } else if (evaluate.counter === objectContainer.markerLength) {
                 performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
             }
-            console.log("Check Container: " + checkContainer);
-        } */
+        }
         return false;
     }
     //One or more markers can't move
