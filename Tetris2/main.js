@@ -20,15 +20,17 @@ let markerLocation = {
     start: {
         row: 0,
         column: 0
-    }
+    },
+    id: "marker"
 }
 
 let objectContainer = {
-    
+
     rows: [],
     columns: [],
     //set at object generator
-    markerLength: 0
+    markerLength: 0,
+    id: "objectContainer"
 }
 
 let clearedRows = [];
