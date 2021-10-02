@@ -33,7 +33,7 @@ let objectContainer = {
     id: "objectContainer"
 }
 
-let clearedRows = [];
+
 
 let limits = {
     left: 0,
@@ -49,6 +49,7 @@ let boardValues = {
 //GLOBAL VARIABLES
 
 let touchBottomLimit = false;
+let clearedRows = [];
 
 //INITIALIZATIONS
 

@@ -344,9 +344,6 @@ const performMovement = (tableElement, markerMovement, targetObject, targetClass
             console.log("Abort add new marker");
         }  */
 
-        console.log("last ROWW: " + row[length - 1]);
-        console.log("last COLUMNN: " + column[length - 1]);
-        console.log("LIMIT RIGHT: " + limits.bottom);
 
         tableElement.children[row[i]].children[column[i]].classList.add(targetClass);
         if (targetClass === "marked") {
@@ -379,17 +376,30 @@ const setBottomLimit = (tableElement, rows, columns) => {
 }
 
 const isMovePossible = (tableElement, direction, positions, object) => {
-    console.log("IS MOVE POSSIBLE: " + object.id);
+    /* console.log("IS MOVE POSSIBLE: " + object.id); */
 
     let rows = object.rows;
     let columns = object.columns;
+    let nextCell;
+
+    //Initialization: nextCell
+    if (tableElement.children[positions.nextRow] === undefined) {
+        if (tableElement.children[positions.row].children[positions.nextColumn] === undefined) {
+            nextCell = tableElement.children[positions.row].children[positions.column];
+        }
+    } else {
+        nextCell = tableElement.children[positions.row].children[positions.nextColumn];
+    }
 
     switch (direction) {
 
         case "left-button":
-            //-Redundancy: there are two indicators for left and right limits in the same conditional
-            if (positions.column === limits.left /* || nextCellClass.contains("bottom-limit") */) {
+
+            if (positions.column === limits.left) {
                 console.log("ABORT LEFT");
+                return 2;
+            } else if (positions.column !== limits.left && nextCell.classList.contains("bottom-limit")) {
+                console.log("ABORT LEFT - bottom-limit");
                 return 2;
             } else {
                 console.log("Marker is OK - Continue check");
@@ -402,12 +412,16 @@ const isMovePossible = (tableElement, direction, positions, object) => {
             console.log("Positions ROW: " + positions.row);
             console.log("Bottom limit: " + limits.bottom);
 
-            if (positions.row === limits.bottom /* || nextCellClass.contains("bottom-limit") */) {
+            if (positions.row === limits.bottom) {
 
                 console.log("Set bottom-limit");
                 setBottomLimit(tableElement, rows, columns);
                 return 3;
 
+            } else if (positions.row !== limits.bottom && nextCell.classList.contains("bottom-limit")) {
+                console.log("Set bottom-limit");
+                setBottomLimit(tableElement, rows, columns);
+                return 3;
             } else {
                 console.log("Marker is OK - Continue check");
                 return 1;
@@ -417,8 +431,11 @@ const isMovePossible = (tableElement, direction, positions, object) => {
 
         case "right-button":
 
-            if (positions.column === limits.right /* || nextCellClass.contains("bottom-limit") */) {
+            if (positions.column === limits.right) {
                 console.log("ABORT RIGHT");
+                return 2;
+            } else if (positions.column !== limits.left && nextCell.classList.contains("bottom-limit")) {
+                console.log("ABORT LEFT - bottom-limit");
                 return 2;
             } else {
                 console.log("Marker is OK - Continue check");
@@ -555,8 +572,7 @@ const markerScanner = (tableElement) => {
             }
         }
     }
-    console.log(markerLocation.rows);
-    console.log(markerLocation.columns);
+
 }
 
 //Inside:
