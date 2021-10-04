@@ -30,10 +30,10 @@ let objectContainer = {
     columns: [],
     //set at object generator
     markerLength: 0,
-    id: "objectContainer"
+    id: "objectContainer",
+    originalPosition: true
+    
 }
-
-
 
 let limits = {
     left: 0,
@@ -45,6 +45,8 @@ let boardValues = {
     rows: 10,
     columns: 4
 }
+
+let shapes;
 
 //GLOBAL VARIABLES
 

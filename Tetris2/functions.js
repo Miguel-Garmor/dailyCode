@@ -1,5 +1,3 @@
-//Functions
-
 const objectContainerGenerator = (tableEl, height, width, startLoc, correction) => {
 
     let startCorrection = startLoc - correction;
@@ -107,6 +105,78 @@ const squareGenerator = (tableEl) => {
     objectContainerGenerator(tableEl, 2, 2, startRow, -1);
     return false;
 }
+
+const performTurn = () => {
+
+}
+
+const checkTurn = (tableElement) => {
+
+    console.log("Inside checkTurn");
+
+    let counter = 0;
+    let objRows = objectContainer.rows;
+    let objColumns = objectContainer.columns;
+
+    let nextShapeNumber = shapes.shapeNumber + 1;
+
+    let nextShape;
+
+    let shapeMarkerPosition;
+
+
+    //Initializations
+
+    if (shapes.shapeArray[nextShapeNumber] === undefined) {
+        nextShape = shapes.shapeArray[0];
+    } else {
+        nextShape = shapes.shapeArray[nextShapeNumber];
+    }
+
+
+    shapeMarkerPosition = nextShape.position;
+
+    console.log("shapeMarkerPosition: " + shapeMarkerPosition);
+
+    console.log("Object container rows: " + objectContainer.rows);
+    console.log("Object container columns: " + objectContainer.columns);
+
+    for (let i = 0; i < shapeMarkerPosition.length; i++) {
+
+        if (tableElement.children[objRows[shapeMarkerPosition[i]]].children[objColumns[shapeMarkerPosition[i]]].classList.contains("bottom-limit")) {
+            console.log("Got bottom limit");
+            console.log("WE CAN'T TURN");
+            return false
+        } else if (tableElement.children[objRows[shapeMarkerPosition[i]]].children[objColumns[shapeMarkerPosition[i]]].classList.contains("objectContainer")) {
+            console.log("Got container ID: " + tableElement.children[objRows[shapeMarkerPosition[i]]].children[objColumns[shapeMarkerPosition[i]]].id);
+            counter++;
+        }
+    }
+
+    if (counter === shapeMarkerPosition.length) {
+        console.log("WE CAN TURN");
+        shapes.shapeNumber = nextShapeNumber;
+        return true;
+    }
+
+
+
+}
+
+const turnObject = (tableElement) => {
+
+    let check = false;
+
+    check = checkTurn(tableElement);
+
+    if (check === false) {
+        console.log("Can't perform turn");
+    } else if (check === true) {
+        console.log("Can perform turn");
+        performTurn();
+    }
+
+}
 const line3Generator = (tableEl) => {
     //Set marker length
     markerLocation.markerLength = 3;
@@ -114,10 +184,31 @@ const line3Generator = (tableEl) => {
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
 
+    //Initialize object
+
+    let line3Shape = {
+        shapeNumber: 0,
+        shapeLength: 3,
+        shapeArray: [
+            {
+                position: [1, 4, 7]
+            },
+            {
+                position: [6, 7, 8]
+            }
+        ]
+    };
+
+    shapes = line3Shape;
+
     objectContainer.markerLength = 9;
     objectContainer.rows = [];
     objectContainer.columns = [];
 
+
+    //Check if line3Gen is possible
+
+    //Position 1
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 1; j++) {
             if (tableEl.children[startRow + i].children[startColumn + j].classList.contains("bottom-limit")) {
@@ -160,6 +251,7 @@ const snakeGenerator = (tableEl) => {
     }
     return false;
 }
+
 const generateObject = (chosenObject, tableEl) => {
 
     let check = false;
@@ -466,6 +558,7 @@ const moveOnDirection = (direction, markerMovement) => {
     }
 
 }
+
 const loopCheck = (markerLength, object, positions, markerMovement, tableElement, direction) => {
 
 
@@ -498,6 +591,71 @@ const loopCheck = (markerLength, object, positions, markerMovement, tableElement
     return evaluate;
 }
 
+const checkOriginalPosition = () => {
+
+    let counter = 0;
+
+    let shapeNumber = shapes.shapeNumber;
+    let shapeLength = shapes.shapeLength;
+    let shapePosition = shapes.shapeArray[shapeNumber].position;
+
+    let markerRow = markerLocation.rows;
+    let markerColumn = markerLocation.columns;
+
+    let objectContainerRow = objectContainer.rows;
+    let objectContainerColumn = objectContainer.columns;
+
+    console.log("marker rows: " + markerLocation.rows);
+    console.log("marker columns: " + markerLocation.columns);
+    console.log("objectContainer rows: " + objectContainer.rows);
+    console.log("objectContainer columns: " + objectContainer.columns);
+    console.log("Shape position: " + shapes.shapeArray[shapeNumber].position);
+    console.log("Shape Length: " + shapeLength);
+
+    for (let i = 0; i < shapeLength; i++) {
+        if (markerRow[i] === objectContainerRow[shapePosition[i]] && markerColumn[i] === objectContainerColumn[shapePosition[i]]) {
+            console.log("True");
+            counter++;
+        } else if ((markerRow[i] !== objectContainerRow[shapePosition[i]] || markerColumn[i] !== objectContainerColumn[shapePosition[i]]))
+            console.log("False");
+    }
+
+    if (counter === shapeLength) {
+        objectContainer.originalPosition = true;
+    } else objectContainer.originalPosition = false;
+
+
+
+}
+
+const scanSetObjectContainer = (tableElement) => {
+
+    let boardRows = boardValues.rows;
+    let boardColumns = boardValues.columns;
+
+    objectContainer.rows = [];
+    objectContainer.columns = [];
+
+    for (let i = 0; i < boardRows; i++) {
+        for (let j = 0; j < boardColumns; j++) {
+            if (tableElement.children[i].children[j].classList.contains("objectContainer")) {
+                console.log("Found CONTAINER");
+                console.log("Position: " + i + j);
+                objectContainer.rows = [...objectContainer.rows, i];
+                objectContainer.columns = [...objectContainer.columns, j];
+
+            }
+        }
+    }
+
+    console.log("Container rows: " + objectContainer.rows);
+    console.log("Container columns: " + objectContainer.columns);
+
+    console.log("Checking original position...");
+
+    checkOriginalPosition();
+
+}
 const adjustMarkers = (direction, tableElement, object) => {
 
     let evaluate;
@@ -526,19 +684,24 @@ const adjustMarkers = (direction, tableElement, object) => {
     if (evaluate.counter === markerLength) {
         //MOVEMENT: object markers
         performMovement(tableElement, markerMovement, markerLocation, "marked");
+
+
         //MOVEMENT: object container
         //CHECK objectContainer movement
         if (direction === "down-button") {
             //moveObjectContainer
             performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
+
         } else if (direction === "left-button" || direction === "right-button") {
             evaluate = loopCheck(objectContainer.markerLength, objectContainer, positions, markerMovement, tableElement, direction);
-            if (evaluate.check === 2) {
+            if (evaluate.check === 2 || objectContainer.originalPosition !== true) {
                 console.log("Can't move object container");
             } else if (evaluate.counter === objectContainer.markerLength) {
                 performMovement(tableElement, markerMovement, objectContainer, "objectContainer");
+
             }
         }
+        scanSetObjectContainer(tableElement);
         return false;
     }
     //One or more markers can't move
@@ -586,9 +749,14 @@ const movementManager = (e) => {
 
         markerScanner(tableElement);
 
-        //Set custom values ADJUST MARKER-------------------------------
-        touchBottomLimit = adjustMarkers(e.target.id, tableElement, markerLocation);
-        //--------------------------------------------------------------
+        if (e.target.id === "turn-button") {
+
+            turnObject(tableElement);
+        } else {
+            touchBottomLimit = adjustMarkers(e.target.id, tableElement, markerLocation);
+        }
+
+
 
         if (touchBottomLimit === true) {
 
