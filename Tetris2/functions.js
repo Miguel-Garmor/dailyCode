@@ -76,35 +76,7 @@ const createBoard = (rows, columns) => {
 
 }
 
-const squareGenerator = (tableEl) => {
 
-    //Set marker length
-    markerLocation.markerLength = 4;
-
-    let startRow = markerLocation.start.row;
-    let startColumn = markerLocation.start.column;
-
-    objectContainer.markerLength = 4;
-    objectContainer.rows = [];
-    objectContainer.columns = [];
-
-
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 2; j++) {
-            if (tableEl.children[startRow + i].children[startColumn + j - 1].classList.contains("bottom-limit")) {
-                console.log("Abort SQUARE GEN - in squareGenerator");
-                return true;
-            } else {
-                tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
-                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
-
-            }
-
-        }
-    }
-    objectContainerGenerator(tableEl, 2, 2, startRow, -1);
-    return false;
-}
 
 const performTurn = (tableElement) => {
 
@@ -193,6 +165,52 @@ const turnObject = (tableElement) => {
         performTurn(tableElement);
     }
 
+}
+
+const squareGenerator = (tableEl) => {
+
+    //Set marker length
+    markerLocation.markerLength = 4;
+
+    let startRow = markerLocation.start.row;
+    let startColumn = markerLocation.start.column;
+
+    //Initialize object
+
+    let squareShape = {
+        shapeNumber: 0,
+        shapeLength: 4,
+        shapeArray: [
+            {
+                position: [0, 1, 2, 3]
+            }
+        ]
+    };
+
+    shapes = squareShape;
+
+    objectContainer.markerLength = 4;
+    objectContainer.rows = [];
+    objectContainer.columns = [];
+
+    //Check if square is possible
+
+
+    for (let i = 0; i < 2; i++) {
+        for (let j = 0; j < 2; j++) {
+            if (tableEl.children[startRow + i].children[startColumn + j - 1].classList.contains("bottom-limit")) {
+                console.log("Abort SQUARE GEN - in squareGenerator");
+                return true;
+            } else {
+                tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
+                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
+
+            }
+
+        }
+    }
+    objectContainerGenerator(tableEl, 2, 2, startRow, -1);
+    return false;
 }
 const line3Generator = (tableEl) => {
     //Set marker length
@@ -293,6 +311,14 @@ const snakeGenerator = (tableEl) => {
     return false;
 }
 
+const objectRandomizer = () => {
+    objectArray = ["square", "line3", "snake"];
+
+    randomNumber = Math.floor(Math.random() * 3);
+
+    return objectArray[randomNumber];
+}
+
 const generateObject = (chosenObject, tableEl) => {
 
     let check = false;
@@ -367,7 +393,9 @@ const resetMarker = () => {
     targetEl.children[columnStart].innerText = "X";
     targetEl.children[columnStart].classList.add("marked");
 
-    check = generateObject("snake", tableEl);
+    objectName = objectRandomizer();
+
+    check = generateObject(objectName, tableEl);
 
     if (check === true) {
         console.log("Abort SQUARE GEN in resetMarker");
