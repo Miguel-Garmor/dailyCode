@@ -31,7 +31,8 @@ let objectContainer = {
     //set at object generator
     markerLength: 0,
     id: "objectContainer",
-    originalPosition: true
+    originalPosition: true,
+    originalPositionStart: true
     
 }
 
