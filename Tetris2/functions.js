@@ -38,7 +38,7 @@ const createBoard = (rows, columns) => {
             let newCell = document.createElement("td");
             let id = iText.concat(jText);
 
-            newCell.innerText = id;
+            /* newCell.innerText = id; */
             newCell.id = id;
 
             newRow.appendChild(newCell);
@@ -76,8 +76,6 @@ const createBoard = (rows, columns) => {
 
 }
 
-
-
 const performTurn = (tableElement) => {
 
     let shapeNumber = shapes.shapeNumber;
@@ -85,17 +83,20 @@ const performTurn = (tableElement) => {
 
     for (let i = 0; i < objectContainer.markerLength; i++) {
         tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].classList.remove("marked");
-        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].innerText = tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].id;
+        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].classList.remove("red");
+        /* tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].innerText = tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].id; */
+        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].innerText = "";
     }
     for (let i = 0; i < shapes.shapeLength; i++) {
         tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].classList.add("marked");
-        tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].innerText = "X";
+        tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].classList.add("red");
+
+        /* tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].innerText = "X"; */
     }
     objectContainer.originalPosition = true;
     objectContainer.originalPositionStart = true;
 
 }
-
 
 const checkTurn = (tableElement) => {
 
@@ -202,8 +203,10 @@ const squareGenerator = (tableEl) => {
                 console.log("Abort SQUARE GEN - in squareGenerator");
                 return true;
             } else {
-                tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
+                /* tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X"; */
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
+                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("red");
+                tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "";
 
             }
 
@@ -212,6 +215,7 @@ const squareGenerator = (tableEl) => {
     objectContainerGenerator(tableEl, 2, 2, startRow, -1);
     return false;
 }
+
 const line3Generator = (tableEl) => {
     //Set marker length
     markerLocation.markerLength = 3;
@@ -249,8 +253,10 @@ const line3Generator = (tableEl) => {
                 console.log("Abort line3 GEN - in squareGenerator");
                 return true;
             } else {
-                tableEl.children[startRow + i].children[startColumn + j].innerText = "X";
+                /* tableEl.children[startRow + i].children[startColumn + j].innerText = "X"; */
                 tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
+                tableEl.children[startRow + i].children[startColumn + j].classList.add("red");
+                tableEl.children[startRow + i].children[startColumn + j].innerText = "";
             }
         }
     }
@@ -275,7 +281,7 @@ const snakeGenerator = (tableEl) => {
                 position: [3, 4, 7, 8]
             },
             {
-                position: [0, 3, 4, 7]
+                position: [1, 3, 4, 6]
             }
         ]
     };
@@ -303,6 +309,8 @@ const snakeGenerator = (tableEl) => {
             } else {
                 tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
+                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("red");
+                tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "";
             }
 
         }
@@ -371,7 +379,7 @@ const restartGame = (tableEl) => {
 
             let idString = string1.concat(string2);
 
-            tableEl.children[i].children[j].innerText = idString;
+            /* tableEl.children[i].children[j].innerText = idString; */
             tableEl.children[i].children[j].className = "";
         }
     }
@@ -390,8 +398,8 @@ const resetMarker = () => {
 
     //Sets marker to mid of board
 
-    targetEl.children[columnStart].innerText = "X";
-    targetEl.children[columnStart].classList.add("marked");
+    /* targetEl.children[columnStart].innerText = "X";
+    targetEl.children[columnStart].classList.add("marked"); */
 
     objectName = objectRandomizer();
 
@@ -422,9 +430,12 @@ const lowerRows = (tableElement) => {
 
                 if (tableElement.children[i].children[j].classList.contains("bottom-limit")) {
                     tableElement.children[i].children[j].classList.remove("bottom-limit");
+                    tableElement.children[i].children[j].classList.remove("red");
                     tableElement.children[i].children[j].innerText = "";
                     tableElement.children[i + 1].children[j].classList.add("bottom-limit");
-                    tableElement.children[i + 1].children[j].innerText = "O";
+                    tableElement.children[i + 1].children[j].classList.add("red");
+
+                    /* tableElement.children[i + 1].children[j].innerText = "O"; */
 
                 }
             }
@@ -462,7 +473,8 @@ const isRowCompleted = (tableElement) => {
 
                     for (j = 0; j < colMax; j++) {
                         tableElement.children[rows[i]].children[j].classList.remove("bottom-limit");
-                        tableElement.children[rows[i]].children[j].innerText = tableElement.children[rows[i]].children[j].id;
+                        tableElement.children[rows[i]].children[j].classList.remove("red");
+                        /* tableElement.children[rows[i]].children[j].innerText = tableElement.children[rows[i]].children[j].id; */
                     }
                     //lowerRows(row, colMax, tableElement);
                     clearedRows[clearedRowsCounter] = rows[i];
@@ -487,8 +499,10 @@ const performMovement = (tableElement, markerMovement, targetObject, targetClass
     for (let i = 0; i < length; i++) {
 
         tableElement.children[row[i]].children[column[i]].classList.remove(targetClass);
+
         if (targetClass === "marked") {
-            tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;
+            /*tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;*/            tableElement.children[row[i]].children[column[i]].innerText = "";
+            tableElement.children[row[i]].children[column[i]].classList.remove("red");
         }
     }
 
@@ -504,11 +518,11 @@ const performMovement = (tableElement, markerMovement, targetObject, targetClass
         /* if (row[i] > limits.bottom || column[i] > limits.right || column[i] < limits.left) {
             console.log("Abort add new marker");
         }  */
-
-
         tableElement.children[row[i]].children[column[i]].classList.add(targetClass);
         if (targetClass === "marked") {
-            tableElement.children[row[i]].children[column[i]].innerText = "X";
+            /* tableElement.children[row[i]].children[column[i]].innerText = "X"; */
+            tableElement.children[row[i]].children[column[i]].classList.add("red");
+
         }
 
     }
@@ -521,7 +535,7 @@ const setBottomLimit = (tableElement, rows, columns) => {
     for (let i = 0; i < markerLocation.markerLength; i++) {
         tableElement.children[rows[i]].children[columns[i]].classList.remove("marked");
         tableElement.children[rows[i]].children[columns[i]].classList.add("bottom-limit");
-        tableElement.children[rows[i]].children[columns[i]].innerText = "O";
+        /* tableElement.children[rows[i]].children[columns[i]].innerText = "O"; */
     }
     console.log("All set");
 
@@ -849,3 +863,19 @@ const movementManager = (e) => {
 
 
 }
+
+
+
+/*
+IMPROVEMENTS:
+--------------
+
+
+line 320: objecGenerator:
+
+can be made into a constructor function. Instead of a switch, the objectName
+goes into the econstructor function and generates the object.
+
+Instead of having functions for each object I could use classes.
+
+*/
