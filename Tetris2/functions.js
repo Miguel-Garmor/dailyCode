@@ -106,9 +106,25 @@ const squareGenerator = (tableEl) => {
     return false;
 }
 
-const performTurn = () => {
+const performTurn = (tableElement) => {
+
+    let shapeNumber = shapes.shapeNumber;
+    let shapePosition = shapes.shapeArray[shapeNumber].position;
+
+    for (let i = 0; i < objectContainer.markerLength; i++) {
+        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].classList.remove("marked");
+        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].innerText = tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].id;
+    }
+    for (let i = 0; i < shapes.shapeLength; i++) {
+        tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].classList.add("marked");
+        tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].innerText = "X";
+    }
+    objectContainer.originalPosition = true;
+
+    markerScanner(tableElement);
 
 }
+
 
 const checkTurn = (tableElement) => {
 
@@ -128,6 +144,8 @@ const checkTurn = (tableElement) => {
     //Initializations
 
     if (shapes.shapeArray[nextShapeNumber] === undefined) {
+        shapes.shapeNumber = 0;
+        nextShapeNumber = shapes.shapeNumber;
         nextShape = shapes.shapeArray[0];
     } else {
         nextShape = shapes.shapeArray[nextShapeNumber];
@@ -173,7 +191,7 @@ const turnObject = (tableElement) => {
         console.log("Can't perform turn");
     } else if (check === true) {
         console.log("Can perform turn");
-        performTurn();
+        performTurn(tableElement);
     }
 
 }
