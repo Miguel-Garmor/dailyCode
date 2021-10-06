@@ -64,10 +64,24 @@ html {
     margin: 0rem;
 }
 
-
-
 /*CELL COLOURS*/
 
-.red{
+.red {
     background-color: red;
+}
+
+.green {
+    background-color: green;
+}
+
+.blue {
+    background-color: blue;
+}
+
+.yellow {
+    background-color: yellow;
+}
+
+.purple {
+    background-color: purple;
 }

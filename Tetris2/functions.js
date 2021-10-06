@@ -80,16 +80,17 @@ const performTurn = (tableElement) => {
 
     let shapeNumber = shapes.shapeNumber;
     let shapePosition = shapes.shapeArray[shapeNumber].position;
+    let shapeColour = shapes.shapeColour;
 
     for (let i = 0; i < objectContainer.markerLength; i++) {
         tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].classList.remove("marked");
-        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].classList.remove("red");
+        tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].classList.remove(shapeColour);
         /* tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].innerText = tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].id; */
         tableElement.children[objectContainer.rows[i]].children[objectContainer.columns[i]].innerText = "";
     }
     for (let i = 0; i < shapes.shapeLength; i++) {
         tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].classList.add("marked");
-        tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].classList.add("red");
+        tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].classList.add(shapeColour);
 
         /* tableElement.children[objectContainer.rows[shapePosition[i]]].children[objectContainer.columns[shapePosition[i]]].innerText = "X"; */
     }
@@ -170,11 +171,13 @@ const turnObject = (tableElement) => {
 
 const squareGenerator = (tableEl) => {
 
-    //Set marker length
-    markerLocation.markerLength = 4;
+    let randomColour;
 
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
+
+    //Set marker length
+    markerLocation.markerLength = 4;
 
     //Initialize object
 
@@ -185,7 +188,8 @@ const squareGenerator = (tableEl) => {
             {
                 position: [0, 1, 2, 3]
             }
-        ]
+        ],
+        shapeColour: colourRandomizer()
     };
 
     shapes = squareShape;
@@ -194,9 +198,11 @@ const squareGenerator = (tableEl) => {
     objectContainer.rows = [];
     objectContainer.columns = [];
 
+
+
     //Check if square is possible
 
-
+    randomColour = shapes.shapeColour;
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 2; j++) {
             if (tableEl.children[startRow + i].children[startColumn + j - 1].classList.contains("bottom-limit")) {
@@ -205,9 +211,8 @@ const squareGenerator = (tableEl) => {
             } else {
                 /* tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X"; */
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
-                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("red");
+                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add(randomColour);
                 tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "";
-
             }
 
         }
@@ -217,11 +222,14 @@ const squareGenerator = (tableEl) => {
 }
 
 const line3Generator = (tableEl) => {
-    //Set marker length
-    markerLocation.markerLength = 3;
+
+    let randomColour;
 
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
+
+    //Set marker length
+    markerLocation.markerLength = 3;
 
     //Initialize object
 
@@ -235,7 +243,8 @@ const line3Generator = (tableEl) => {
             {
                 position: [6, 7, 8]
             }
-        ]
+        ],
+        shapeColour: colourRandomizer()
     };
 
     shapes = line3Shape;
@@ -244,8 +253,10 @@ const line3Generator = (tableEl) => {
     objectContainer.rows = [];
     objectContainer.columns = [];
 
+
     //Check if line3Gen is possible
 
+    randomColour = shapes.shapeColour;
     //Position 1
     for (let i = 0; i < 3; i++) {
         for (let j = 0; j < 1; j++) {
@@ -255,7 +266,7 @@ const line3Generator = (tableEl) => {
             } else {
                 /* tableEl.children[startRow + i].children[startColumn + j].innerText = "X"; */
                 tableEl.children[startRow + i].children[startColumn + j].classList.add("marked");
-                tableEl.children[startRow + i].children[startColumn + j].classList.add("red");
+                tableEl.children[startRow + i].children[startColumn + j].classList.add(randomColour);
                 tableEl.children[startRow + i].children[startColumn + j].innerText = "";
             }
         }
@@ -265,11 +276,14 @@ const line3Generator = (tableEl) => {
 }
 
 const snakeGenerator = (tableEl) => {
-    //Set marker length
-    markerLocation.markerLength = 4;
+
+    let randomColour;
 
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
+
+    //Set marker length
+    markerLocation.markerLength = 4;
 
     //Initialize object
 
@@ -283,7 +297,8 @@ const snakeGenerator = (tableEl) => {
             {
                 position: [1, 3, 4, 6]
             }
-        ]
+        ],
+        shapeColour: colourRandomizer()
     };
 
     shapes = snakeShape;
@@ -295,9 +310,10 @@ const snakeGenerator = (tableEl) => {
     /*Original position at start*/
     objectContainer.originalPositionStart = false;
 
+
     //Check if snake is possible
 
-
+    randomColour = shapes.shapeColour;
     //Position 1
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 3; j++) {
@@ -309,7 +325,7 @@ const snakeGenerator = (tableEl) => {
             } else {
                 tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X";
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
-                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("red");
+                tableEl.children[startRow + i].children[startColumn + j - 1].classList.add(randomColour);
                 tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "";
             }
 
@@ -317,6 +333,15 @@ const snakeGenerator = (tableEl) => {
     }
     objectContainerGenerator(tableEl, 3, 3, startRow, -1);
     return false;
+}
+
+const colourRandomizer = () => {
+    const colours = ["red", "green", "blue", "yellow", "purple"];
+    const randomNumber = Math.floor(Math.random() * 5);
+
+    const randomColour = colours[randomNumber];
+
+    return randomColour;
 }
 
 const objectRandomizer = () => {
@@ -494,6 +519,8 @@ const performMovement = (tableElement, markerMovement, targetObject, targetClass
     let column = targetObject.columns;
     let length = targetObject.markerLength;
 
+    let shapeColour = shapes.shapeColour;
+
 
     //delete old markers
     for (let i = 0; i < length; i++) {
@@ -502,7 +529,7 @@ const performMovement = (tableElement, markerMovement, targetObject, targetClass
 
         if (targetClass === "marked") {
             /*tableElement.children[row[i]].children[column[i]].innerText = tableElement.children[row[i]].children[column[i]].id;*/            tableElement.children[row[i]].children[column[i]].innerText = "";
-            tableElement.children[row[i]].children[column[i]].classList.remove("red");
+            tableElement.children[row[i]].children[column[i]].classList.remove(shapeColour);
         }
     }
 
@@ -521,7 +548,7 @@ const performMovement = (tableElement, markerMovement, targetObject, targetClass
         tableElement.children[row[i]].children[column[i]].classList.add(targetClass);
         if (targetClass === "marked") {
             /* tableElement.children[row[i]].children[column[i]].innerText = "X"; */
-            tableElement.children[row[i]].children[column[i]].classList.add("red");
+            tableElement.children[row[i]].children[column[i]].classList.add(shapeColour);
 
         }
 
