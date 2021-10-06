@@ -447,18 +447,37 @@ const lowerRows = (tableElement) => {
     let colMax = boardValues.columns;
     let row = clearedRows;
 
+    let listClasses = [];
+    let classListLength;
+    let classHolder;
+
     for (let rowCounter = 0; rowCounter < rowsLength; rowCounter++) {
         for (let i = row[rowCounter]; i >= 0; i--) {
             for (let j = 0; j < colMax; j++) {
-                console.log("row" + i);
-                console.log("column" + j);
+
 
                 if (tableElement.children[i].children[j].classList.contains("bottom-limit")) {
-                    tableElement.children[i].children[j].classList.remove("bottom-limit");
-                    tableElement.children[i].children[j].classList.remove("red");
+
+                    //Store classList values in Variable
+                    console.log("Classlist: " + tableElement.children[i].children[j].classList);
+                    classListLength = tableElement.children[i].children[j].classList.length;
+
+                    for (let n = 0; n < classListLength; n++) {
+                        listClasses[n] = tableElement.children[i].children[j].classList.item(n);
+                    }
+
+                    console.log("Classes in the list LOWEROS:" + listClasses);
+
+                    tableElement.children[i].children[j].className = "";
                     tableElement.children[i].children[j].innerText = "";
-                    tableElement.children[i + 1].children[j].classList.add("bottom-limit");
-                    tableElement.children[i + 1].children[j].classList.add("red");
+
+                    console.log("Classlist after del LOWEROWS: " + listClasses);
+
+                    if (i !== limits.bottom) {
+                        for (let n = 0; n < classListLength; n++) {
+                            tableElement.children[i + 1].children[j].classList.add(listClasses[n]);
+                        }
+                    }
 
                     /* tableElement.children[i + 1].children[j].innerText = "O"; */
 
@@ -497,8 +516,7 @@ const isRowCompleted = (tableElement) => {
                 if (counter === colMax) {
 
                     for (j = 0; j < colMax; j++) {
-                        tableElement.children[rows[i]].children[j].classList.remove("bottom-limit");
-                        tableElement.children[rows[i]].children[j].classList.remove("red");
+                        tableElement.children[rows[i]].children[j].className = "";
                         /* tableElement.children[rows[i]].children[j].innerText = tableElement.children[rows[i]].children[j].id; */
                     }
                     //lowerRows(row, colMax, tableElement);
