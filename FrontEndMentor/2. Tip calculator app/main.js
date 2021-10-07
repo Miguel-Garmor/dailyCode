@@ -4,7 +4,7 @@ const numPeopleEl = document.querySelector("#num-people");
 const resetButton = document.querySelector("#reset-button");
 const custom = document.querySelector("#custom");
 const customContainer = document.querySelector(".customContainer");
-
+const errorMessage = document.querySelector("#error-message");
 
 const tipAmount = document.querySelector("#tip-amount");
 const totalAmount = document.querySelector("#total-amount");
