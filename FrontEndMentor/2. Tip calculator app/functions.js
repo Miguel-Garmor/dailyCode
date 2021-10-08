@@ -22,7 +22,7 @@ const getBill = (e) => {
     billHolder = parseFloat(e.target.value);
     tipElements.bill = billHolder;
 
-    tipElements.check = inputCheck(billHolder, billContainer, 9999, "inputBill");
+    tipElements.checkBill = inputCheck(billHolder, billContainer, 9999, "inputBill");
 }
 
 const clearClickedClass = () => {
@@ -59,7 +59,7 @@ const selectCustomTip = (e) => {
     tipElements.tip = customTipHolder;
     e.target.id = customTipHolder;
 
-    tipElements.check = inputCheck(customTipHolder, customContainer, 100, "customTip");
+    tipElements.checkTip = inputCheck(customTipHolder, customContainer, 100, "customTip");
 }
 
 const getNumPeople = (e) => {
@@ -68,7 +68,7 @@ const getNumPeople = (e) => {
     numPeopleHolder = parseInt(e.target.value);
     tipElements.numPeople = numPeopleHolder;
 
-    tipElements.check = inputCheck(numPeopleHolder, numPeopleContainer, 50, "inputPeople");
+    tipElements.checkPeople = inputCheck(numPeopleHolder, numPeopleContainer, 50, "inputPeople");
 }
 
 
@@ -120,6 +120,10 @@ const resetValues = () => {
     tipElements.bill = 0;
     tipElements.tip = 0;
     tipElements.numPeople = 0;
+    //Reset error outline:
+    billContainer.classList.remove("errorOutline");
+    customContainer.classList.remove("errorOutline");
+    numPeopleContainer.classList.remove("errorOutline");
 
     clearClickedClass();
 }
@@ -127,7 +131,7 @@ const resetValues = () => {
 const calculate = () => {
     tipAmtPerson();
     totalAmtPerson();
-    if (tipElements.check === false) {
+    if (tipElements.checkBill === false || tipElements.checkTip === false || tipElements.checkPeople === false) {
         resetResult();
     }
 }

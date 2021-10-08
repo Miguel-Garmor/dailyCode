@@ -8,8 +8,12 @@ html {
     font-size: 10px;
 }
 
+.body {
+    height: 100vh;
+    width: 100vw;
+}
+
 .frame {
-    position: relative;
     height: 100vh;
     width: 100vw;
     background-color: #C5E4E7;
@@ -128,7 +132,7 @@ input[type=number] {
 }
 
 .select-area section input {
-    background-color: #F3F8FC;
+    background-color: transparent;
     border: none;
     border-radius: 0.7rem;
     height: 3rem;
@@ -334,4 +338,47 @@ input[type=number] {
     background-color: #a2fff3;
     color: rgb(31, 31, 31);
     cursor: pointer;
+}
+
+@media screen and (max-width: 803px) {
+    .frame {
+        min-height: 100vh;
+        width: 100vw;
+        position: unset;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        position: unset;
+        height: 90%;
+        width: 100vw;
+        transform: translate(0%, 25%);
+    }
+    .select-area {
+        width: 100%;
+    }
+    .showMessage {
+        font-size: 0px !important;
+    }
+    .result-area {
+        height: 40%;
+        width: 100%;
+    }
+    .info {
+        padding-top: 4rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .button-grid {
+        /* height: 60%;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+        display: grid; */
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 0.5rem;
+    }
 }

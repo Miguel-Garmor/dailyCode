@@ -16,7 +16,9 @@ let tipElements = {
     bill: 0,
     tip: 0,
     numPeople: 0,
-    check: false
+    checkBill: false,
+    checkTip: false,
+    checkPeople: false
 };
 
 billEl.addEventListener("input", getBill);
@@ -32,7 +34,3 @@ numPeopleEl.addEventListener("input", getNumPeople);
 numPeopleEl.addEventListener("input", calculate);
 
 resetButton.addEventListener("click", resetValues);
-
-
-
-
