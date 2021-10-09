@@ -6,26 +6,29 @@
 
 html {
     font-size: 10px;
+    color: white;
 }
 
-.body {
-    position: relative;
+body {
+    background-color: #141C2F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
 }
 
 /*----------------CONTAINER------------------*/
 
 .container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     height: 50rem;
-    width: 80rem;
-    border: 1px solid black;
+    width: 70rem;
+    background-color: #141C2F;
+    font-family: 'Poppins', sans-serif;
 }
 
 /*----------------LOGO------------------*/
@@ -34,9 +37,9 @@ html {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     height: 10%;
     width: 100%;
-    border: 1px solid green;
     margin-left: auto;
     margin-right: auto;
 }
@@ -44,7 +47,17 @@ html {
 .logo div {
     display: flex;
     justify-content: center;
-    align-items: right;
+    align-items: center;
+}
+
+.logo h1 {
+    font-size: 2rem;
+}
+
+.logo p {
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 .hidden {
@@ -56,10 +69,11 @@ html {
 .input {
     height: 10%;
     width: 100%;
-    border: 1px solid black;
+    border-radius: 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-color: #1F2A48;
 }
 
 .input i {
@@ -68,21 +82,37 @@ html {
     align-items: center;
     height: 100%;
     width: 5%;
-    border: 1px solid purple;
+    color: #0378F9;
+    margin-left: 1rem;
 }
 
 .input input {
     display: block;
     height: 100%;
     width: 70%;
-    border: 1px solid purple;
+    border: none;
+    background-color: transparent;
+}
+
+.input input::placeholder {
+    color: rgb(170, 170, 170);
+    font-family: 'Poppins', sans-serif;
+}
+
+.input input:focus {
+    outline: none;
+    caret-color: white;
 }
 
 .input button {
     display: block;
-    height: 100%;
-    width: 20%;
-    border: 1px solid purple;
+    height: 80%;
+    width: 15%;
+    border-radius: 1rem;
+    border: none;
+    background-color: #0378F9;
+    color: white;
+    margin-right: 1rem;
 }
 
 /*----------------CONTENT------------------*/
@@ -90,49 +120,45 @@ html {
 .content {
     height: 70%;
     width: 100%;
-    border: 1px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 1rem;
+    background-color: #1F2A48;
 }
 
 .image {
-    position: relative;
-    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-self: flex-start;
+    height: 50%;
     width: 30%;
-    border: 1px solid purple;
 }
 
 .image div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    transform: translate(-50%, -50%);
     height: 13rem;
     width: 13rem;
-    border: 1px solid black;
     border-radius: 100%;
+    /*Image not adaptable*/
     background-image: url(./imgs/WhatsApp\ Image\ 2021-01-12\ at\ 20.20.47.jpeg);
     background-size: cover;
+    margin-top: 3rem;
 }
 
 .contentDetails {
-    height: 100%;
+    height: 95%;
     width: 70%;
-    border: 1px solid purple;
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
+    margin-right: 5%;
 }
 
 /*----*/
 
 .profileInfo {
-    height: 30%;
+    height: 35%;
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -140,49 +166,85 @@ html {
 
 .info {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: left;
     flex-direction: column;
     height: 100%;
     width: 50%;
-    border: 1px solid purple;
+}
+
+.info h1 {
+    font-size: 2rem;
+}
+
+.info #name p {
+    font-size: 1.5rem;
+    color: #0378F9;
+    font-weight: 1000;
+}
+
+#bio p {
+    font-size: 1.2rem;
 }
 
 .joinDate {
     display: flex;
     justify-content: right;
-    align-items: center;
+    align-items: start;
     height: 100%;
     width: 50%;
-    border: 1px solid purple;
+}
+
+.joinDate p {
+    margin-top: 5%;
+    font-size: 1.3rem;
+    font-weight: 700;
 }
 
 /*----*/
 
 .stats {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: left;
-    height: 20%;
+    height: 25%;
     width: 100%;
+    border-radius: 1rem;
+    background-color: #141C2F;
+}
+
+.stats h1 {
+    font-size: 1rem;
+    font-weight: 1000;
+}
+
+.stats p {
+    font-size: 1.7rem;
+    font-weight: 1000;
 }
 
 .repos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
-    width: 33%;
-    border: 1px solid purple;
+    width: 30%;
 }
 
 .followers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
-    width: 33%;
-    border: 1px solid purple;
+    width: 30%;
 }
 
 .following {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     height: 100%;
-    width: 33%;
-    border: 1px solid purple;
+    width: 30%;
 }
 
 /*----*/
@@ -193,9 +255,8 @@ html {
     justify-items: center;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    height: 45%;
+    height: 20%;
     width: 100%;
-    border: 1px solid blueviolet;
 }
 
 .location {
@@ -204,7 +265,10 @@ html {
     align-items: center;
     height: 90%;
     width: 100%;
-    border: 1px solid green;
+}
+
+.location i {
+    margin-right: 0.9rem;
 }
 
 .twitter {
@@ -213,7 +277,10 @@ html {
     align-items: center;
     height: 90%;
     width: 100%;
-    border: 1px solid green;
+}
+
+.twitter i {
+    margin-right: 0.9rem;
 }
 
 .link {
@@ -222,7 +289,10 @@ html {
     align-items: center;
     height: 90%;
     width: 100%;
-    border: 1px solid green;
+}
+
+.link i {
+    margin-right: 0.9rem;
 }
 
 .github {
@@ -231,5 +301,8 @@ html {
     align-items: center;
     height: 90%;
     width: 100%;
-    border: 1px solid green;
+}
+
+.github i {
+    margin-right: 0.9rem;
 }
