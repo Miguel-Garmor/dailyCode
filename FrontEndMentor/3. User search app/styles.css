@@ -20,6 +20,7 @@ html {
     --font-weight: 600;
     --font-weight-extreme: 1000;
     --box-shadow: 0 4px 8px 0 rgba(44, 44, 44, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    --display-block: block;
 }
 
 .theme-dark {
@@ -29,6 +30,7 @@ html {
     --font-color-secondary: #0378F9;
     --font-color-terciary: #aaaaaa;
     --font-weight: 500;
+    --display-block: block;
 }
 
 /*--THEMES*/
@@ -143,100 +145,125 @@ body {
 
 /*----------------CONTENT------------------*/
 
-.content {
+.contentContainer {
     height: 70%;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 1rem;
     background-color: var(--color-secondary);
     box-shadow: var(--box-shadow);
+    border-radius: 1rem;
 }
 
-.image {
-    display: flex;
-    justify-content: center;
-    align-self: flex-start;
-    height: 50%;
-    width: 30%;
+.content {
+    height: 90%;
+    width: 100%;
+    display: grid;
+    row-gap: 2rem;
+    grid-template-columns: 1fr 2fr 1fr;
+    background-color: transparent;
 }
 
-.image div {
-    height: 13rem;
-    width: 13rem;
-    border-radius: 100%;
-    /*Image not adaptable*/
-    background-image: url(./imgs/WhatsApp\ Image\ 2021-01-12\ at\ 20.20.47.jpeg);
-    background-size: cover;
-    margin-top: 3rem;
-}
-
-.contentDetails {
-    height: 95%;
-    width: 70%;
-    display: flex;
-    justify-content: space-evenly;
+.personalDetails {
+    height: 100%;
+    width: 100%;
+    grid-row: 1/2;
+    grid-column: 1/4;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 0.5fr 1fr 1fr;
     flex-direction: column;
     align-items: center;
-    margin-right: 5%;
 }
 
-/*----*/
-
-.profileInfo {
-    height: 35%;
+.personalDetails #profile-pic {
+    grid-row: 1/4;
+    height: 100%;
     width: 100%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-items: flex-start;
 }
 
-.info {
-    display: flex;
-    justify-content: space-between;
-    align-items: left;
-    flex-direction: column;
+.personalDetails #profile-pic img {
+    height: 12rem;
+    width: 12rem;
+    border-radius: 50%;
+    margin-top: 2.2rem;
+}
+
+.personalDetails #name {
     height: 100%;
-    width: 70%;
+    width: 100%;
+    font-size: 1.2rem;
+    color: var(--font-color-primary);
+    font-weight: var(--font-weight);
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
 }
 
-.info h1 {
-    font-size: 2rem;
+.personalDetails #name h1 {
+    margin-top: 2rem;
 }
 
-.info #name p {
+.personalDetails #nick {
+    height: 100%;
+    width: 100%;
+    grid-row: 2/3;
+    grid-column: 2/3;
     font-size: 1.5rem;
     color: var(--font-color-secondary);
-    font-weight: 1000;
+    font-weight: var(--font-weight);
+    display: flex;
+    justify-content: start;
+    align-items: flex-start;
 }
 
-#bio p {
+.personalDetails #bio {
+    grid-row: 3/4;
+    grid-column: 2/3;
+    height: 100%;
+    width: 100%;
     font-size: 1.2rem;
+    color: var(--font-color-primary);
     font-weight: var(--font-weight);
 }
 
-.joinDate {
-    display: flex;
-    justify-content: right;
-    align-items: start;
+.personalDetails #join-date {
     height: 100%;
-    width: 30%;
+    width: 100%;
+    font-size: 1.2rem;
+    color: var(--font-color-primary);
+    font-weight: var(--font-weight-extreme);
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
 }
 
-.joinDate p {
-    margin-top: 5%;
-    font-size: 1.3rem;
-    font-weight: 700;
+.personalDetails #join-date p {
+    margin-top: 2.5rem;
 }
 
 /*----*/
 
+.statsContainer {
+    grid-row: 2/3;
+    grid-column: 2/4;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
 .stats {
     display: flex;
-    justify-content: space-evenly;
+    justify-self: right;
     align-items: left;
-    height: 25%;
-    width: 100%;
+    height: 100%;
+    width: 90%;
     border-radius: 1rem;
     background-color: var(--color-primary);
 }
@@ -249,6 +276,10 @@ body {
 .stats p {
     font-size: 1.7rem;
     font-weight: 1000;
+}
+
+.stats .repos {
+    margin-left: 2rem;
 }
 
 .repos {
@@ -277,13 +308,23 @@ body {
 
 /*----*/
 
+.socialLinksContainer {
+    grid-row: 3/4;
+    grid-column: 2/4;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .socialLinks {
     display: grid;
     align-items: center;
-    justify-items: center;
+    justify-items: left;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    height: 20%;
+    height: 100%;
     width: 100%;
 }
 
