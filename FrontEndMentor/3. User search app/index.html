@@ -24,18 +24,21 @@
 
         <section class="logo">
             <h1>devfinder</h1>
-            <div id = "theme-changer">
-                <p id= "dark" class="hidden">dark mode</p>
+            <div id="theme-changer">
+                <p id="dark" class="hidden">dark mode</p>
                 <i class="fas fa-moon fa-lg hidden"></i>
-                <p id= "light">light mode</p>
+                <p id="light">light mode</p>
                 <i class="fas fa-sun fa-lg"></i>
             </div>
         </section>
 
         <section class="input">
             <i class="fas fa-search fa-2x"></i>
-            <input id= "search-box" type="text" placeholder="Search GitHub username...">
-            <button id= "search-button">Search</button>
+            <input list="options" id="search-box" type="text" placeholder="Search GitHub username...">
+            <datalist id="options">
+            <option value="Hello"></option>
+            </datalist>
+            <button id="search-button">Search</button>
         </section>
         <section class="contentContainer">
             <div class="content">

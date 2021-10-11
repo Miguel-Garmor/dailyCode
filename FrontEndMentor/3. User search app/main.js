@@ -1,7 +1,11 @@
 //VARIABLES
 
 let generalData;
+let objectData;
 let searchQuery;
+
+let api_url = 'https://api.github.com/users';
+let api_url2;
 
 let imageURL;
 let profileName;
@@ -21,6 +25,7 @@ let gitHub;
 
 let searchButton = document.querySelector("#search-button");
 let inputArea = document.querySelector("#search-box");
+let optionList = document.querySelector("#options");
 
 let themeChanger = document.querySelector("#theme-changer");
 let light = document.querySelector("#light");
@@ -30,12 +35,45 @@ let moon = document.querySelector(".fa-moon");
 
 //FUNCTIONS
 
+async function fetchData() {
+    let response = await fetch(api_url);
+    let data1 = await response.json();
+    return data1;
+}
+
+const addOptions = () => {
+    console.log(inputArea.value);
+    fetchData()
+        .then((data) => {
+            optionList.innerHTML = "";
+            let loginNames = [];
+            let optionElement;
+            for (let i = 0; i < data.length; i++) {
+
+                if (data[i].login.includes(inputArea.value)) {
+                    console.log(data[i].login);
+                    loginNames = [...loginNames, data[i].login];
+                }
+            }
+            for (let i = 0; i < loginNames.length; i++) {
+
+                optionElement = document.createElement("option");
+                optionElement.value = loginNames[i];
+                optionList.append(optionElement);
+            }
+
+        });
+
+}
+
 const searchOnEnter = (e) => {
 
     if (e.keyCode === 13) {
         e.preventDefault();
         searchButton.click();
+        inputArea.value = "";
     }
+
 }
 
 const searchHandler = (e) => {
@@ -82,6 +120,7 @@ const searchHandler = (e) => {
             document.querySelector(".github").innerHTML = `<i class="fab fa-github"></i><p>${gitHub}</p>`;
 
         });
+    inputArea.value = "";
 }
 
 const themeChangeHandler = (e) => {
@@ -107,8 +146,13 @@ const themeChangeHandler = (e) => {
 
 //EVENT LISTENERS
 searchButton.addEventListener("click", searchHandler);
+
 themeChanger.addEventListener("click", themeChangeHandler);
+
 inputArea.addEventListener("keyup", searchOnEnter);
+
+inputArea.addEventListener("input", addOptions);
+
 
 
 
