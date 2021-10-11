@@ -1,3 +1,5 @@
+//VARIABLES
+
 let generalData;
 let searchQuery;
 
@@ -15,7 +17,10 @@ let userLocation;
 let blog;
 let gitHub;
 
+//SELECTORS
+
 let searchButton = document.querySelector("#search-button");
+let inputArea = document.querySelector("#search-box");
 
 let themeChanger = document.querySelector("#theme-changer");
 let light = document.querySelector("#light");
@@ -23,6 +28,15 @@ let sun = document.querySelector(".fa-sun");
 let dark = document.querySelector("#dark");
 let moon = document.querySelector(".fa-moon");
 
+//FUNCTIONS
+
+const searchOnEnter = (e) => {
+
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        searchButton.click();
+    }
+}
 
 const searchHandler = (e) => {
     e.preventDefault();
@@ -91,9 +105,10 @@ const themeChangeHandler = (e) => {
     }
 }
 
+//EVENT LISTENERS
 searchButton.addEventListener("click", searchHandler);
 themeChanger.addEventListener("click", themeChangeHandler);
-
+inputArea.addEventListener("keyup", searchOnEnter);
 
 
 
