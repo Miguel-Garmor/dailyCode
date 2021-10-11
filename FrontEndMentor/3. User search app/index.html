@@ -5,10 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/eb42eed187.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100&display=swap" rel="stylesheet">
+
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/eb42eed187.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="./styles.css">
+
+
+
     <title>Document</title>
 </head>
 
@@ -17,18 +24,18 @@
 
         <section class="logo">
             <h1>devfinder</h1>
-            <div>
-                <p class="">dark mode</p>
-                <i class="fas fa-moon fa-lg "></i>
-                <p class="hidden">light mode</p>
-                <i class="fas fa-sun fa-lg hidden"></i>
+            <div id = "theme-changer">
+                <p id= "dark" class="hidden">dark mode</p>
+                <i class="fas fa-moon fa-lg hidden"></i>
+                <p id= "light">light mode</p>
+                <i class="fas fa-sun fa-lg"></i>
             </div>
         </section>
 
         <section class="input">
             <i class="fas fa-search fa-2x"></i>
-            <input type="text" placeholder="Search GitHub username...">
-            <button>Search</button>
+            <input id= "search-box" type="text" placeholder="Search GitHub username...">
+            <button id= "search-button">Search</button>
         </section>
         <section class="contentContainer">
             <div class="content">
@@ -39,6 +46,7 @@
                     </div>
                     <div id="name">
                         <h1>Mike Garmor</h1>
+
                     </div>
                     <div id="nick">
                         <p>@Mikegarmor</p>
@@ -75,7 +83,7 @@
                 <div class="socialLinksContainer">
                     <div class="socialLinks">
                         <div class="location">
-                            <i class="fab fa-twitter"></i>
+                            <i class="fas fa-map-marker-alt"></i>
                             <p>San Francisco</p>
                         </div>
                         <div class="twitter">
@@ -83,7 +91,7 @@
                             <p>@migmor</p>
                         </div>
                         <div class="link">
-                            <i class="fab fa-github"></i>
+                            <i class="fas fa-pen-fancy"></i>
                             <p>http://miguelmoral.blog</p>
                         </div>
                         <div class="github">
@@ -96,6 +104,8 @@
         </section>
     </div>
 
+    <script src="./functions.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

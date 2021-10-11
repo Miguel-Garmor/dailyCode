@@ -70,7 +70,7 @@ body {
     margin-right: auto;
 }
 
-.logo div {
+.logo #theme-changer {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,6 +120,7 @@ body {
     width: 70%;
     border: none;
     background-color: transparent;
+    color: var(--font-color-terciary);
 }
 
 .input input::placeholder {
@@ -130,6 +131,7 @@ body {
 .input input:focus {
     outline: none;
     caret-color: var(--font-color-primary);
+    color: var(--font-color-terciary);
 }
 
 .input button {
@@ -458,6 +460,19 @@ body {
         width: 80%;
         min-width: 320px;
         margin: auto;
+    }
+    .input {
+        justify-content: space-between;
+    }
+    .input i {
+        margin-left: 5%;
+    }
+    .input input {
+        width: 50%;
+    }
+    .input button {
+        width: 20%;
+        margin-right: 3%;
     }
     .personalDetails {
         grid-template-columns: 0.7fr 1fr;
