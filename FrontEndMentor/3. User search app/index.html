@@ -34,11 +34,14 @@
 
         <section class="input">
             <i class="fas fa-search fa-2x"></i>
-            <input list="options" id="search-box" type="text" placeholder="Search GitHub username...">
-            <datalist id="options">
-            <option value="Hello"></option>
-            </datalist>
+            <div id="input-list">
+                <input  id="search-box" type="text" placeholder="Search GitHub username...">
+                <div id="floating-div" class="hidden">
+                    <ul id="floating-list"></ul>
+                </div>
+            </div>
             <button id="search-button">Search</button>
+
         </section>
         <section class="contentContainer">
             <div class="content">

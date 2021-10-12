@@ -5,7 +5,6 @@ let objectData;
 let searchQuery;
 
 let api_url = 'https://api.github.com/users';
-let api_url2;
 
 let imageURL;
 let profileName;
@@ -25,7 +24,8 @@ let gitHub;
 
 let searchButton = document.querySelector("#search-button");
 let inputArea = document.querySelector("#search-box");
-let optionList = document.querySelector("#options");
+let inputListDiv = document.querySelector("#input-list");
+let floatingList = document.querySelector("#floating-list");
 
 let themeChanger = document.querySelector("#theme-changer");
 let light = document.querySelector("#light");
@@ -41,45 +41,7 @@ async function fetchData() {
     return data1;
 }
 
-const addOptions = () => {
-    console.log(inputArea.value);
-    fetchData()
-        .then((data) => {
-            optionList.innerHTML = "";
-            let loginNames = [];
-            let optionElement;
-            for (let i = 0; i < data.length; i++) {
-
-                if (data[i].login.includes(inputArea.value)) {
-                    console.log(data[i].login);
-                    loginNames = [...loginNames, data[i].login];
-                }
-            }
-            for (let i = 0; i < loginNames.length; i++) {
-
-                optionElement = document.createElement("option");
-                optionElement.value = loginNames[i];
-                optionList.append(optionElement);
-            }
-
-        });
-
-}
-
-const searchOnEnter = (e) => {
-
-    if (e.keyCode === 13) {
-        e.preventDefault();
-        searchButton.click();
-        inputArea.value = "";
-    }
-
-}
-
-const searchHandler = (e) => {
-    e.preventDefault();
-    searchQuery = e.target.parentNode.children[1].value;
-
+const fetchDataOnSearch = (searchQuery) => {
     fetch("https://api.github.com/users/" + `${searchQuery}`)
         .then((response) => response.json())
         .then(data => {
@@ -120,6 +82,57 @@ const searchHandler = (e) => {
             document.querySelector(".github").innerHTML = `<i class="fab fa-github"></i><p>${gitHub}</p>`;
 
         });
+}
+
+const addSuggestions = () => {
+    console.log(inputArea.value);
+    fetchData()
+        .then((data) => {
+
+            floatingList.innerHTML = "";
+            let loginNames = [];
+            let img_url = [];
+            let listElement;
+
+            if (inputArea.value !== null && inputArea.value !== "") {
+
+                for (let i = 0; i < data.length; i++) {
+
+                    if (data[i].login.includes(inputArea.value)) {
+                        img_url = [...img_url, data[i].avatar_url];
+                        loginNames = [...loginNames, data[i].login];
+                    }
+                }
+                for (let i = 0; i < loginNames.length; i++) {
+
+                    listElement = document.createElement("li");
+                    listElement.className = "listItem";
+                    listElement.innerHTML = `<img src=${img_url[i]} alt="">${loginNames[i]}`;
+                    floatingList.append(listElement);
+                }
+            }
+
+        });
+
+}
+
+const searchOnEnter = (e) => {
+
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        searchButton.click();
+        inputArea.value = "";
+    }
+
+}
+
+const buttonSearchHandler = (e) => {
+    e.preventDefault();
+
+    let searchQuery = inputArea.value;
+
+    fetchDataOnSearch(searchQuery);
+
     inputArea.value = "";
 }
 
@@ -144,16 +157,36 @@ const themeChangeHandler = (e) => {
     }
 }
 
+const showFloatingList = () => {
+    floatingList.parentNode.classList.remove("hidden");
+}
+
+const hideFloatingList = (e) => {
+    if (e.target.id !== "floating-div") {
+        floatingList.parentNode.classList.add("hidden");
+    }
+}
+
+const searchSuggestionHandler = (e) => {
+    inputArea.value = e.target.innerText;
+    fetchDataOnSearch(inputArea.value);
+    inputArea.value = "";
+}
+
 //EVENT LISTENERS
-searchButton.addEventListener("click", searchHandler);
+searchButton.addEventListener("click", buttonSearchHandler);
 
 themeChanger.addEventListener("click", themeChangeHandler);
 
 inputArea.addEventListener("keyup", searchOnEnter);
 
-inputArea.addEventListener("input", addOptions);
+inputArea.addEventListener("input", addSuggestions);
 
+inputArea.addEventListener("input", showFloatingList);
 
+document.addEventListener("click", hideFloatingList);
+
+floatingList.addEventListener("click", searchSuggestionHandler);
 
 
 
