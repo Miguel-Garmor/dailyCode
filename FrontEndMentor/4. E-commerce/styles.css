@@ -1,0 +1,56 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+nav {
+    height: 10vh;
+    width: 90vw;
+    margin: auto;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.logo {
+    flex: 1 2 auto;
+    border: 1px solid black;
+}
+
+.links {
+    flex: 3 1 auto;
+    border: 1px solid black;
+}
+
+.profile-cart {
+    flex: 1 1 auto;
+    border: 1px solid black;
+}
+
+.content {
+    height: 90vh;
+    width: 90vw;
+    margin: auto;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery {
+    height: 100%;
+    width: 50%;
+    border: 1px solid black;
+}
+
+.description {
+    height: 100%;
+    width: 50%;
+    border: 1px solid black;
+}
