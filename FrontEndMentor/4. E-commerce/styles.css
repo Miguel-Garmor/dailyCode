@@ -308,15 +308,16 @@ nav {
         min-width: 1000px;
     }
     .buttons {
+        padding-top: 1rem;
         padding-bottom: 2rem;
     }
     .buttons .addCart {
-        height: 100%;
+        height: 4rem;
         padding-top: 0.3rem;
         padding-bottom: 0.3rem;
     }
-    .buttons .quantity button {
-        height: 100%;
+    .buttons .quantity {
+        height: 4rem;
     }
 }
 
@@ -368,6 +369,12 @@ nav {
     .description .title h1 {
         padding-top: 1rem;
         font-size: 3rem;
+    }
+    .buttons .quantity {
+        height: 4rem;
+    }
+    .buttons .addCart {
+        height: 4rem;
     }
 }
 
@@ -450,7 +457,28 @@ nav {
         padding-top: 1rem;
         font-size: 3rem;
     }
+    .pricing {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+    .pricing #originalPrice p {
+        font-size: 1.5rem;
+    }
     .endPrice #discountPrice {
         margin-right: 1rem;
+    }
+    .buttons {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .buttons .quantity {
+        height: 5rem;
+        width: 100%;
+    }
+    .buttons .addCart {
+        height: 5rem;
+        width: 100%;
+        margin-top: 1.5rem;
     }
 }
