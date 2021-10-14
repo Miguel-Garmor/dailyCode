@@ -28,6 +28,17 @@ nav {
     font-size: 3rem;
 }
 
+.logo i {
+    margin-left: 1rem;
+    margin-right: 1.5rem;
+    display: none;
+}
+
+.logo i:hover {
+    cursor: pointer;
+    color: gray;
+}
+
 .links {
     flex: 2 1 auto;
     display: flex;
@@ -287,4 +298,159 @@ nav {
 .buttons .addCart i {
     color: white;
     margin-right: 1rem;
+}
+
+@media screen and (max-width:1144px) {
+    nav {
+        min-width: 1000px;
+    }
+    .content {
+        min-width: 1000px;
+    }
+    .buttons {
+        padding-bottom: 2rem;
+    }
+    .buttons .addCart {
+        height: 100%;
+        padding-top: 0.3rem;
+        padding-bottom: 0.3rem;
+    }
+    .buttons .quantity button {
+        height: 100%;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    nav {
+        min-width: 40rem;
+    }
+    .content {
+        min-width: 40rem;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+    }
+    .gallerySection {
+        width: 100%;
+        margin-top: 3rem;
+        margin-bottom: 1rem;
+    }
+    .mainImage {
+        height: 27rem;
+        width: 100%;
+        max-width: 45rem;
+        min-height: unset;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    .mainImage img {
+        height: 100%;
+        width: 100%;
+        min-width: 40rem;
+        min-height: unset;
+        min-width: 0;
+        border-radius: 2rem;
+    }
+    .thumbnails {
+        display: none;
+    }
+    .descriptionSection {
+        width: 100%;
+        min-width: 40rem;
+    }
+    .description section {
+        padding-top: 2rem;
+    }
+    .description .title h1 {
+        padding-top: 1rem;
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width:800px) {
+    .logo i {
+        display: block;
+    }
+    .links {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 530px) {
+    .endPrice #discountPrice {
+        margin-right: 1rem;
+    }
+}
+
+@media screen and (max-width: 482px) {
+    nav {
+        margin: 0;
+        padding: 0;
+        width: 100vw;
+        min-height: unset;
+        min-width: unset;
+        /*overflow: hidden;*/
+    }
+    .logo i {
+        display: block;
+    }
+    .links {
+        display: none;
+    }
+    .content {
+        height: auto;
+        width: 100vw;
+        min-height: unset;
+        min-width: 0;
+        margin: 0;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    .gallerySection {
+        height: auto;
+        width: 100vw;
+        min-height: unset;
+        min-width: 0;
+        margin: 0;
+    }
+    .mainImage {
+        height: 27rem;
+        width: 100%;
+        min-height: unset;
+        min-width: 0;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+    .mainImage img {
+        height: 100%;
+        width: 100%;
+        min-height: unset;
+        min-width: 0;
+        border-radius: 0;
+    }
+    .descriptionSection {
+        height: auto;
+        width: 100%;
+        min-height: unset;
+        min-width: 0;
+    }
+    .description {
+        height: auto;
+        width: 100%;
+    }
+    .description section {
+        padding-top: 2rem;
+    }
+    .description .title h1 {
+        padding-top: 1rem;
+        font-size: 3rem;
+    }
+    .endPrice #discountPrice {
+        margin-right: 1rem;
+    }
 }
