@@ -36,20 +36,20 @@
         <section class="gallerySection">
 
             <div class="mainImage">
-                <img src="./imgs/image-product-1.jpg" alt="">
+                <img id="main-img" src="./imgs/image-product-1.jpg" alt="">
             </div>
             <div class="thumbnails">
                 <div>
-                    <img src="./imgs/image-product-1-thumbnail.jpg" alt="">
+                    <img class="thumb" id="thumb1" src="./imgs/image-product-1-thumbnail.jpg">
                 </div>
                 <div>
-                    <img src="./imgs/image-product-2-thumbnail.jpg" alt="">
+                    <img class="thumb" id="thumb2" src="./imgs/image-product-2-thumbnail.jpg">
                 </div>
                 <div>
-                    <img src="./imgs/image-product-3-thumbnail.jpg" alt="">
+                    <img class="thumb" id="thumb3" src="./imgs/image-product-3-thumbnail.jpg">
                 </div>
                 <div>
-                    <img src="./imgs/image-product-4-thumbnail.jpg" alt="">
+                    <img class="thumb" id="thumb4" src="./imgs/image-product-4-thumbnail.jpg">
                 </div>
             </div>
 
@@ -93,6 +93,26 @@
             </div>
         </section>
     </div>
+
+    <!--Light box-->
+    <div id="light-box" class="hidden">
+        <div id="overlay-img-container">
+
+            <img id="overlayImg" src="./imgs/image-product-1.jpg">
+            <div id="arrow-container-1">
+                <i class="fas fa-angle-left fa-5x" id="left-arrow"></i>
+            </div>
+            <div id="arrow-container-2">
+                <i class="fas fa-angle-right fa-5x" id="right-arrow"></i>
+            </div>
+            <i class="fas fa-times fa-3x" id="close-light-box"></i>
+        </div>
+
+    </div>
+
+
+
+    <script src="./app.js"></script>
 </body>
 
 </html>
