@@ -11,6 +11,8 @@ let imgIndex = 0;
 let cartQuantitySelect = 0;
 let cartQuantityTotal = 0;
 
+let lightBoxSwitch = true;
+
 //Selectors
 
 const profileCart = document.querySelector(".profile-cart");
@@ -21,6 +23,7 @@ const cartGenerator = document.querySelector("#cart-generator");
 const thumbnails = document.querySelector(".thumbnails");
 const mainImgContainer = document.querySelector(".mainImage");
 const mainImg = document.querySelector("#main-img");
+const mainImgArrowContainer = document.querySelector("#mainImage-arrow-container");
 
 const lightBox = document.querySelector("#light-box");
 const closeLightBox = document.querySelector("#close-light-box");
@@ -73,6 +76,17 @@ function showSlides(n) {
 
 
 //Functions
+
+const LightBoxOnOff = () => {
+
+    if (window.innerWidth <= 1000) {
+        lightBoxSwitch = false;
+        mainImgArrowContainer.className = "show";
+    } else {
+        lightBoxSwitch = true;
+        mainImgArrowContainer.className = "hidden";
+    }
+}
 
 const deleteCartHandler = (e) => {
     if (e.target.classList.contains("trash")) {
@@ -181,38 +195,61 @@ const thumbnailHandlerIn = (e) => {
     mainImg.src = "./imgs/image-product-1.jpg";
 } */
 
-const lightBoxHandler = (e) => {
-    console.log(e.target);
-    lightBox.className = "show";
+const lightBoxHandler = () => {
+    if (lightBoxSwitch === true) {
+        lightBox.className = "show";
+    }
 }
 
 const closeLightBoxHandler = () => {
     lightBox.className = "hidden";
 }
 
-const actionChangeLBImage = (direction) => {
+const actionChangeLBImage = (direction, selector) => {
     if ((imgIndex + direction) < 0) {
         imgIndex = img_urls.length - 1;
-        overlayImg.src = img_urls[imgIndex];
+        selector.src = img_urls[imgIndex];
     } else if ((imgIndex + direction) > img_urls.length - 1) {
         imgIndex = 0;
-        overlayImg.src = img_urls[imgIndex];
+        selector.src = img_urls[imgIndex];
     } else {
         imgIndex += direction;
-        overlayImg.src = img_urls[imgIndex];
+        selector.src = img_urls[imgIndex];
     }
 }
 
 const changeLBImageHandler = (e) => {
 
-    if (e.target.id === "left-arrow") {
-        console.log("Left arrow yahur");
-        actionChangeLBImage(-1);
+    if (e.target.parentNode.parentNode.id === "overlay-img-container") {
 
-    } else if (e.target.id === "right-arrow") {
-        console.log("Right arrow yahur");
-        actionChangeLBImage(1);
+        if (e.target.id === "left-arrow") {
+            console.log("Left arrow yahur");
+            actionChangeLBImage(-1, overlayImg);
+
+        } else if (e.target.id === "right-arrow") {
+            console.log("Right arrow yahur");
+            actionChangeLBImage(1, overlayImg);
+        }
+    } else if (e.target.parentNode.id === "mainImage-arrow-container") {
+        console.log("This is mobile");
+        if (e.target.id === "left-arrow") {
+            console.log("Left arrow yahur");
+            actionChangeLBImage(-1, mainImg);
+
+        } else if (e.target.id === "right-arrow") {
+            console.log("Right arrow yahur");
+            actionChangeLBImage(1, mainImg);
+        }
     }
+
+    /*  if (e.target.id === "left-arrow") {
+         console.log("Left arrow yahur");
+         actionChangeLBImage(-1, selector);
+ 
+     } else if (e.target.id === "right-arrow") {
+         console.log("Right arrow yahur");
+         actionChangeLBImage(1, selector);
+     } */
 }
 
 
@@ -228,8 +265,22 @@ thumbnails.addEventListener("click", thumbnailHandlerIn);
 
 mainImg.addEventListener("click", lightBoxHandler);
 closeLightBox.addEventListener("click", closeLightBoxHandler);
-
 lightBox.addEventListener("click", changeLBImageHandler);
+
+mainImgArrowContainer.addEventListener("click", changeLBImageHandler);
 
 quantity.addEventListener("click", increaseDecreaseQuantity);
 addToCart.addEventListener("click", addToCartHandler);
+
+window.addEventListener("resize", LightBoxOnOff);
+window.addEventListener("load", function () {
+    if (window.innerWidth <= 1000) {
+        lightBoxSwitch = false;
+        mainImgArrowContainer.className = "show";
+        console.log("show");
+    } else {
+        lightBoxSwitch = true;
+        mainImgArrowContainer.className = "hidden";
+        console.log("hide");
+    }
+});

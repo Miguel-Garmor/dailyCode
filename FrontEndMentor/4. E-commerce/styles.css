@@ -119,6 +119,7 @@ nav {
 }
 
 .mainImage {
+    position: relative;
     height: 35rem;
     width: 35rem;
     display: flex;
@@ -135,6 +136,18 @@ nav {
     max-width: 100%;
     object-fit: cover;
     border-radius: 1rem;
+}
+
+.mainImage #mainImage-arrow-container {
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    right: 0;
+    transform: translate(0, -50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
 }
 
 .thumbnails {
