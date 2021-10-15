@@ -10,6 +10,9 @@ let imgIndex = 0;
 
 //Selectors
 
+const profileCart = document.querySelector(".profile-cart");
+const cartIcon = document.querySelector(".fa-shopping-cart");
+
 const thumbnails = document.querySelector(".thumbnails");
 const mainImgContainer = document.querySelector(".mainImage");
 const mainImg = document.querySelector("#main-img");
@@ -62,6 +65,14 @@ function showSlides(n) {
 
 
 //Functions
+
+const openCartHandler = () => {
+    profileCart.children[1].classList.toggle("hidden");
+}
+
+const profileCartHandler = (e) => {
+    console.log("Im in the cart: " + e.target.id);
+}
 const thumbnailHandlerIn = (e) => {
     let thumbnail = e.target;
     let thumbnailId = e.target.id;
@@ -76,19 +87,19 @@ const thumbnailHandlerIn = (e) => {
         mainImg.src = "./imgs/image-product-4.jpg";
     }
 
-    if (thumbnail.className === "thumb") {
-        console.log(thumbnails.children[2].children[0].id);
-        for (let i = 0; i < thumbnails.children.length; i++) {
-            if (thumbnails.children[i].children[0].id === thumbnailId) {
-                thumbnail.style.opacity = 0.6;
-                thumbnail.style.border = "3px solid #FF7D1B";
-            } else {
-                thumbnails.children[i].children[0].style.opacity = 1;
-                thumbnails.children[i].children[0].style.border = "3px solid transparent";
-            }
-
-        }
-    }
+    /*  if (thumbnail.className === "thumb") {
+         console.log(thumbnails.children[2].children[0].id);
+         for (let i = 0; i < thumbnails.children.length; i++) {
+             if (thumbnails.children[i].children[0].id === thumbnailId) {
+                 thumbnail.style.opacity = 0.6;
+                 thumbnail.style.border = "3px solid #FF7D1B";
+             } else {
+                 thumbnails.children[i].children[0].style.opacity = 1;
+                 thumbnails.children[i].children[0].style.border = "3px solid transparent";
+             }
+ 
+         }
+     } */
 }
 
 /* const thumbnailHandlerOut = () => {
@@ -106,12 +117,12 @@ const closeLightBoxHandler = () => {
 
 const actionChangeLBImage = (direction) => {
     if ((imgIndex + direction) < 0) {
-        imgIndex = img_urls.length-1;
+        imgIndex = img_urls.length - 1;
         overlayImg.src = img_urls[imgIndex];
-    } else if ((imgIndex + direction) > img_urls.length-1) {
+    } else if ((imgIndex + direction) > img_urls.length - 1) {
         imgIndex = 0;
         overlayImg.src = img_urls[imgIndex];
-    }else{
+    } else {
         imgIndex += direction;
         overlayImg.src = img_urls[imgIndex];
     }
@@ -132,9 +143,11 @@ const changeLBImageHandler = (e) => {
 
 //Event handlers
 
-thumbnails.addEventListener("mouseover", thumbnailHandlerIn);
-thumbnails.addEventListener("click", thumbnailHandlerIn);
+profileCart.addEventListener("click", profileCartHandler);
+cartIcon.addEventListener("click", openCartHandler);
 
+thumbnails.addEventListener("click", thumbnailHandlerIn);
+/* thumbnails.addEventListener("mouseover", thumbnailHandlerIn);*/
 /* thumbnails.addEventListener("mouseleave", thumbnailHandlerOut); */
 
 mainImg.addEventListener("click", lightBoxHandler);

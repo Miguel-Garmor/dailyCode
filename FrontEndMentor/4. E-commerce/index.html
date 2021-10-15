@@ -15,7 +15,7 @@
 
     <nav>
         <section class="logo">
-            <i class="fas fa-bars"></i>
+            <i id="hamburger-menu" class="fas fa-bars"></i>
             <p>trainers</p>
         </section>
         <section class="links">
@@ -29,6 +29,24 @@
         </section>
         <section class="profile-cart">
             <i class="fas fa-shopping-cart fa-lg"></i>
+
+            <div class="profileCartContainer hidden">
+                <div id="cart-title"><p>Cart</p></div>
+                <div id="cart-content">
+                    <div>
+                        <img src="./imgs/image-product-1-thumbnail.jpg" alt="">
+                        <div>
+                            <p>Fall Limited Edition Trainers</p>
+                            <p>125€ x 5</p>
+                            <p><strong>375€</strong></p>
+                        </div>
+                        <i class="fas fa-trash-alt"></i>
+                    </div>
+                    <button>Checkout</button>
+                </div>
+
+            </div>
+
             <img src="./imgs/WhatsApp Image 2021-01-12 at 20.20.47.jpeg" alt="">
         </section>
     </nav>
@@ -96,8 +114,8 @@
 
     <!--Light box-->
     <div id="light-box" class="hidden">
-        <div id="overlay-img-container">
 
+        <div id="overlay-img-container">
             <img id="overlayImg" src="./imgs/image-product-1.jpg">
             <div id="arrow-container-1">
                 <i class="fas fa-angle-left fa-5x" id="left-arrow"></i>
@@ -109,8 +127,6 @@
         </div>
 
     </div>
-
-
 
     <script src="./app.js"></script>
 </body>
