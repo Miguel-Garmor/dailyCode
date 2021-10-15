@@ -8,10 +8,15 @@ const img_urls = [
 
 let imgIndex = 0;
 
+let cartQuantitySelect = 0;
+let cartQuantityTotal = 0;
+
 //Selectors
 
 const profileCart = document.querySelector(".profile-cart");
 const cartIcon = document.querySelector(".fa-shopping-cart");
+const cartCalc = document.querySelector("#cart-calc");
+const cartGenerator = document.querySelector("#cart-generator");
 
 const thumbnails = document.querySelector(".thumbnails");
 const mainImgContainer = document.querySelector(".mainImage");
@@ -20,6 +25,9 @@ const mainImg = document.querySelector("#main-img");
 const lightBox = document.querySelector("#light-box");
 const closeLightBox = document.querySelector("#close-light-box");
 const overlayImg = document.querySelector("#overlayImg");
+
+const quantity = document.querySelector(".quantity");
+const addToCart = document.querySelector(".addCart");
 
 /* 
 // Open the Modal
@@ -65,6 +73,73 @@ function showSlides(n) {
 
 
 //Functions
+
+const deleteCartHandler = (e) => {
+    if (e.target.classList.contains("trash")) {
+        console.log("Got the trash");
+        cartQuantityTotal = 0;
+        cartGenerator.innerHTML = "Cart is Empty";
+    }
+
+}
+const addToCartHandler = () => {
+    //Get total quantity
+    cartQuantityTotal += cartQuantitySelect;
+
+    if (cartQuantityTotal === 0) {
+        cartGenerator.innerHTML = "Cart is Empty";
+    } else if (cartQuantityTotal > 0) {
+
+        cartGenerator.innerHTML = "";
+
+        //Add to main cart
+        //--1st El: image
+        let imageEl = document.createElement("img");
+        imageEl.src = "./imgs/image-product-1-thumbnail.jpg";
+        //--
+
+        //--2nd El: Cart calculation
+        let cartCalcContainerEl = document.createElement("div");
+        cartCalcContainerEl.id = "cart-calc";
+
+        let cartDescriptionEl = document.createElement("p");
+        cartDescriptionEl.innerText = "Fall Limited Edition Trainers";
+        let cartCalcEl = document.createElement("p");
+        cartCalcEl.innerHTML = `<p>125 x ${cartQuantityTotal}`;
+        let cartTotalEl = document.createElement("p");
+        cartTotalEl.innerHTML = `<p><strong>${125 * cartQuantityTotal}€</strong>`;
+        //---Append p tags to "cart-calc"
+        cartCalcContainerEl.appendChild(cartDescriptionEl);
+        cartCalcContainerEl.appendChild(cartCalcEl);
+        cartCalcContainerEl.appendChild(cartTotalEl);
+        //--
+
+        //--3rd El: trash icon
+        let trasIconEl = document.createElement("i");
+        trasIconEl.className = "fas fa-trash-alt trash";
+        //--
+
+        //-Add all elements to "cart-generator"
+        cartGenerator.appendChild(imageEl);
+        cartGenerator.appendChild(cartCalcContainerEl);
+        cartGenerator.appendChild(trasIconEl);
+
+
+    }
+}
+const increaseDecreaseQuantity = (e) => {
+    if (e.target.classList.contains("minus")) {
+        if (cartQuantitySelect !== 0) {
+            cartQuantitySelect--;
+            quantity.children[1].innerText = cartQuantitySelect;
+        }
+
+    } else if (e.target.classList.contains("plus")) {
+        cartQuantitySelect++;
+        quantity.children[1].innerText = cartQuantitySelect;
+
+    }
+}
 
 const openCartHandler = () => {
     profileCart.children[1].classList.toggle("hidden");
@@ -145,6 +220,7 @@ const changeLBImageHandler = (e) => {
 
 profileCart.addEventListener("click", profileCartHandler);
 cartIcon.addEventListener("click", openCartHandler);
+cartGenerator.addEventListener("click", deleteCartHandler);
 
 thumbnails.addEventListener("click", thumbnailHandlerIn);
 /* thumbnails.addEventListener("mouseover", thumbnailHandlerIn);*/
@@ -154,3 +230,6 @@ mainImg.addEventListener("click", lightBoxHandler);
 closeLightBox.addEventListener("click", closeLightBoxHandler);
 
 lightBox.addEventListener("click", changeLBImageHandler);
+
+quantity.addEventListener("click", increaseDecreaseQuantity);
+addToCart.addEventListener("click", addToCartHandler);
