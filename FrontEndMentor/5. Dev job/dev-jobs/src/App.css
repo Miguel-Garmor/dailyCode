@@ -1,0 +1,50 @@
+html {
+  font-size: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+nav {
+  height: 20vh;
+  width: auto;
+  border: 1px solid black;
+  border-bottom-left-radius: 10rem;
+}
+
+#header-container {
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+}
+
+#logo {
+  font-size: 2rem;
+}
+
+#theme {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#theme-switch {
+  width: 3.5rem;
+  height: 2rem;
+  border: 1.5px solid black;
+  margin: 0 1rem 0 1rem;
+  padding: 0 0.3rem 0 0.3rem;
+  border-radius: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+#theme-switch div {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-radius: 50%;
+  background-color: black;
+}
