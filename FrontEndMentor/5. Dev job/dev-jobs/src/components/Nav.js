@@ -1,4 +1,5 @@
 import React from 'react';
+import Display from './Display'
 
 
 const Nav = () => {
@@ -16,7 +17,7 @@ const Nav = () => {
                     <i class="fas fa-moon fa-lg"></i>
                 </div>
             </div>
-
+            <Display />
         </nav>
 
     );
