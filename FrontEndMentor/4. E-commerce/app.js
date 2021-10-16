@@ -32,6 +32,10 @@ const overlayImg = document.querySelector("#overlayImg");
 const quantity = document.querySelector(".quantity");
 const addToCart = document.querySelector(".addCart");
 
+const hamburgerMenu = document.querySelector("#hamburger-menu");
+const links = document.querySelector(".links");
+const closeLinksIcon = document.querySelector("#close-links");
+
 /* 
 // Open the Modal
 function openModal() {
@@ -77,6 +81,16 @@ function showSlides(n) {
 
 //Functions
 
+const showLinks = () => {
+    links.classList.remove("hidden");
+    closeLinksIcon.classList.remove("hidden");
+}
+
+const closeLinks = () =>{
+    links.classList.add("hidden");
+    closeLinksIcon.classList.add("hidden");
+}
+
 const LightBoxOnOff = () => {
 
     if (window.innerWidth <= 1000) {
@@ -96,6 +110,7 @@ const deleteCartHandler = (e) => {
     }
 
 }
+
 const addToCartHandler = () => {
     //Get total quantity
     cartQuantityTotal += cartQuantitySelect;
@@ -141,6 +156,7 @@ const addToCartHandler = () => {
 
     }
 }
+
 const increaseDecreaseQuantity = (e) => {
     if (e.target.classList.contains("minus")) {
         if (cartQuantitySelect !== 0) {
@@ -159,9 +175,6 @@ const openCartHandler = () => {
     profileCart.children[1].classList.toggle("hidden");
 }
 
-const profileCartHandler = (e) => {
-    console.log("Im in the cart: " + e.target.id);
-}
 const thumbnailHandlerIn = (e) => {
     let thumbnail = e.target;
     let thumbnailId = e.target.id;
@@ -254,8 +267,19 @@ const changeLBImageHandler = (e) => {
 
 
 //Event handlers
+window.addEventListener("resize", LightBoxOnOff);
+window.addEventListener("load", function () {
+    if (window.innerWidth <= 1000) {
+        lightBoxSwitch = false;
+        mainImgArrowContainer.className = "show";
+        console.log("show");
+    } else {
+        lightBoxSwitch = true;
+        mainImgArrowContainer.className = "hidden";
+        console.log("hide");
+    }
+});
 
-profileCart.addEventListener("click", profileCartHandler);
 cartIcon.addEventListener("click", openCartHandler);
 cartGenerator.addEventListener("click", deleteCartHandler);
 
@@ -272,15 +296,5 @@ mainImgArrowContainer.addEventListener("click", changeLBImageHandler);
 quantity.addEventListener("click", increaseDecreaseQuantity);
 addToCart.addEventListener("click", addToCartHandler);
 
-window.addEventListener("resize", LightBoxOnOff);
-window.addEventListener("load", function () {
-    if (window.innerWidth <= 1000) {
-        lightBoxSwitch = false;
-        mainImgArrowContainer.className = "show";
-        console.log("show");
-    } else {
-        lightBoxSwitch = true;
-        mainImgArrowContainer.className = "hidden";
-        console.log("hide");
-    }
-});
+hamburgerMenu.addEventListener("click", showLinks);
+closeLinksIcon.addEventListener("click", closeLinks);
