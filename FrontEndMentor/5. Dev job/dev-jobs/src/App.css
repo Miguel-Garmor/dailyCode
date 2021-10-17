@@ -76,7 +76,7 @@ nav {
   border: 1rem;
   border-radius: 1rem;
   display: grid;
-  grid-template-columns: 40fr 30fr 30fr;
+  grid-template-columns: 40fr 25fr 20fr;
   align-items: center;
 }
 
@@ -132,29 +132,95 @@ nav {
 
 #submit {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
 }
 
-#submit label {
-  width: 35%;
+#submit div {
+  width: 50%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   align-items: center;
-  font-size: 1.3rem;
-  font-weight: 500;
 }
 
-#submit input {
-  height: 2rem;
-  width: 2rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  background-color: rgb(221, 221, 221);
-  border-radius: 0.1rem;
+/* The container */
 
+#submit label {
+  height: 2.3rem;
+  width: 2.3rem;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin-right: 10%;
+}
+
+/* Hide the browser's default checkbox */
+
+#submit label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2.3rem;
+  width: 2.3rem;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+
+#submit label:hover input~.checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+
+#submit label input:checked~.checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+
+#submit .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+
+#submit label input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+
+#submit label .checkmark:after {
+  left: 9px;
+  top: 3px;
+  width: 3px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#submit div p{
+  font-size: 1.3rem;
 }
 
 #submit button {

@@ -12,11 +12,14 @@ const Search = () => {
                 <input type="text" placeholder="Filter by location..." />
             </div>
             <div id="submit">
+                <div>
+                    <label id="checkbox">
+                        <input type="checkbox" />
+                        <span class="checkmark"></span>
 
-                <label class="checkbox">
-                    <input type="checkbox" />
-                    <span>Check Me</span>
-                </label>
+                    </label>
+                    <p>Full Time</p>
+                </div>
 
                 <button>Search</button>
             </div>

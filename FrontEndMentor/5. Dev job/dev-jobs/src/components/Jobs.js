@@ -14,7 +14,6 @@ const Jobs = () => {
             <Job />
             <Job />
             <Job />
-            <Job />
         </div>
     );
 }
