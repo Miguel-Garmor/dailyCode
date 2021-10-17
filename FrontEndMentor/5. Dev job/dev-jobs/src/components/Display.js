@@ -2,11 +2,13 @@ import React from 'react';
 import Search from './Search';
 import Jobs from './Jobs';
 
-const Display = () => {
+const Display = ({ isMobile }) => {
     return (
         <div id="display">
-            <Search/>
-            <Jobs/>
+            <Search
+                isMobile={isMobile}
+            />
+            <Jobs />
         </div>
     );
 }

@@ -7,6 +7,10 @@ body {
   background-color: #ebebeb;
 }
 
+.hidden {
+  display: none !important;
+}
+
 nav {
   height: 20vh;
   width: auto;
@@ -219,17 +223,22 @@ nav {
   transform: rotate(45deg);
 }
 
-#submit div p{
+#submit div p {
   font-size: 1.3rem;
+  font-weight: 500;
 }
 
 #submit button {
+  height: 50%;
   border: none;
   border-radius: 1rem;
   color: white;
   font-size: 1.5rem;
   background-color: #5964E0;
   padding: 1rem 1.5rem 1rem 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #jobs {
@@ -294,4 +303,43 @@ nav {
 #country p {
   font-weight: 600;
   color: #5964E0;
+}
+
+@media screen and (max-width: 1000px) {
+  #search {
+    grid-template-columns: 1.3fr 1fr 1fr;
+  }
+  #jobs {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #search {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+/*MOBILE*/
+
+@media screen and (max-width: 700px) {
+  #location-filter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+  }
+  #search {
+    grid-template-columns: 5fr 1fr 1fr;
+  }
+  #submit button {
+    padding: 0 20% 0 20%;
+    margin: 0 10% 0 0;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  #jobs {
+    grid-template-columns: 1fr;
+  }
 }
