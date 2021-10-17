@@ -7,6 +7,7 @@ function App() {
   //State
 
   const [isMobile, setIsMobile] = useState(false);
+  const [filterActive, setFilterActive] = useState(false);
 
   //Effect
 
@@ -26,13 +27,25 @@ function App() {
     }
   }
 
+  const closeOverlay = (e) => {
+    if (e.target.classList.contains("overlay")) {
+      setFilterActive(true);
+    } else if (!e.target.classList.contains("overlay") && !e.target.classList.contains("fa-filter")) {
+      setFilterActive(false)
+    }
+  }
+
   //Event listeners
   window.addEventListener("resize", isMobileHandler);
+  window.addEventListener("click", closeOverlay);
+
 
   return (
     <div className="App">
       <Nav
         isMobile={isMobile}
+        setFilterActive={setFilterActive}
+        filterActive={filterActive}
       />
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import Display from './Display'
 
 
-const Nav = ({ isMobile }) => {
+const Nav = ({ isMobile, setFilterActive, filterActive }) => {
 
     return (
         <nav>
@@ -19,6 +19,8 @@ const Nav = ({ isMobile }) => {
             </div>
             <Display
                 isMobile={isMobile}
+                setFilterActive={setFilterActive}
+                filterActive={filterActive}
             />
         </nav>
 
