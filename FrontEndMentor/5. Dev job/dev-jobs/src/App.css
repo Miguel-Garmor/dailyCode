@@ -272,6 +272,9 @@ nav {
   width: 5rem;
   background-color: none;
   border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #short-description {
