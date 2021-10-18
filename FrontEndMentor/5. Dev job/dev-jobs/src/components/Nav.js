@@ -2,7 +2,7 @@ import React from 'react';
 import Display from './Display'
 
 
-const Nav = ({ isMobile, setFilterActive, filterActive }) => {
+const Nav = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searchQuery, setSearchLocation, searchLocation, setIsFullTime, isFullTime, setFilteredJobs, filteredJobs, jobs }) => {
 
     return (
         <nav>
@@ -19,8 +19,23 @@ const Nav = ({ isMobile, setFilterActive, filterActive }) => {
             </div>
             <Display
                 isMobile={isMobile}
+
                 setFilterActive={setFilterActive}
                 filterActive={filterActive}
+
+                setSearchQuery={setSearchQuery}
+                searchQuery={searchQuery}
+
+                setSearchLocation={setSearchLocation}
+                searchLocation={searchLocation}
+
+                setIsFullTime={setIsFullTime}
+                isFullTime={isFullTime}
+
+                jobs={jobs}
+
+                setFilteredJobs={setFilteredJobs}
+                filteredJobs={filteredJobs}
             />
         </nav>
 

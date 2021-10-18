@@ -1,21 +1,17 @@
 import React from 'react';
-
-
 import Job from './Job';
 
-const Jobs = () => {
+const Jobs = ({ filteredJobs }) => {
     return (
         <div id="jobs">
-            <Job />
-            <Job />
-            <Job />
-            <Job />
-            <Job />
-            <Job />
-            <Job />
-            <Job />
-            <Job />
-            <Job />
+            {
+                filteredJobs.map(job => (
+                    <Job
+                        key={job.id}
+                        job={job}
+                    />
+                ))
+            }
         </div>
     );
 }

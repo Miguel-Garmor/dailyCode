@@ -9,20 +9,43 @@ function App() {
   const [isMobile, setIsMobile] = useState(false);
   const [filterActive, setFilterActive] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchLocation, setSearchLocation] = useState("");
+  const [isFullTime, setIsFullTime] = useState(false);
+
+  const [jobs, setJobs] = useState([]);
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
   //Effect
 
   useEffect(() => {
     isMobileHandler();
+    fetchJobs();
   }, []);
+
+  useEffect(() => {
+    setFilteredJobs(jobs);
+  }, [jobs]);
+
+
+
 
   //Functions
 
+  const fetchJobs = () => {
+    fetch("http://localhost:8000/jobs")
+      .then(result => {
+        return result.json();
+      })
+      .then(data => {
+        setJobs(data);
+      });
+  }
+
   const isMobileHandler = () => {
     if (window.innerWidth <= 700) {
-      console.log("isMobile");
       setIsMobile(true);
     } else {
-      console.log("Ain't mobile");
       setIsMobile(false);
     }
   }
@@ -42,11 +65,27 @@ function App() {
 
   return (
     <div className="App">
-      <Nav
+      {filteredJobs && <Nav
         isMobile={isMobile}
+
         setFilterActive={setFilterActive}
         filterActive={filterActive}
-      />
+
+        setSearchQuery={setSearchQuery}
+        searchQuery={searchQuery}
+
+        setSearchLocation={setSearchLocation}
+        searchLocation={searchLocation}
+
+        setIsFullTime={setIsFullTime}
+        isFullTime={isFullTime}
+
+        jobs={jobs}
+
+        setFilteredJobs={setFilteredJobs}
+        filteredJobs={filteredJobs}
+
+      />}
     </div>
   );
 }
