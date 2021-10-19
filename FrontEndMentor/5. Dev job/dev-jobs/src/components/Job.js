@@ -1,5 +1,4 @@
 import React from 'react';
-import Jobs from './Jobs';
 
 
 
@@ -7,7 +6,7 @@ const Job = ({ job }) => {
     return (
         <div id="job">
             <div id="thumb-img" style={{ backgroundColor: job.logoBackground }}>
-                <img src={job.logo} />
+                <img src={job.logo} alt=""/>
             </div>
             <div id="short-description">
                 <p>{job.postedAt} - {job.contract}</p>

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 
 
 const Search = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searchQuery, setSearchLocation, searchLocation, setIsFullTime, isFullTime, setFilteredJobs, filteredJobs, jobs }) => {
 
-    //State
-    const [auxArray, setAuxArray] = useState([]);
-
+   
     //Functions
     const filterActiveHandler = () => {
         setFilterActive(!filterActive);
@@ -39,7 +37,7 @@ const Search = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searc
             let positionLowerCase = job.position.toLowerCase();
             if (positionLowerCase.includes(searchQuery) || job.position.includes(searchQuery)) {
                 console.log(job.position + " contains: " + searchQuery);
-                filteringJobs = [...filteringJobs, job]
+                filteringJobs = [...filteringJobs, job];
             }
         });
 
@@ -57,7 +55,7 @@ const Search = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searc
             });
             //Check if country search query matches any country in filtered array
             countryArray.map(country => {
-                if (country.toLowerCase() === searchLocation.toLowerCase()) {
+                if (country.toLowerCase().includes(searchLocation.toLowerCase())) {
                     countryCheck = true;
                 }
             });
@@ -66,7 +64,7 @@ const Search = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searc
 
             //Filter Jobs by the country serached
             if (countryCheck === true) {
-                filteringJobs = filteringJobs.filter(job => job.location.toLowerCase() === searchLocation.toLowerCase());
+                filteringJobs = filteringJobs.filter(job => job.location.toLowerCase().includes(searchLocation.toLowerCase()));
                 console.log("Running location Check...");
             }
         }
@@ -98,7 +96,7 @@ const Search = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searc
             <div id="submit">
                 <div className={`${isMobile ? "hidden" : ""}`}>
                     <label id="checkbox">
-                        <input type="checkbox" onClick={fullTimeHandler} checked={isFullTime} />
+                        <input type="checkbox" onClick={fullTimeHandler} checked={isFullTime} readOnly={true}/>
                         <span className="checkmark"></span>
                     </label>
                     <p>Full Time</p>
@@ -112,7 +110,7 @@ const Search = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searc
             <div id="overlay-filter" className={`overlay ${isMobile ? "" : "hidden"} ${filterActive ? "" : "hidden"}`}>
                 <div id="overlay-checkbox-container" className="overlay">
                     <label id="checkbox" className="overlay">
-                        <input type="checkbox" className="overlay" onClick={fullTimeHandler} checked={isFullTime} />
+                        <input type="checkbox" className="overlay" onClick={fullTimeHandler} checked={isFullTime} readOnly={true}/>
                         <span className="checkmark overlay"></span>
                     </label>
                     <p className="overlay">Full Time</p>
