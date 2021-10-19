@@ -43,8 +43,8 @@ let limits = {
 }
 
 let boardValues = {
-    rows: 10,
-    columns: 4
+    rows: 20,
+    columns: 10
 }
 
 let shapes;

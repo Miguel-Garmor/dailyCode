@@ -76,7 +76,7 @@ const createBoard = (rows, columns) => {
 
 }
 
-const performTurn = (tableElement) => {
+const setNewShape = (tableElement) => {
 
     let shapeNumber = shapes.shapeNumber;
     let shapePosition = shapes.shapeArray[shapeNumber].position;
@@ -164,7 +164,7 @@ const turnObject = (tableElement) => {
         console.log("Can't perform turn");
     } else if (check === true) {
         console.log("Can perform turn");
-        performTurn(tableElement);
+        setNewShape(tableElement);
     }
 
 }
@@ -175,6 +175,8 @@ const squareGenerator = (tableEl) => {
 
     let startRow = markerLocation.start.row;
     let startColumn = markerLocation.start.column;
+
+    let adjustedStart;
 
     //Set marker length
     markerLocation.markerLength = 4;
@@ -203,13 +205,14 @@ const squareGenerator = (tableEl) => {
     //Check if square is possible
 
     randomColour = shapes.shapeColour;
+
     for (let i = 0; i < 2; i++) {
         for (let j = 0; j < 2; j++) {
             if (tableEl.children[startRow + i].children[startColumn + j - 1].classList.contains("bottom-limit")) {
                 console.log("Abort SQUARE GEN - in squareGenerator");
                 return true;
             } else {
-                /* tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "X"; */
+                
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add("marked");
                 tableEl.children[startRow + i].children[startColumn + j - 1].classList.add(randomColour);
                 tableEl.children[startRow + i].children[startColumn + j - 1].innerText = "";
@@ -217,7 +220,11 @@ const squareGenerator = (tableEl) => {
 
         }
     }
-    objectContainerGenerator(tableEl, 2, 2, startRow, -1);
+
+    adjustedStart = startColumn-1;
+
+
+    objectContainerGenerator(tableEl, 2, 2, startColumn, 1);
     return false;
 }
 
@@ -271,7 +278,7 @@ const line3Generator = (tableEl) => {
             }
         }
     }
-    objectContainerGenerator(tableEl, 3, 3, startRow, -1);
+    objectContainerGenerator(tableEl, 3, 3, startColumn, 1);
     return false;
 }
 
@@ -331,7 +338,7 @@ const snakeGenerator = (tableEl) => {
 
         }
     }
-    objectContainerGenerator(tableEl, 3, 3, startRow, -1);
+    objectContainerGenerator(tableEl, 3, 3, startColumn, 1);
     return false;
 }
 
@@ -871,7 +878,7 @@ const markerScanner = (tableElement) => {
 //--adjustMarker
 const movementManager = (e) => {
 
-    const tableElement = e.target.parentNode.parentNode.children[0].children[0];
+    const tableElement = e.target.parentNode.parentNode.parentNode.children[0].children[0];
 
     if (touchBottomLimit === false) {
 
@@ -909,18 +916,3 @@ const movementManager = (e) => {
 
 }
 
-
-
-/*
-IMPROVEMENTS:
---------------
-
-
-line 320: objecGenerator:
-
-can be made into a constructor function. Instead of a switch, the objectName
-goes into the econstructor function and generates the object.
-
-Instead of having functions for each object I could use classes.
-
-*/
