@@ -2,7 +2,13 @@ import React from 'react';
 import Display from './Display'
 
 
-const Nav = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searchQuery, setSearchLocation, searchLocation, setIsFullTime, isFullTime, setFilteredJobs, filteredJobs, jobs }) => {
+const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSearchQuery, searchQuery, setSearchLocation, searchLocation, setIsFullTime, isFullTime, setFilteredJobs, filteredJobs, jobs }) => {
+
+    //Functions
+
+    const themeToggleHandler = () => {
+        theme === "light" ? setTheme("dark") : setTheme("light");
+    }
 
     return (
         <nav>
@@ -11,8 +17,8 @@ const Nav = ({ isMobile, setFilterActive, filterActive, setSearchQuery, searchQu
                 <div id="logo" ><p>devJobs</p></div>
                 <div id="theme">
                     <i className="fas fa-sun fa-lg"></i>
-                    <div id="theme-switch">
-                        <div></div>
+                    <div id="theme-switch" onClick={themeToggleHandler}>
+                        <div ></div>
                     </div>
                     <i className="fas fa-moon fa-lg"></i>
                 </div>

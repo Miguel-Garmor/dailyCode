@@ -116,8 +116,8 @@ nav {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  border-left: 1px solid rgb(173, 173, 173);
-  border-right: 1px solid rgb(173, 173, 173);
+  border-left: 1px solid rgb(133, 133, 133) !important;
+  border-right: 1px solid rgb(133, 133, 133) !important;
 }
 
 #location-filter i {
@@ -187,7 +187,7 @@ nav {
 /* On mouse-over, add a grey background color */
 
 #submit label:hover input~.checkmark {
-  background-color: #ccc;
+  background-color: rgb(161, 161, 161);
 }
 
 /* When the checkbox is checked, add a blue background */

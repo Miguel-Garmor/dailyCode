@@ -1,7 +1,12 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import styled, { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme, GlobalStyles } from './themes';
 
 import Nav from './components/Nav';
+
+const StyledApp = styled.div`
+`;
 
 function App() {
   //State
@@ -15,6 +20,8 @@ function App() {
 
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
+
+  const [theme, setTheme] = useState("dark");
 
   //Effect
 
@@ -31,6 +38,8 @@ function App() {
 
 
   //Functions
+
+
 
   const fetchJobs = () => {
     fetch("http://localhost:8000/jobs")
@@ -64,29 +73,36 @@ function App() {
 
 
   return (
-    <div className="App">
-      {filteredJobs && <Nav
-        isMobile={isMobile}
+    <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <GlobalStyles />
+      <StyledApp className="App">
+        {filteredJobs && <Nav
+          isMobile={isMobile}
 
-        setFilterActive={setFilterActive}
-        filterActive={filterActive}
+          setFilterActive={setFilterActive}
+          filterActive={filterActive}
 
-        setSearchQuery={setSearchQuery}
-        searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          searchQuery={searchQuery}
 
-        setSearchLocation={setSearchLocation}
-        searchLocation={searchLocation}
+          setSearchLocation={setSearchLocation}
+          searchLocation={searchLocation}
 
-        setIsFullTime={setIsFullTime}
-        isFullTime={isFullTime}
+          setIsFullTime={setIsFullTime}
+          isFullTime={isFullTime}
 
-        jobs={jobs}
+          jobs={jobs}
 
-        setFilteredJobs={setFilteredJobs}
-        filteredJobs={filteredJobs}
+          setFilteredJobs={setFilteredJobs}
+          filteredJobs={filteredJobs}
 
-      />}
-    </div>
+          setTheme={setTheme}
+          theme={theme}
+
+        />}
+
+      </StyledApp>
+    </ThemeProvider>
   );
 }
 
