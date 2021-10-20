@@ -5,6 +5,7 @@ import { lightTheme, darkTheme, GlobalStyles } from './themes';
 
 import Nav from './components/Nav';
 
+
 const StyledApp = styled.div`
 `;
 
@@ -73,6 +74,7 @@ function App() {
 
 
   return (
+
     <ThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
       <GlobalStyles />
       <StyledApp className="App">
@@ -100,7 +102,6 @@ function App() {
           theme={theme}
 
         />}
-
       </StyledApp>
     </ThemeProvider>
   );

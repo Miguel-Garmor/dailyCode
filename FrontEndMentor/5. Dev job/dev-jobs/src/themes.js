@@ -10,6 +10,7 @@ export const lightTheme = {
     buttonColor: "#5A64DE",
     iconColor: "#7F84D4",
 
+
 }
 
 export const darkTheme = {
@@ -21,7 +22,6 @@ export const darkTheme = {
     checkboxColor: "#313843",
     buttonColor: "#5866E0",
     iconColor: "#4C53A4",
-
 
 }
 
@@ -77,6 +77,12 @@ body {
 
 #short-description p:nth-child(2){
     color: ${props => props.theme.primaryFontColor};
+}
+
+//Job Description page
+
+.jobDescription p{
+    color: white
 }
 `
 

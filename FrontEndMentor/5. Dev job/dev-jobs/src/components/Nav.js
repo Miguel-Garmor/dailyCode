@@ -1,8 +1,12 @@
 import React from 'react';
 import Display from './Display'
+import JobDescription from './JobDescription';
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
 const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSearchQuery, searchQuery, setSearchLocation, searchLocation, setIsFullTime, isFullTime, setFilteredJobs, filteredJobs, jobs }) => {
+
+  
 
     //Functions
 
@@ -10,41 +14,53 @@ const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSear
         theme === "light" ? setTheme("dark") : setTheme("light");
     }
 
+    
     return (
-        <nav>
-            <div id="header-container">
-
-                <div id="logo" ><p>devJobs</p></div>
-                <div id="theme">
-                    <i className="fas fa-sun fa-lg"></i>
-                    <div id="theme-switch" onClick={themeToggleHandler}>
-                        <div ></div>
+        <Router>
+            <nav>
+                <div id="header-container">
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                        <div id="logo" ><p>devJobs</p></div>
+                    </Link>
+                    <div id="theme">
+                        <i className="fas fa-sun fa-lg"></i>
+                        <div id="theme-switch" onClick={themeToggleHandler}>
+                            <div ></div>
+                        </div>
+                        <i className="fas fa-moon fa-lg"></i>
                     </div>
-                    <i className="fas fa-moon fa-lg"></i>
                 </div>
-            </div>
-            <Display
-                isMobile={isMobile}
+                <Switch>
+                    <Route path="/" exact component={Display} >
+                        <Display
+                            isMobile={isMobile}
 
-                setFilterActive={setFilterActive}
-                filterActive={filterActive}
+                            setFilterActive={setFilterActive}
+                            filterActive={filterActive}
 
-                setSearchQuery={setSearchQuery}
-                searchQuery={searchQuery}
+                            setSearchQuery={setSearchQuery}
+                            searchQuery={searchQuery}
 
-                setSearchLocation={setSearchLocation}
-                searchLocation={searchLocation}
+                            setSearchLocation={setSearchLocation}
+                            searchLocation={searchLocation}
 
-                setIsFullTime={setIsFullTime}
-                isFullTime={isFullTime}
+                            setIsFullTime={setIsFullTime}
+                            isFullTime={isFullTime}
 
-                jobs={jobs}
+                            jobs={jobs}
 
-                setFilteredJobs={setFilteredJobs}
-                filteredJobs={filteredJobs}
-            />
-        </nav>
+                            setFilteredJobs={setFilteredJobs}
+                            filteredJobs={filteredJobs}
+                        />
+                    </Route>
+                    <Route path="/description" component={JobDescription}>
+                        <JobDescription />
+                    </Route>
+                </Switch>
 
+
+            </nav>
+        </Router>
     );
 }
 
