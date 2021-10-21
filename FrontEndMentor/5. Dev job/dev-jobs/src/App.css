@@ -27,7 +27,7 @@ nav {
   align-items: center;
 }
 
-#logo {
+#logo p{
   font-size: 2.5rem;
   font-weight: 600;
   color: white;
@@ -442,4 +442,262 @@ nav {
 #overlay-filter p {
   font-size: 1.3rem;
   font-weight: 500;
+}
+
+/*Job Description page*/
+
+.GlobalJobDes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.jobDescription {
+  color: black;
+  max-width: 75rem;
+  min-height: 90vh;
+  margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.jobDescription-header {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-bottom: 3rem;
+}
+
+.jobDescription-img {
+  flex: 1 0 1;
+  height: 10rem;
+  min-width: 10rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+}
+
+.jobDescription-img img {
+  height: auto;
+  width: 60%;
+}
+
+.jobDescription-rest {
+  height: 100%;
+  width: 90%;
+}
+
+.jobDescription-rest section {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jobDescription-rest section div:nth-child(1) {
+  width: 50%;
+  height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+}
+
+.jobDescription-rest section div:nth-child(1) h1 {
+  display: block;
+  font-size: 1.5rem;
+  color: black;
+  margin: 0 0 1rem 0;
+  padding: 0;
+}
+
+.jobDescription-rest section div:nth-child(1) h2 {
+  display: block;
+  font-size: 1rem;
+  color: gray;
+  margin: 0;
+  padding: 0;
+}
+
+.jobDescription-rest section div:nth-child(2) {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.jobDescription-rest section div:nth-child(2) button {
+  height: 4rem;
+  width: 13rem;
+  font-weight: 600;
+  border: none;
+}
+
+.jobDescription-rest section div:nth-child(2) button:hover {
+  cursor: pointer;
+}
+
+.jobDescription-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: white;
+  padding: 4rem 0 4rem 0;
+  margin: 0 0 3rem 0;
+}
+
+.jobDescription-content div {
+  width: 90%;
+  height: auto;
+  margin: auto;
+}
+
+.jobDescription-content div section {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  justify-content: center;
+  align-content: center;
+  padding: 0;
+  margin: 0 0 2.5rem 0;
+}
+
+.jobDescription-content section p {
+  grid-column: 1/2;
+  grid-row: 1/2;
+  justify-content: flex-start;
+  font-size: 1rem !important;
+  padding: 0;
+  margin: 0;
+  color: gray;
+}
+
+.jobDescription-content section h1 {
+  grid-column: 1/2;
+  grid-row: 2/3;
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+}
+
+.jobDescription-content section h3 {
+  height: 100%;
+  grid-column: 1/2;
+  grid-row: 3/4;
+  justify-content: flex-start;
+  font-size: 1.2rem;
+  color: #5963DD;
+  padding: 0;
+  margin: 0;
+}
+
+.jobDescription-content section button {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  height: 4rem;
+  width: 13rem;
+  color: #EFEDFA;
+  background-color: #5963DD;
+  font-weight: 600;
+  border: none;
+}
+
+.jobDescription-content section button:hover {
+  cursor: pointer;
+  background-color: #4952b4;
+}
+
+.jobDescription-content p, li span {
+  font-size: 1.2rem;
+}
+
+.jobDescription-content li span {
+  line-height: 3rem;
+}
+
+.jobDescription-content ol, ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.jobDescription-content ul li::before {
+  content: "• ";
+  padding-right: 1.5rem;
+}
+
+.jobDescription-content ol {
+  counter-reset: my-awesome-counter;
+}
+
+.jobDescription-content ol li {
+  counter-increment: my-awesome-counter;
+}
+
+.jobDescription-content ol li::before {
+  content: counter(my-awesome-counter) "";
+  color: #4952b4;
+  font-weight: bold;
+  padding-right: 1.5rem;
+}
+
+.jobDescription-content ol li::before {
+  content: counter(my-awesome-counter) "";
+  color: #4952b4;
+  font-weight: bold;
+  padding-right: 1.5rem;
+}
+
+.footer {
+  width: 100%;
+  height: 12vh;
+  margin-top: 1rem;
+  
+}
+
+.footer section {
+  max-width: 75rem;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer section div:nth-child(1) h1 {
+  font-size: 1.5rem;
+  color: black;
+}
+
+.footer section div:nth-child(1) h2 {
+  font-size: 1rem;
+  color: gray;
+}
+
+.footer section div:nth-child(2) button {
+  height: 4rem;
+  width: 13rem;
+  color: #EFEDFA;
+  background-color: #5963DD;
+  font-weight: 600;
+  border: none;
+}
+
+.footer section div:nth-child(2) button:hover {
+  cursor: pointer;
+  background-color: #4952b4;
 }

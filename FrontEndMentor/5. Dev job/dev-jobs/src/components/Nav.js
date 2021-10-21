@@ -1,12 +1,13 @@
 import React from 'react';
 import Display from './Display'
 import JobDescription from './JobDescription';
+
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
 const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSearchQuery, searchQuery, setSearchLocation, searchLocation, setIsFullTime, isFullTime, setFilteredJobs, filteredJobs, jobs }) => {
 
-  
+
 
     //Functions
 
@@ -14,7 +15,7 @@ const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSear
         theme === "light" ? setTheme("dark") : setTheme("light");
     }
 
-    
+
     return (
         <Router>
             <nav>
