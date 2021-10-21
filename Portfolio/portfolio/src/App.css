@@ -1,0 +1,41 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav {
+    height: 10vh;
+    width: 100%;
+    background-color: rgb(49, 49, 83);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav div {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav  div h1 {
+    width: 20%;
+    color: white;
+}
+
+nav ul {
+    height: 100%;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav ul li {
+    list-style: none;
+    color: white;
+}
