@@ -1,18 +1,20 @@
 import React from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 
 const Home = () => {
     return (
 
-        <div>
-            <div>
-                <img src="" alt="" />
+        <div className="homeComponent">
+            <div id="home-image">
+                <img src="./imgs/miguel-garcia-moral.jpeg" alt="" />
             </div>
-            <div>
-                <h1></h1>
-                <p></p>
-                <p></p>
+            <div id="home-text">
+                <div class = "homeTextContainer">
+                    <h1>Hey there! It's Miguel</h1>
+                    <p>I'm a passionate Web Developer</p>
+                    <p>I've got skills and more loading...</p>
+                    <p>Check my projects out</p>
+                </div>
             </div>
         </div>
 

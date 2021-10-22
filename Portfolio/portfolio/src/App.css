@@ -22,7 +22,7 @@ nav div {
     align-items: center;
 }
 
-nav  div h1 {
+nav div h1 {
     width: 20%;
     color: white;
 }
@@ -38,4 +38,48 @@ nav ul {
 nav ul li {
     list-style: none;
     color: white;
+}
+
+.homeComponent {
+    height: 90vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#home-image {
+    height: 100%;
+    width: 50%;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#home-image img {
+    height: 30rem;
+    width: 30rem;
+    border-radius: 50%;
+}
+
+#home-text {
+    height: 100%;
+    width: 50%;
+    background-color: blue;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.homeTextContainer {
+    height: 50%;
+    width: 50%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
 }
