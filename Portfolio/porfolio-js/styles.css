@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+nav {
+    height: 10vh;
+    width: 100vw;
+    border: 1px solid black
+}
+
+.navContent {
+    height: 100%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.links {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.links ul {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links li {
+    list-style: none;
+    font-size: 2rem;
+}
+
+.home {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.homeImage {
+    width: 50%;
+    height: 100%;
+    border: 1px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeImage img {
+    height: 40rem;
+    width: 40rem;
+    border-radius: 50%;
+}
+
+.homeContent {
+    width: 50%;
+    height: 100%;
+    border: 1px solid purple;
+}
+
+.projects {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.skills {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.contact {
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
