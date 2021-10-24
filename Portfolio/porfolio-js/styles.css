@@ -75,7 +75,7 @@ nav .navContent {
 }
 
 .homeImage img {
-    width: 10rem;
+    width: 25rem;
     height: auto;
     border-radius: 50%;
 }
@@ -134,4 +134,47 @@ nav .navContent {
 .homeContent div #react {
     height: auto;
     width: 10rem;
+}
+
+.projects {
+    height: 100vh;
+    width: 100vw;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.projects h1 {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.projects .gridContainer {
+    height: 80%;
+    width: 60%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.gridContainer div {
+    border: 1px solid purple;
+}
+
+.gridContainer div:nth-child(4) {
+    grid-column: 2/3;
+}
+
+.skills {
+    height: 100vh;
+    width: 100vw;
+    border: 1px solid black;
+}
+
+.contact {
+    height: 100vh;
+    width: 100vw;
+    border: 1px solid black;
 }

@@ -25,27 +25,33 @@
             </div>
         </div>
     </nav>
-    
+
     <section class="home">
         <div class="homeImage">
-            <img src="./imgs/miguel-garcia-moral.jpeg" alt=""/>
+            <img src="./imgs/miguel-garcia-moral.jpeg" alt="" />
         </div>
         <div class="homeContent">
             <h1>Hey it's Miguel</h1>
             <h2>And I got some skills</h2>
             <div class="homeContentImgs">
-                <img id = "webstack" src="./imgs/web-stack.png" alt=""/>
+                <img id="webstack" src="./imgs/web-stack.png" alt="" />
                 <div>
-                    <img id ="sass" src="./imgs/sass-badge.png" alt="">
-                    <img id = "jQuery"src="./imgs/jQuery-badge.png" alt="">
+                    <img id="sass" src="./imgs/sass-badge.png" alt="">
+                    <img id="jQuery" src="./imgs/jQuery-badge.png" alt="">
                 </div>
-                <img id = "react" src="./imgs/react-badge.png" alt="">
+                <img id="react" src="./imgs/react-badge.png" alt="">
             </div>
         </div>
     </section>
 
     <section class="projects">
-        <h1>PROJECTS</h1>
+        <h1>Projects</h1>
+        <div class="gridContainer">
+            <div id="project1">Project 1</div>
+            <div id="project2">Project 2</div>
+            <div id="project3">Project 3</div>
+            <div id="project4">Project 4</div>
+        </div>
     </section>
 
     <section class="skills">
@@ -54,6 +60,22 @@
 
     <section class="contact">
         <h1>CONTACT</h1>
+        <form action="/action_page.php">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+            <label for="country">Country</label>
+            <select id="country" name="country">
+                <option value="australia">Australia</option>
+                <option value="canada">Canada</option>
+                <option value="usa">USA</option>
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
     </section>
 
 </body>
