@@ -12,10 +12,11 @@ html {
 nav {
     height: 10vh;
     width: 100vw;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 nav .navContent {
@@ -28,14 +29,15 @@ nav .navContent {
 
 #logo {
     height: 100%;
-    width: 20%;
+    width: 30%;
     display: flex;
     justify-content: start;
     align-items: center;
 }
 
 #logo h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-family: 'Rock Salt', cursive;
 }
 
 .links {
@@ -61,6 +63,7 @@ nav .navContent {
 .home {
     height: 100vh;
     width: 100vw;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,9 +72,6 @@ nav .navContent {
 .homeImage {
     height: 100%;
     width: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -104,7 +104,7 @@ nav .navContent {
     flex-direction: column;
 }
 
-.homeContent .homeContentImgs {
+.homeContentImgs {
     height: 65%;
     width: 80%;
     display: flex;
@@ -115,14 +115,15 @@ nav .navContent {
     border-radius: 50%;
     box-shadow: 10px 5px 20px rgb(0, 0, 0);
     padding: 2rem 0 2rem 0;
+    overflow: hidden;
 }
 
-.homeContent div #webstack {
+.homeContentImgs #webstack {
     height: auto;
     width: 25rem;
 }
 
-.homeContent div div {
+.homeContentImgs div {
     width: 80%;
     display: flex;
     justify-content: space-evenly;
@@ -150,6 +151,7 @@ nav .navContent {
 .projects {
     min-height: 100vh;
     width: 100vw;
+    max-width: 100%;
     border: 1px solid black;
     display: flex;
     justify-content: center;
@@ -240,11 +242,13 @@ nav .navContent {
 .skills {
     height: 100vh;
     width: 100vw;
+    max-width: 100%;
     border: 1px solid black;
 }
 
 .contact {
     height: 100vh;
     width: 100vw;
+    max-width: 100%;
     border: 1px solid black;
 }
