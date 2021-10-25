@@ -25,10 +25,11 @@ html {
     height: 10vh;
     width: auto;
     color: rgb(240, 240, 240);
+    margin-top: 4rem;
 }
 
 #game-area {
-    height: 90vh;
+    height: 80vh;
     width: 100vw;
     display: flex;
     justify-content: center;
@@ -79,6 +80,7 @@ html {
     text-align: center;
     border-radius: 50%;
     background-color: white;
+    margin-top: 2rem;
 }
 
 #button-section i {
