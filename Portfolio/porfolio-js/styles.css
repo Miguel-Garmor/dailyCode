@@ -68,7 +68,7 @@ nav .navContent {
 
 .homeImage {
     height: 100%;
-    width: 50%;
+    width: 30%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -76,6 +76,7 @@ nav .navContent {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    text-align: center;
 }
 
 .homeImage img {
@@ -184,8 +185,26 @@ nav .navContent {
     width: 30rem;
 }
 
-.project h1 {
+.projectHeader {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.projectHeader h1 {
     margin: 0 0 0 2rem;
+}
+
+.projectHeader i {
+    margin: 0 2rem 0 0;
+    transition: 0.3s;
+}
+
+.projectHeader i:hover {
+    color: rgb(133, 133, 133);
+    cursor: pointer
 }
 
 .project .projectImage {
@@ -194,7 +213,7 @@ nav .navContent {
     display: flex;
     justify-content: center;
     align-items: center;
-   overflow: hidden;
+    overflow: hidden;
     margin: 0;
     padding: 0;
 }
