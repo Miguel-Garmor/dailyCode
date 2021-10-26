@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <nav>
+    <nav id="navigation-bar">
         <div class="navContent">
             <div id="logo">
                 <h1>Miguel Moral</h1>
@@ -23,31 +23,44 @@
                 <ul>
                     <li>Home</li>
                     <li>Projects</li>
-                    <li>Skills</li>
+                    <!-- <li>Skills</li> -->
                     <li>Contact</li>
                 </ul>
             </div>
         </div>
     </nav>
+    <div id="pull-down-btn">
+        <i class="fas fa-angle-down fa-2x"></i>
+    </div>
 
     <section class="home">
-        <div class="homeImage">
-            <img src="./imgs/miguel-garcia-moral.jpeg" alt="" />
-            <h1>Hey, it's Miguel!</h1>
-            <h2>And I've got some skills</h2>
-        </div>
-        <div>
-            <i class="far fa-hand-point-right fa-10x"></i>
-        </div>
-        <div class="homeContent">
 
-            <div class="homeContentImgs">
-                <img id="webstack" src="./imgs/web-stack.png" alt="" />
+        <div id="home-video">
+            <iframe width="535" height="300" src="https://www.youtube.com/embed/xJGo9dh1NGQ">
+            </iframe>
+        </div>
+        <div class="skillsContainer">
+            <h1>My skills</h1>
+            <div id="skills">
                 <div>
-                    <img id="jQuery" src="./imgs/jQuery-badge.png" alt="">
-                    <img id="sass" src="./imgs/sass-badge-noBG.png" alt="">
+                    <img src="./imgs/html-badge.png" alt="">
                 </div>
-                <img id="react" src="./imgs/react-badge.png" alt="">
+                <div>
+                    <img src="./imgs/css-badge.png" alt="">
+                </div>
+                <div>
+                    <img src="./imgs/js-badge.png" alt="">
+                </div>
+                <div>
+                    <img src="./imgs/jQuery-badge.png" alt="">
+                </div>
+                <div>
+                    <img src="./imgs/sass-badge-noBG.png" alt="">
+                </div>
+                <div>
+                    <img src="./imgs/react-badge.png" alt="">
+                </div>
+
             </div>
         </div>
     </section>
@@ -160,30 +173,28 @@
         </div>
     </section>
 
-    <section class="skills">
+    <!--  <section class="skills">
         <h1>SKILLS</h1>
-    </section>
+    </section> -->
 
     <section class="contact">
-        <h1>CONTACT</h1>
-        <form action="/action_page.php">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+        <h1 id="contact-header">CONTACT</h1>
+        <div id="input-area">
+            <form action="/action_page.php">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
 
-            <label for="country">Country</label>
-            <select id="country" name="country">
-                <option value="australia">Australia</option>
-                <option value="canada">Canada</option>
-                <option value="usa">USA</option>
-            </select>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Your message..." rows="4" cols="50"></textarea>
 
-            <input type="submit" value="Submit">
-        </form>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
     </section>
-
+    <script src="./app.js"></script>
 </body>
 
 </html>
