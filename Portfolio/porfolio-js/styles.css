@@ -75,6 +75,12 @@ nav .navContent {
 
 #hamburger {
     display: none;
+    transition: 0.3s;
+}
+
+#hamburger:hover {
+    cursor: pointer;
+    color: rgb(114, 114, 114);
 }
 
 .links {
@@ -321,11 +327,50 @@ nav .navContent {
 }
 
 @media only screen and (max-width: 890px) {
+    #pull-down-btn {
+        display: none !important;
+    }
     #hamburger {
         display: block;
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
     }
     .links {
         display: none;
+    }
+    .mobileLinks {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: 50vw;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        background: rgb(230, 230, 230);
+    }
+    .mobileLinks ul {
+        height: 80%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    .mobileLinks li {
+        font-size: 2rem;
+    }
+    #menu-cross {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+    }
+    #menu-cross:hover {
+        cursor: pointer;
+        color: rgb(78, 78, 78);
     }
     #logo {
         width: 90%;

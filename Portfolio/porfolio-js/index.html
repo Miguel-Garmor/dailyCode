@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
+
     <title>Miguel Moral</title>
 </head>
 
@@ -19,7 +20,7 @@
             <div id="logo">
                 <h1>Miguel Moral</h1>
             </div>
-            <i class="fas fa-bars fa-2x" id="hamburger"></i>
+
             <div class="links">
                 <ul>
                     <li>Home</li>
@@ -30,9 +31,20 @@
             </div>
         </div>
     </nav>
+    <div class="mobileLinks hidden">
+        <ul>
+            <li>Home</li>
+            <li>Projects</li>
+            <!-- <li>Skills</li> -->
+            <li>Contact</li>
+        </ul>
+    </div>
+    <i class="fas fa-bars fa-3x" id="hamburger"></i>
+    <i id="menu-cross" class="fas fa-times fa-3x hidden"></i>
     <div id="pull-down-btn">
         <i class="fas fa-angle-down fa-2x"></i>
     </div>
+
 
     <section class="home">
 
@@ -183,22 +195,28 @@
         <div id="input-area">
             <form action="/action_page.php">
                 <label for="name">First Name</label>
-                <input type="text" id="name" name="name" placeholder="Your name...">
+                <input type="text" id="toName" placeholder="Your name...">
 
                 <label for="email1">Email</label>
-                <input type="text" id="email1" name="email1" placeholder="Your email...">
+                <input type="text" id="senderEmail" placeholder="Your email...">
 
                 <label for="email2"></label>
-                <input type="text" id="email2" name="email2" placeholder="Please repeat your email...">
+                <input type="text" id="senderEmail2" placeholder="Please repeat your email...">
 
                 <label for="message">Message</label>
                 <textarea id="message" name="message" placeholder="Your message..." rows="4" cols="50"></textarea>
 
-                <input type="submit" value="Submit">
+                <button id="emailSubmit">Send email</button>
             </form>
         </div>
     </section>
     <script src="./app.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("user_lgNkA02HdDKbFlZ0FYm7u");
+        })();
+    </script>
 </body>
 
 </html>
