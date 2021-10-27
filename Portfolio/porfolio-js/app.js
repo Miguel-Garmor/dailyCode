@@ -1,7 +1,7 @@
 
 //Global variables
 let startScroll;
-let scrollOnLink;
+let scrollOnLink = false;
 let resetScrollOnLink;
 
 //Selectors
@@ -78,6 +78,14 @@ const scrollToLink = (e) => {
             navBar.classList.add("hidden");
             navBtn.classList.remove("hidden");
             resetScrollOnLink = false;
+            scrollOnLink = true;
+
+            function resetScrollOnLinkHandler() {
+                console.log("resetting scroll link");
+                resetScrollOnLink = true;
+            }
+            setTimeout(resetScrollOnLinkHandler, 1000);
+
             break;
         case "Contact":
             contact.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -87,13 +95,8 @@ const scrollToLink = (e) => {
     }
 
 
-    function resetScrollOnLinkHandler() {
-        console.log("resetting scroll link");
-        resetScrollOnLink = true;
-    }
 
-    setTimeout(resetScrollOnLinkHandler, 2000);
-    scrollOnLink = true;
+
 }
 
 //Event listeners
