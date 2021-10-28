@@ -162,13 +162,11 @@ const scrollToLink = (e) => {
 const nameCheckHandler = () => {
 
     if (toName.value === "") {
-        console.log("Name is empty");
         toName.classList.remove("success");
         toName.classList.add("error");
         document.querySelector("#empty-name").classList.remove("hidden");
         formCheck.sender_name = false;
     } else {
-        console.log("Name has char");
         toName.classList.add("success");
         toName.classList.remove("error");
         document.querySelector("#empty-name").classList.add("hidden");
@@ -189,16 +187,25 @@ const emailCheckHandler = () => {
         formCheck.sender_email = false;
     }
 
-    if (senderEmail.value === senderEmail2.value) {
+    if (senderEmail.value === senderEmail2.value && senderEmail2.value !== "") {
         document.querySelector("#no-match").classList.add("hidden");
         senderEmail2.classList.remove("error");
         senderEmail2.classList.add("success");
         formCheck.sender_email2 = true;
-    } else {
-        document.querySelector("#no-match").classList.remove("hidden");
-        senderEmail2.classList.add("error");
-        senderEmail2.classList.remove("success");
-        formCheck.sender_email2 = false;
+    } else if (senderEmail.value !== senderEmail2.value || senderEmail2.value === "") {
+        if (senderEmail2.value === "") {
+            document.querySelector("#no-match").innerText = "Field is empty";
+            document.querySelector("#no-match").classList.remove("hidden");
+            senderEmail2.classList.add("error");
+            senderEmail2.classList.remove("success");
+            formCheck.sender_email2 = false;
+        } else {
+            document.querySelector("#no-match").innerText = "Emails don't match";
+            document.querySelector("#no-match").classList.remove("hidden");
+            senderEmail2.classList.add("error");
+            senderEmail2.classList.remove("success");
+            formCheck.sender_email2 = false;
+        }
     }
 
 }
@@ -233,8 +240,19 @@ const sendMail = (e) => {
             .then(res => {
                 console.log("success", res.status);
             }) */
+        document.querySelector("#message-sent").classList.remove("hidden");
+
+        toName.value = "";
+        senderEmail.value = "";
+        senderEmail2.value = "";
+        message.value = "";
+
     } else {
         console.log("Error: message not sent");
+        nameCheckHandler();
+        emailCheckHandler();
+        messageCheckHandler();
+        document.querySelector("#message-sent").classList.add("hidden");
     }
 
 

@@ -348,6 +348,11 @@ nav .navContent {
     color: red;
 }
 
+#message-sent{
+    font-size: 2rem;
+    color: green;
+}
+
 .error {
     outline: 1px solid red;
     border: none;
