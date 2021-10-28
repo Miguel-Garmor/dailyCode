@@ -4,6 +4,13 @@ let startScroll;
 let scrollOnLink = false;
 let resetScrollOnLink;
 
+const formCheck = {
+    sender_name: false,
+    sender_email: false,
+    sender_email2: false,
+    sender_message: false
+};
+
 //Selectors
 const navBar = document.querySelector("#navigation-bar");
 const navBtn = document.querySelector("#pull-down-btn");
@@ -19,7 +26,12 @@ const contact = document.querySelector(".contact");
 const hamburger = document.querySelector("#hamburger");
 const menuCross = document.querySelector("#menu-cross");
 
+const toName = document.querySelector("#toName");
+const senderEmail = document.querySelector("#senderEmail");
+const senderEmail2 = document.querySelector("#senderEmail2");
+const message = document.querySelector("#message");
 const emailSubmit = document.querySelector("#emailSubmit");
+
 
 
 //Functions
@@ -147,17 +159,84 @@ const scrollToLink = (e) => {
     }
 }
 
+const nameCheckHandler = () => {
+
+    if (toName.value === "") {
+        console.log("Name is empty");
+        toName.classList.remove("success");
+        toName.classList.add("error");
+        document.querySelector("#empty-name").classList.remove("hidden");
+        formCheck.sender_name = false;
+    } else {
+        console.log("Name has char");
+        toName.classList.add("success");
+        toName.classList.remove("error");
+        document.querySelector("#empty-name").classList.add("hidden");
+        formCheck.sender_name = true;
+    }
+}
+
+const emailCheckHandler = () => {
+    if (senderEmail.value.includes("@")) {
+        document.querySelector("#invalid-email").classList.add("hidden");
+        senderEmail.classList.remove("error");
+        senderEmail.classList.add("success");
+        formCheck.sender_email = true;
+    } else {
+        document.querySelector("#invalid-email").classList.remove("hidden");
+        senderEmail.classList.add("error");
+        senderEmail.classList.remove("success");
+        formCheck.sender_email = false;
+    }
+
+    if (senderEmail.value === senderEmail2.value) {
+        document.querySelector("#no-match").classList.add("hidden");
+        senderEmail2.classList.remove("error");
+        senderEmail2.classList.add("success");
+        formCheck.sender_email2 = true;
+    } else {
+        document.querySelector("#no-match").classList.remove("hidden");
+        senderEmail2.classList.add("error");
+        senderEmail2.classList.remove("success");
+        formCheck.sender_email2 = false;
+    }
+
+}
+
+const messageCheckHandler = () => {
+    if (message.value === "") {
+        document.querySelector("#empty-message").classList.remove("hidden");
+        message.classList.add("error");
+        message.classList.remove("success");
+        formCheck.sender_message = false;
+    } else {
+        document.querySelector("#empty-message").classList.add("hidden");
+        message.classList.remove("error");
+        message.classList.add("success");
+        formCheck.sender_message = true;
+    }
+}
+
 const sendMail = (e) => {
     e.preventDefault();
     const tempParams = {
-        from_name: document.querySelector("#toName").value,
-        sender_email: document.querySelector("#senderEmail").value,
-        message: document.querySelector("#message").value
+        from_name: toName.value,
+        sender_email: senderEmail.value,
+        message: message.value
     }
-    /* emailjs.send('service_x0myxqr', 'template_s06skol', tempParams)
-        .then(res => {
-            console.log("success", res.status);
-        }) */
+
+    //
+
+    if (formCheck.sender_name && formCheck.sender_email && formCheck.sender_email2 && formCheck.sender_message) {
+        console.log("Success: message sent");
+        /* emailjs.send('service_x0myxqr', 'template_s06skol', tempParams)
+            .then(res => {
+                console.log("success", res.status);
+            }) */
+    } else {
+        console.log("Error: message not sent");
+    }
+
 
 }
 const toggleMenu = (e) => {
@@ -187,6 +266,11 @@ navBtn.addEventListener("click", navBtnHandler);
 links.addEventListener("click", scrollToLink);
 mobileLinks.addEventListener("click", scrollToLink);
 
+
+toName.addEventListener("input", nameCheckHandler);
+senderEmail.addEventListener("input", emailCheckHandler);
+senderEmail2.addEventListener("input", emailCheckHandler);
+message.addEventListener("input", messageCheckHandler);
 emailSubmit.addEventListener("click", sendMail);
 
 hamburger.addEventListener("click", toggleMenu);

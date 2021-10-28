@@ -194,16 +194,23 @@
         <h1 id="contact-header">CONTACT</h1>
         <div id="input-area">
             <form action="/action_page.php">
-                <label for="name">First Name</label>
-                <input type="text" id="toName" placeholder="Your name...">
+                <label id="firstName" for="name">First Name</label>
+
+                <div class="hidden" id="empty-name">Name is empty</div>
+                <input type="text" id="toName" value="" placeholder="Your name..." />
 
                 <label for="email1">Email</label>
+
+                <div class="hidden" id="invalid-email">Invalid email</div>
                 <input type="text" id="senderEmail" placeholder="Your email...">
 
-                <label for="email2"></label>
+                <div class="hidden" id="no-match">Emails don't match</div>
+
                 <input type="text" id="senderEmail2" placeholder="Please repeat your email...">
 
                 <label for="message">Message</label>
+
+                <div class="hidden" id="empty-message">Message is empty</div>
                 <textarea id="message" name="message" placeholder="Your message..." rows="4" cols="50"></textarea>
 
                 <button id="emailSubmit">Send email</button>

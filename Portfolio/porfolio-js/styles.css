@@ -313,6 +313,51 @@ nav .navContent {
     font-size: 1.5rem;
 }
 
+#emailSubmit {
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    background: rgb(38, 70, 177);
+    padding: 1rem 1rem 1rem 1rem;
+    border-radius: 1rem;
+    transition: 0.3s;
+}
+
+#emailSubmit:hover {
+    cursor: pointer;
+    background: rgb(56, 100, 247);
+}
+
+#empty-name {
+    font-size: 1rem;
+    color: red;
+}
+
+#invalid-email {
+    font-size: 1rem;
+    color: red;
+}
+
+#no-match {
+    font-size: 1rem;
+    color: red;
+}
+
+#empty-message {
+    font-size: 1rem;
+    color: red;
+}
+
+.error {
+    outline: 1px solid red;
+    border: none;
+}
+
+.success {
+    outline: 1px solid green;
+    border: none;
+}
+
 /*Media Queries*/
 
 @media only screen and (max-width: 1000px) {
@@ -323,6 +368,9 @@ nav .navContent {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
         margin: 4rem;
+    }
+    #input-area {
+        width: 60%;
     }
 }
 
@@ -347,13 +395,13 @@ nav .navContent {
         width: 50vw;
         display: flex;
         justify-content: center;
-        align-content: center;
+        align-items: center;
         flex-direction: column;
         background: rgb(230, 230, 230);
     }
     .mobileLinks ul {
         height: 80%;
-        width: 100%;
+        width: 50%;
         display: flex;
         justify-content: space-between;
         align-content: center;
@@ -362,6 +410,12 @@ nav .navContent {
     }
     .mobileLinks li {
         font-size: 2rem;
+        list-style: none;
+    }
+    .mobileLinks li:hover {
+        color: gray;
+        cursor: pointer;
+        border-bottom: 1px solid orange;
     }
     #menu-cross {
         position: fixed;
@@ -396,6 +450,9 @@ nav .navContent {
     #home-video iframe {
         width: var(--videoWidth);
         height: calc(var(--videoWidth)/1.777);
+    }
+    #input-area {
+        width: 70%;
     }
 }
 
