@@ -36,6 +36,11 @@ html {
     --const-white: #F5F8FF;
 }
 
+#theme-changer:hover {
+    cursor: pointer;
+    color: gray;
+}
+
 /*--THEMES*/
 
 body {
@@ -141,7 +146,6 @@ body {
     outline: none;
     caret-color: var(--font-color-primary);
     color: var(--font-color-terciary);
-    border: 1px solid rgb(163, 163, 163);
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
 }
@@ -192,13 +196,15 @@ body {
     width: 100%;
     list-style: none;
     font-size: 2rem;
-    border: 1px solid rgb(163, 163, 163);
+    /*     border: 1px solid rgb(163, 163, 163);
+ */
     padding: 1rem 1rem 1rem 1rem;
     align-self: center;
 }
 
 #floating-div li:hover {
     background-color: var(--color-secondary-hover);
+    cursor: pointer;
 }
 
 #floating-div img {
@@ -541,14 +547,19 @@ body {
     }
     .input i {
         margin-left: 5%;
+        padding: 0rem 1.5rem 0rem 1.5rem;
     }
     .input input {
-        width: 50%;
+        width: 100%;
     }
     .input button {
-        width: 20%;
+        width: 30%;
         margin-right: 3%;
     }
+    .fa-search {
+        width: 20%;
+    }
+    
     .personalDetails {
         grid-template-columns: 0.7fr 1fr;
     }

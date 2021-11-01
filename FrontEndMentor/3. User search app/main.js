@@ -3,6 +3,7 @@
 let generalData;
 let objectData;
 let searchQuery;
+let tempString;
 
 let api_url = 'https://api.github.com/users';
 
@@ -85,7 +86,7 @@ const fetchDataOnSearch = (searchQuery) => {
 }
 
 const addSuggestions = () => {
-    console.log(inputArea.value);
+
     fetchData()
         .then((data) => {
 
@@ -94,11 +95,11 @@ const addSuggestions = () => {
             let img_url = [];
             let listElement;
 
-            if (inputArea.value !== null && inputArea.value !== "") {
+            if (inputArea.value.toLowerCase() !== null && inputArea.value.toLowerCase() !== "") {
 
                 for (let i = 0; i < data.length; i++) {
 
-                    if (data[i].login.includes(inputArea.value)) {
+                    if (data[i].login.includes(inputArea.value.toLowerCase())) {
                         img_url = [...img_url, data[i].avatar_url];
                         loginNames = [...loginNames, data[i].login];
                     }
@@ -130,16 +131,17 @@ const buttonSearchHandler = (e) => {
     e.preventDefault();
 
     let searchQuery = inputArea.value;
+    searchQuery = searchQuery.toLowerCase();
 
     fetchDataOnSearch(searchQuery);
 
     inputArea.value = "";
 }
 
-const themeChangeHandler = (e) => {
-    let themeText = e.target.innerText;
+const themeChangerHandler = (e) => {
+    let themeClass = e.target.classList;
 
-    if (themeText.includes("dark")) {
+    if (themeClass.contains("dark")) {
         console.log("Has dark");
         dark.classList.toggle("hidden");
         moon.classList.toggle("hidden");
@@ -147,7 +149,7 @@ const themeChangeHandler = (e) => {
         sun.classList.toggle("hidden");
 
         document.documentElement.className = "theme-dark"
-    } else if (themeText.includes("light")) {
+    } else if (themeClass.contains("light")) {
         console.log("Has light");
         dark.classList.toggle("hidden");
         moon.classList.toggle("hidden");
@@ -168,15 +170,14 @@ const hideFloatingList = (e) => {
 }
 
 const searchSuggestionHandler = (e) => {
-    inputArea.value = e.target.innerText;
-    fetchDataOnSearch(inputArea.value);
-    inputArea.value = "";
+    tempString = e.target.innerText.toLowerCase();
+    fetchDataOnSearch(tempString);
 }
 
 //EVENT LISTENERS
 searchButton.addEventListener("click", buttonSearchHandler);
 
-themeChanger.addEventListener("click", themeChangeHandler);
+themeChanger.addEventListener("click", themeChangerHandler);
 
 inputArea.addEventListener("keyup", searchOnEnter);
 
