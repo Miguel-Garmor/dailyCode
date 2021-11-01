@@ -236,10 +236,10 @@ const sendMail = (e) => {
 
     if (formCheck.sender_name && formCheck.sender_email && formCheck.sender_email2 && formCheck.sender_message) {
         console.log("Success: message sent");
-        /* emailjs.send('service_x0myxqr', 'template_s06skol', tempParams)
+        emailjs.send('service_x0myxqr', 'template_s06skol', tempParams)
             .then(res => {
                 console.log("success", res.status);
-            }) */
+            })
         document.querySelector("#message-sent").classList.remove("hidden");
 
         toName.value = "";
@@ -247,6 +247,10 @@ const sendMail = (e) => {
         senderEmail2.value = "";
         message.value = "";
 
+        formCheck.sender_name = false;
+        formCheck.sender_email = false;
+        formCheck.sender_email2 = false;
+        formCheck.sender_message = false;
     } else {
         console.log("Error: message not sent");
         nameCheckHandler();

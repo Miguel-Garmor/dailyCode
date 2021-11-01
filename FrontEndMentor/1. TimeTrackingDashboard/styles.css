@@ -41,9 +41,6 @@ html {
     align-items: left;
     background-color: #1D204D;
     font-family: Poppins;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .report-container {
@@ -55,6 +52,12 @@ html {
     background-color: #5746EA;
     border-radius: 1rem;
     padding: 3rem;
+}
+
+.report-container h2 {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: underline;
 }
 
 .report-container h1 {
@@ -90,9 +93,9 @@ html {
 
 .filter-container ul {
     display: flex;
-    flex-direction: column;
-    align-items: left;
     justify-content: left;
+    align-items: left;
+    flex-direction: column;
     width: 100%;
 }
 
@@ -113,11 +116,17 @@ html {
 
 .box {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
     font-family: Poppins;
     color: white;
     overflow: hidden;
+}
+
+.box img {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    height: 5rem;
+    width: auto;
 }
 
 .work {
@@ -144,14 +153,6 @@ html {
     background: #F1C65B;
 }
 
-.box img {
-    position: absolute;
-    right: 0;
-    top: -5px;
-    height: 5rem;
-    width: auto;
-}
-
 .box-container {
     display: flex;
     flex-direction: column;
@@ -161,7 +162,7 @@ html {
     height: 85%;
     width: 100%;
     background: #1D204D;
-    padding: 2rem;
+    padding: 3rem;
 }
 
 .box-container h1 {
@@ -188,13 +189,57 @@ html {
         grid-template-columns: 1fr;
         height: auto;
         width: 90vw;
+        max-width: 30rem;
     }
     .report-box {
-        height: 35vh;
+        height: 30vh;
         max-width: 50rem;
+        justify-content: space-between;
+    }
+    .report-container {
+        height: 55%;
+        flex-direction: column;
+        padding: 1.5rem;
+    }
+    .report-container div:nth-child(2) {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+    .report-container div:nth-child(2) h2 {
+        color: white;
+        text-decoration: underline;
+    }
+    .report-container div:nth-child(2) h1 {
+        font-size: 2rem;
+        padding-left: 1.5rem;
+    }
+    .img-container {
+        height: 5rem;
+        width: 5rem;
+        margin: 0;
+    }
+    .img-container img {
+        border: 1px solid white;
+    }
+    .filter-container {
+        padding: 1.5rem;
+        height: 45%;
     }
     .box {
         height: 25vh;
         max-width: 50rem;
+    }
+    .box-container {
+        height: 70%;
+        padding: 1.5rem;
+    }
+    .box-container h1 {
+        font-size: 1rem;
+        padding-bottom: 1rem;
+    }
+    .box-container h2 {
+        font-size: 2rem;
+        padding-bottom: 0.5rem;
     }
 }

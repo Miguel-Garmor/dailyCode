@@ -20,7 +20,7 @@ const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSear
         <Router>
             <nav>
                 <div id="header-container">
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link to="/devjobs" style={{ textDecoration: "none" }}>
                         <div id="logo" ><p>devJobs</p></div>
                     </Link>
                     <div id="theme">
@@ -32,7 +32,7 @@ const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSear
                     </div>
                 </div>
                 <Switch>
-                    <Route path="/" exact component={Display} >
+                    <Route path="/devjobs" exact component={Display} >
                         <Display
                             isMobile={isMobile}
 
@@ -54,7 +54,7 @@ const Nav = ({ setTheme, theme, isMobile, setFilterActive, filterActive, setSear
                             filteredJobs={filteredJobs}
                         />
                     </Route>
-                    <Route path="/description" component={JobDescription}>
+                    <Route path="/devjobs/description" component={JobDescription}>
                         <JobDescription />
                     </Route>
                 </Switch>

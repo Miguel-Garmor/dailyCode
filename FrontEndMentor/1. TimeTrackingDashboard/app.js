@@ -7,10 +7,10 @@ const valueOnLoad = () => {
     console.log(filterContainer.children[0].children[0]);
 
     for (let i = 0; i < container.children.length; i++) {
-                container.children[i].children[1].children[0].children[0].classList = "";
-            }
+        container.children[i].children[1].children[0].children[0].classList.remove("clicked");
+    }
 
-    filterContainer.children[0].children[0].className = "clicked";
+    filterContainer.children[0].children[0].classList.add("clicked");
 
     for (let i = 1; i < container.children.length; i++) {
 
@@ -25,12 +25,10 @@ const filterValues = (e) => {
 
 
     for (let i = 0; i < e.target.parentNode.children.length; i++) {
-        console.log("Before: " + e.target.parentNode.children[0].classList);
-        e.target.parentNode.children[i].classList = "";
-        console.log("After: " + e.target.parentNode.children[0].classList);
+        e.target.parentNode.children[i].classList.remove("clicked");
     }
 
-    e.target.className = "clicked";
+    e.target.classList.add = "clicked";
     console.log(e.target.classList);
 
 

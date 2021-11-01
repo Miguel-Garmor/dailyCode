@@ -210,6 +210,17 @@ nav .navContent {
     /*Not responsive*/
     height: 25rem;
     width: 30rem;
+    transition: 0.3s;
+}
+
+.project:hover {
+    background-color: rgb(192, 250, 242);
+    cursor: progress;
+}
+
+.project a {
+    color: #551a8b;
+    text-decoration: none;
 }
 
 .projectHeader {
@@ -348,7 +359,7 @@ nav .navContent {
     color: red;
 }
 
-#message-sent{
+#message-sent {
     font-size: 2rem;
     color: green;
 }
