@@ -48,6 +48,7 @@ const selectTip = (e) => {
     tipElements.tip = parseInt(e.target.id);
 
     toggleBtnClass(e);
+    tipElements.checkTip = true;
 
 }
 
