@@ -45,6 +45,7 @@ const toggleBtnClass = (e) => {
 }
 
 const selectTip = (e) => {
+    custom.value = "";
     tipElements.tip = parseInt(e.target.id);
 
     toggleBtnClass(e);
