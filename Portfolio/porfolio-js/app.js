@@ -34,6 +34,7 @@ const emailSubmit = document.querySelector("#emailSubmit");
 
 
 
+
 //Functions
 
 const navBtnLoad = () => {
@@ -277,6 +278,21 @@ const toggleMenu = (e) => {
 
 }
 
+const projectGithubLinkHandler = (e) => {
+    const targetClass = e.target.classList;
+    const parentEl = e.target.closest(".project");
+
+    console.log(parentEl.id);
+
+    if (!targetClass.contains("fa-github") && parentEl.classList.contains("project")) {
+        window.open(parentEl.getAttribute("data-value"));
+
+    } else if (targetClass.contains("fa-github")) {
+        window.open(e.target.getAttribute("data-value"));
+    }
+
+}
+
 //Event listeners
 
 window.addEventListener("scroll", scrollHandler);
@@ -298,3 +314,5 @@ emailSubmit.addEventListener("click", sendMail);
 hamburger.addEventListener("click", toggleMenu);
 
 menuCross.addEventListener("click", toggleMenu);
+
+projects.addEventListener("click", projectGithubLinkHandler);

@@ -215,7 +215,7 @@ nav .navContent {
 
 .project:hover {
     background-color: rgb(192, 250, 242);
-    cursor: progress;
+    cursor: pointer
 }
 
 .project a {
