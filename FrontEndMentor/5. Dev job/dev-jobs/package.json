@@ -1,5 +1,6 @@
 {
   "name": "dev-jobs",
+  "homepage": "https://miguelmoral.com/devjobs/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

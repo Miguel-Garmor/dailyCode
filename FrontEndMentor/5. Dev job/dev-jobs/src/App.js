@@ -40,15 +40,15 @@ function App() {
 
   //Functions
 
-
-
   const fetchJobs = () => {
-    fetch("http://localhost:8000/jobs")
-      .then(result => {
-        return result.json();
+    fetch('https://miguelmoral.com/devjobs/data.json')
+      .then(function (response) {
+        console.log(response)
+        return response.json();
       })
-      .then(data => {
-        setJobs(data);
+      .then(function (data) {
+        console.log(data);
+        setJobs(data)
       });
   }
 

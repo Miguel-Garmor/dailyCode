@@ -74,11 +74,11 @@ const scrollHandler = () => {
         //Scroll up or down
 
         if ((window.pageYOffset - startScroll) <= 0 && scrollOnLink === false) {
-            console.log("scroll up");
+
             navBar.classList.remove("hidden");
             navBtn.classList.add("hidden");
         } else if ((window.pageYOffset - startScroll) > 0) {
-            console.log("scroll down");
+
             navBar.classList.add("hidden");
             navBtn.classList.remove("hidden");
         }
@@ -281,8 +281,6 @@ const toggleMenu = (e) => {
 const projectGithubLinkHandler = (e) => {
     const targetClass = e.target.classList;
     const parentEl = e.target.closest(".project");
-
-    console.log(parentEl.id);
 
     if (!targetClass.contains("fa-github") && parentEl.classList.contains("project")) {
         window.open(parentEl.getAttribute("data-value"));
