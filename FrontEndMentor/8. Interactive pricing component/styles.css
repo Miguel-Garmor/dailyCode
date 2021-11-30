@@ -1,0 +1,43 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 10px;
+}
+
+body {
+    position: relative;
+    display: flex;
+
+    justify-content: center;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    background-color: #F1F5FE;
+    border-bottom-left-radius: 25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header div {
+    position: absolute;
+    top: 10rem;
+    text-align: center;
+}
+
+.pricingComponent {
+    position: absolute;
+    height: 30rem;
+    width: 45rem;
+    border-radius: 2rem;
+    background-color: white;
+    box-shadow: 0px 0px 12px #b1b1b1;
+    top: 30rem;
+}
