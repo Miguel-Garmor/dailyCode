@@ -6,6 +6,7 @@
 
 html {
     font-size: 10px;
+    font-family: 'Poppins', sans-serif;
 }
 
 body {
@@ -32,6 +33,15 @@ body {
     text-align: center;
 }
 
+.header div h1 {
+    font-weight: 500;
+}
+
+.header div h2 {
+    font-weight: 500;
+    color: gray;
+}
+
 .pricingComponent {
     position: absolute;
     height: 30rem;
@@ -40,4 +50,149 @@ body {
     background-color: white;
     box-shadow: 0px 0px 12px #b1b1b1;
     top: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.result {
+    height: 20%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#page-views {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: gray;
+}
+
+#price-month {
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.slideContainer {
+    height: 10%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#range-slider {
+    width: 100%;
+}
+
+#range-slider:hover {
+    cursor: pointer;
+}
+
+.billingInfo {
+    height: 10%;
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.billingInfoContainer {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#billing-switch {
+    height: 1.3rem;
+    width: 2.8rem;
+    border-radius: 1rem;
+    background: rgb(180, 180, 180);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+#switch-circle {
+    height: 80%;
+    width: 1rem;
+    margin: 0.2rem;
+    background: white;
+    border-radius: 50%;
+}
+
+.dividerLine {
+    height: 0.1rem;
+    width: 100%;
+    background-color: gray;
+    margin: 2rem 0 2rem 0;
+}
+
+.benefits {
+    height: 30%;
+    width: 80%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.benefitsContainer {
+    height: 75%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.benefitList {
+    height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.benefitList li {
+    list-style: none;
+}
+
+.benefitList div {
+    display: flex;
+    align-items: center;
+}
+
+.benefitList i {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    color: green;
+}
+
+.startTrialButtonContainer {
+    height: 100%;
+    display: flex;
+    justify-content: start;
+    border: 1px solid black;
+}
+
+.startTrialButton button {
+    height: 3rem;
+    width: 10rem;
+    color: rgb(197, 197, 197);
+    font-weight: 300;
+    font-size: 1rem;
+    background-color: black;
+    border-radius: 2rem;
+    border: none;
+    transition: 0.3s
+}
+
+.startTrialButton button:hover {
+    cursor: pointer;
+    background-color: rgb(88, 88, 88);
+    color: white;
 }
